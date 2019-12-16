@@ -1,0 +1,9 @@
+name: HeartAge_year
+main: Color_yr.HeartAge_year.HeartAge_year
+author: Color_yr
+version: 1.0.0
+
+commands:
+  tpStone:
+    description: 传送石指令
+    usage: §4[HeartAge_year]§6/tpStone help来查看帮助
