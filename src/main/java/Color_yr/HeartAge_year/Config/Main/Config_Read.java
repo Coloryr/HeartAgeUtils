@@ -1,6 +1,6 @@
 package Color_yr.HeartAge_year.Config.Main;
 
-import Color_yr.HeartAge_year.Config.tpStone.tpStone_set;
+import Color_yr.HeartAge_year.Config.tpStone.tpStone_do;
 import Color_yr.HeartAge_year.HeartAge_year;
 import com.google.gson.Gson;
 import org.bukkit.Material;
@@ -11,9 +11,8 @@ import java.nio.file.Files;
 
 public class Config_Read {
 
-    private File FileName;
-
     public static Config_Obj main_config;
+    private File FileName;
 
     private void Config_reload() {
         try {
@@ -26,7 +25,7 @@ public class Config_Read {
                 if (temp == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品找不到");
                 } else {
-                    tpStone_set.item = temp;
+                    tpStone_do.item = temp;
                 }
             } else {
                 HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品ID为空");
@@ -36,7 +35,7 @@ public class Config_Read {
                 if (temp == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品找不到");
                 } else {
-                    tpStone_set.updata_item = temp;
+                    tpStone_do.updata_item = temp;
                 }
             } else {
                 HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品ID为空");

@@ -7,35 +7,35 @@ public class Localtion {
     private int y = 0;
     private int z = 0;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getX() {
         return x;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setX(int x) {
+        this.x = x;
     }
 
     public int getY() {
         return y;
     }
 
-    public void setZ(int z) {
-        this.z = z;
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getZ() {
         return z;
+    }
+
+    public void setZ(int z) {
+        this.z = z;
     }
 }

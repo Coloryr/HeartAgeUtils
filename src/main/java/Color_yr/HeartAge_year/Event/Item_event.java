@@ -16,9 +16,8 @@ import org.bukkit.inventory.ItemStack;
 public class Item_event implements Listener {
 
     @EventHandler
-    public void itemclick(PlayerInteractEvent e)
-    {
-        if(e.getAction()== Action.RIGHT_CLICK_AIR) {
+    public void itemclick(PlayerInteractEvent e) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             ItemStack item = e.getItem();
             if (item == null)
                 return;

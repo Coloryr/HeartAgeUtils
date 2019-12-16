@@ -8,20 +8,20 @@ public class tpStone {
     private int slot;
     private Map<String, Localtion> sel = new HashMap<>();
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setSlot(int slot) {
-        this.slot = slot;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getSlot() {
         return slot;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
     }
 
     public Map<String, Localtion> getSel() {
