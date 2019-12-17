@@ -3,10 +3,10 @@ package Color_yr.HeartAge_year.Config.tpStone.Obj;
 import java.util.HashMap;
 import java.util.Map;
 
-public class tpStone {
+public class tpStone {//传送石储存对象
     private String name;
     private int slot;
-    private Map<String, Localtion> sel = new HashMap<>();
+    private Map<String, Location> sel = new HashMap<>();
 
     public String getName() {
         return name;
@@ -24,7 +24,7 @@ public class tpStone {
         this.slot = slot;
     }
 
-    public Map<String, Localtion> getSel() {
+    public Map<String, Location> getSel() {
         return sel;
     }
 }

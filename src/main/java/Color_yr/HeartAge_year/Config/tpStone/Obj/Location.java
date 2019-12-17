@@ -1,6 +1,6 @@
 package Color_yr.HeartAge_year.Config.tpStone.Obj;
 
-public class Localtion {
+public class Location {//传送石坐标储存对象
 
     private String name = "";
     private int x = 0;

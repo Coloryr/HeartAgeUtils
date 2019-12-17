@@ -1,6 +1,6 @@
 package Color_yr.HeartAge_year.Config.tpStone;
 
-import Color_yr.HeartAge_year.Config.tpStone.Obj.Localtion;
+import Color_yr.HeartAge_year.Config.tpStone.Obj.Location;
 import Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone;
 
 import java.util.ArrayList;
@@ -28,14 +28,14 @@ public class tpStone_set {
         this.tpStone = tpStone;
     }
 
-    public boolean setsel(String sel, Localtion localtion) {
+    public boolean setsel(String sel, Location location) {//设置槽位的坐标
         if (!sel_list.contains(sel))
             return false;
-        tpStone.getSel().put(sel, localtion);
+        tpStone.getSel().put(sel, location);
         return true;
     }
 
-    public Localtion getsel(String sel) {
+    public Location getsel(String sel) {//读取槽位的坐标
         if (sel_list.contains(sel))
             return tpStone.getSel().get(sel);
         return null;

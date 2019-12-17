@@ -20,11 +20,11 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
             if (args.length == 0) {
                 sender.sendMessage("§d[HeartAge_year]§c错误，请使用/tpStone help 获取帮助");
                 return true;
-            } else if (args[0].equalsIgnoreCase("help")) {
+            } else if (args[0].equalsIgnoreCase("help")) {//获取帮助
                 sender.sendMessage("§d[HeartAge_year]§b输入/tpStone rename [名字] 修改传送石名字");
                 sender.sendMessage("§d[HeartAge_year]§b输入/tpStone uplevel 升级传送石");
                 return true;
-            } else if (args[0].equalsIgnoreCase("rename")) {
+            } else if (args[0].equalsIgnoreCase("rename")) {//重命名传送石
                 if (sender instanceof ConsoleCommandSender) {
                     sender.sendMessage("§d[HeartAge_year]§c只能玩家使用这个指令");
                     return true;
@@ -50,7 +50,10 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                     return true;
                 }
                 itemMeta.setDisplayName(args[1]);
-            } else if (args[0].equalsIgnoreCase("get")) {
+            } else if (args[0].equalsIgnoreCase("updata")) {//升级传送石
+
+                return true;
+            } else if (args[0].equalsIgnoreCase("get")) {//给传送石
                 if (!sender.hasPermission("tpStone.give")) {
                     sender.sendMessage("§d[HeartAge_year]§c没有使用该指令的权限");
                     return true;

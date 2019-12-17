@@ -1,6 +1,6 @@
 package Color_yr.HeartAge_year.Config.tpStone;
 
-import Color_yr.HeartAge_year.Config.tpStone.Obj.Localtion;
+import Color_yr.HeartAge_year.Config.tpStone.Obj.Location;
 import Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
@@ -18,12 +18,12 @@ public class tpStone_do {
     public static Material updata_item;
     public static Map<String, Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone> toStone_save = new HashMap<>();
 
-    public ItemStack new_tpStone(UUID uuid) {
+    public ItemStack new_tpStone(UUID uuid) {//获得新的传送石
         ItemStack item = new ItemStack(tpStone_do.item);
         tpStone obj = new tpStone();
         obj.setSlot(1);
         tpStone_set set = new tpStone_set(obj);
-        set.setsel(tpStone_set.sel_list.get(0), new Localtion());
+        set.setsel(tpStone_set.sel_list.get(0), new Location());
         tpStone_do.toStone_save.put(uuid.toString(), obj);
         ItemMeta ItemMeta = item.getItemMeta();
         assert ItemMeta != null;

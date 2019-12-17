@@ -1,5 +1,6 @@
 package Color_yr.HeartAge_year.Config.Main;
 
+import Color_yr.HeartAge_year.Config.Main.Obj.Config_Obj;
 import Color_yr.HeartAge_year.Config.tpStone.tpStone_do;
 import Color_yr.HeartAge_year.HeartAge_year;
 import com.google.gson.Gson;
@@ -11,8 +12,8 @@ import java.nio.file.Files;
 
 public class Config_Read {
 
-    public static Config_Obj main_config;
-    private File FileName;
+    public static Config_Obj main_config;   //主配置文件对象
+    private File FileName;  //文件缓存
 
     private void Config_reload() {
         try {
@@ -20,8 +21,9 @@ public class Config_Read {
             InputStreamReader reader = new InputStreamReader(new FileInputStream(FileName), StandardCharsets.UTF_8);
             BufferedReader bfreader = new BufferedReader(reader);
             main_config = read_gson.fromJson(bfreader, Config_Obj.class);
-            if (!main_config.getItem().getHand().isEmpty()) {
-                Material temp = Material.matchMaterial(main_config.getItem().getHand());
+            //读传送石物品
+            if (!main_config.gettpStone().getmain().isEmpty()) {
+                Material temp = Material.matchMaterial(main_config.gettpStone().getmain());
                 if (temp == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品找不到");
                 } else {
@@ -30,8 +32,9 @@ public class Config_Read {
             } else {
                 HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品ID为空");
             }
-            if (!main_config.getItem().getUpdata().isEmpty()) {
-                Material temp = Material.matchMaterial(main_config.getItem().getUpdata());
+            //读传送石升级物品
+            if (!main_config.gettpStone().getUpdata().isEmpty()) {
+                Material temp = Material.matchMaterial(main_config.gettpStone().getUpdata());
                 if (temp == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品找不到");
                 } else {
@@ -46,14 +49,15 @@ public class Config_Read {
     }
 
     public void setConfig() {
-        FileName = new File(HeartAge_year.plugin.getDataFolder(), "config.yml");
+        //读取文件初始化
+        FileName = new File(HeartAge_year.plugin.getDataFolder(), "config.json");
         if (!HeartAge_year.plugin.getDataFolder().exists())
             HeartAge_year.plugin.getDataFolder().mkdirs();
         if (!FileName.exists()) {
             try (InputStream in = HeartAge_year.plugin.getResource("config.json")) {
                 Files.copy(in, FileName.toPath());
             } catch (IOException e) {
-                HeartAge_year.log.warning("§d[HeartAge_year]§c配置文件 config.yml 创建失败：" + e);
+                HeartAge_year.log.warning("§d[HeartAge_year]§c配置文件 config.json 创建失败：" + e);
             }
         }
         Config_reload();

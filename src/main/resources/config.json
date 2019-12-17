@@ -1,7 +1,7 @@
 {
-  "vision": "1.0.0",
+  "version": "1.0.0",
   "item": {
-    "hand": "minecraft:stone",
-    "updata": "minecraft:stone"
+    "main": "minecraft:stone",
+    "update": "minecraft:stone"
   }
 }
