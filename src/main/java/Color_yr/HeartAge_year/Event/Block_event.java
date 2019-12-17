@@ -28,7 +28,7 @@ public class Block_event implements Listener {
     }
 
     @EventHandler
-    public void BlockBreakEvent(final BlockBreakEvent e) {
+    public void blockBreakEvent(final BlockBreakEvent e) {
         if (e.getPlayer().isOp()) {
             return;
         }
