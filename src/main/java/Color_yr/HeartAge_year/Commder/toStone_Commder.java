@@ -44,12 +44,8 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                     sender.sendMessage("§d[HeartAge_year]§c请输入新的传送石名字");
                     return true;
                 }
-                ItemMeta itemMeta = stack.getItemMeta();
-                if (itemMeta == null) {
-                    sender.sendMessage("§d[HeartAge_year]§c你的传送石异常");
-                    return true;
-                }
-                itemMeta.setDisplayName(args[1]);
+                sender.sendMessage("§d[HeartAge_year]§" + new tpStone_do().rename_tpStone(stack, args[1]));
+                return true;
             } else if (args[0].equalsIgnoreCase("updata")) {//升级传送石
                 if (sender instanceof ConsoleCommandSender) {
                     sender.sendMessage("§d[HeartAge_year]§c只能玩家使用这个指令");
@@ -61,9 +57,16 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                     return true;
                 }
                 ItemStack stack = player.getInventory().getItemInMainHand();
+
                 Material item = stack.getType();
                 if (!item.equals(tpStone_do.item)) {
                     sender.sendMessage("§d[HeartAge_year]§c请手持传送石后执行");
+                    return true;
+                }
+                stack = player.getInventory().getItemInOffHand();
+                item = stack.getType();
+                if (!item.equals(tpStone_do.updata_item)) {
+                    sender.sendMessage("§d[HeartAge_year]§c请副手持升级物品");
                     return true;
                 }
                 sender.sendMessage("§d[HeartAge_year]§" + new tpStone_do().up_tpStone(stack));

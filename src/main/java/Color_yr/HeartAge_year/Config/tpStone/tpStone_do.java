@@ -38,7 +38,7 @@ public class tpStone_do {
         return item;
     }
 
-    public String up_tpStone(ItemStack item) {
+    public String up_tpStone(ItemStack item) {//升级传送石
         NBTTagCompound nbt = new NBTset().NBT_get(item);
         if (nbt.hasKeyOfType("uuid", 3)) {
             String uuid = nbt.getString("uuid");
@@ -49,6 +49,22 @@ public class tpStone_do {
                 stone.setSlot(stone.getSlot() + 1);
                 new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location());
                 new tpStone_Read().save(stone, uuid);
+                return "b传送石已升级";
+            }
+        }
+        return "c传送石异常";
+    }
+    public String rename_tpStone(ItemStack item, String new_name) {//重命名传送石
+        NBTTagCompound nbt = new NBTset().NBT_get(item);
+        if (nbt.hasKeyOfType("uuid", 3)) {
+            String uuid = nbt.getString("uuid");
+            if (toStone_save.containsKey(uuid)) {
+                tpStone stone = toStone_save.get(uuid);
+                stone.setName(new_name);
+                item.getItemMeta().setDisplayName(new_name);
+                new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location());
+                new tpStone_Read().save(stone, uuid);
+                return "b传送石已重命名";
             }
         }
         return "c传送石异常";
