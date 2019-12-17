@@ -51,7 +51,22 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                 }
                 itemMeta.setDisplayName(args[1]);
             } else if (args[0].equalsIgnoreCase("updata")) {//升级传送石
-
+                if (sender instanceof ConsoleCommandSender) {
+                    sender.sendMessage("§d[HeartAge_year]§c只能玩家使用这个指令");
+                    return true;
+                }
+                Player player = (Player) sender;
+                if (player == null) {
+                    sender.sendMessage("§d[HeartAge_year]§c执行指令的玩家找不到");
+                    return true;
+                }
+                ItemStack stack = player.getInventory().getItemInMainHand();
+                Material item = stack.getType();
+                if (!item.equals(tpStone_do.item)) {
+                    sender.sendMessage("§d[HeartAge_year]§c请手持传送石后执行");
+                    return true;
+                }
+                sender.sendMessage("§d[HeartAge_year]§" + new tpStone_do().up_tpStone(stack));
                 return true;
             } else if (args[0].equalsIgnoreCase("get")) {//给传送石
                 if (!sender.hasPermission("tpStone.give")) {
@@ -62,8 +77,7 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                 do {
                     uuid = UUID.randomUUID();
                 } while (tpStone_do.toStone_save.containsKey(uuid.toString()));
-                Player player = Bukkit.getPlayer(sender.getName());
-                assert player != null;
+                Player player = (Player) sender;
                 player.getInventory().addItem(new tpStone_do().new_tpStone(uuid));
                 sender.sendMessage("§d[HeartAge_year]§b你获得了一个新的传送石");
             }

@@ -4,10 +4,7 @@ import Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone;
 import Color_yr.HeartAge_year.HeartAge_year;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class tpStone_Read {
@@ -33,7 +30,21 @@ public class tpStone_Read {
                 }
             }
         } catch (Exception e) {
-            HeartAge_year.log.warning("§d[HeartAge_year]§c背包配置文件初始化失败" + e);
+            HeartAge_year.log.warning("§d[HeartAge_year]§c传送石配置文件初始化失败" + e);
+        }
+    }
+
+    public void save(tpStone stone, String uuid) {
+        //保存传送石储存
+        try {
+            File save_file = new File(FileName.getParent() + "/" + uuid + ".json");
+            if (!save_file.exists())
+                save_file.createNewFile();
+            OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(save_file), StandardCharsets.UTF_8);
+            write.write(new Gson().toJson(stone));
+            write.close();
+        } catch (Exception e) {
+            HeartAge_year.log.warning("§d[HeartAge_year]§c传送石内容保存失败" + e);
         }
     }
 }

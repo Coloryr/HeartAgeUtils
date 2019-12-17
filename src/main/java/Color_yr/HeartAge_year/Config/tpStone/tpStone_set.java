@@ -28,11 +28,10 @@ public class tpStone_set {
         this.tpStone = tpStone;
     }
 
-    public boolean setsel(String sel, Location location) {//设置槽位的坐标
+    public void setsel(String sel, Location location) {//设置槽位的坐标
         if (!sel_list.contains(sel))
-            return false;
+            return;
         tpStone.getSel().put(sel, location);
-        return true;
     }
 
     public Location getsel(String sel) {//读取槽位的坐标

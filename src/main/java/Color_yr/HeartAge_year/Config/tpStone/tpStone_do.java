@@ -16,7 +16,7 @@ import java.util.UUID;
 public class tpStone_do {
     public static Material item;
     public static Material updata_item;
-    public static Map<String, Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone> toStone_save = new HashMap<>();
+    public static Map<String, tpStone> toStone_save = new HashMap<>();
 
     public ItemStack new_tpStone(UUID uuid) {//获得新的传送石
         ItemStack item = new ItemStack(tpStone_do.item);
@@ -36,5 +36,21 @@ public class tpStone_do {
         NBTTagCompound nbt = new NBTset().NBT_get(item);
         nbt.setString("uuid", uuid.toString());
         return item;
+    }
+
+    public String up_tpStone(ItemStack item) {
+        NBTTagCompound nbt = new NBTset().NBT_get(item);
+        if (nbt.hasKeyOfType("uuid", 3)) {
+            String uuid = nbt.getString("uuid");
+            if (toStone_save.containsKey(uuid)) {
+                tpStone stone = toStone_save.get(uuid);
+                if (stone.getSlot() == 9)
+                    return "c传送石槽位已满";
+                stone.setSlot(stone.getSlot() + 1);
+                new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location());
+                new tpStone_Read().save(stone, uuid);
+            }
+        }
+        return "c传送石异常";
     }
 }

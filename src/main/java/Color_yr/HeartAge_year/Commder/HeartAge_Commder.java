@@ -10,7 +10,7 @@ import java.util.List;
 public class HeartAge_Commder implements CommandExecutor, TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] arg) {
-        if(command.getName().equalsIgnoreCase("heartage")) {
+        if (command.getName().equalsIgnoreCase("heartage")) {
             if (arg.length == 0) {
                 sender.sendMessage("§d[HeartAge_year]§c错误，请使用/heartage help 获取帮助");
                 return true;
