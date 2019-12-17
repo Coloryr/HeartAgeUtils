@@ -1,7 +1,9 @@
-package Color_yr.HeartAge_year.Config.tpStone;
+package Color_yr.HeartAge_year.tpStone;
 
-import Color_yr.HeartAge_year.Config.tpStone.Obj.Location;
-import Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone;
+import Color_yr.HeartAge_year.Obj.Location_Obj;
+import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
+import Color_yr.HeartAge_year.Config.tpStone_Read;
+import Color_yr.HeartAge_year.util.NBT_set;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import org.bukkit.Material;
@@ -16,27 +18,30 @@ import java.util.UUID;
 public class tpStone_do {
     public static Material item;
     public static Material updata_item;
-    public static Map<String, tpStone> toStone_save = new HashMap<>();
+    public static Map<String, tpStone_save_Obj> toStone_save = new HashMap<>();
 
-    public ItemStack new_tpStone(UUID uuid) {//获得新的传送石
+    public ItemStack new_tpStone(String uuid) {//获得新的传送石
         if(tpStone_do.item == null)
             return null;
         ItemStack item = new ItemStack(tpStone_do.item);
-        tpStone obj = new tpStone();
+        tpStone_save_Obj obj = new tpStone_save_Obj();
         obj.setSlot(1);
         tpStone_set set = new tpStone_set(obj);
-        set.setsel(tpStone_set.sel_list.get(0), new Location());
-        tpStone_do.toStone_save.put(uuid.toString(), obj);
+        set.setsel(tpStone_set.sel_list.get(0), new Location_Obj());
+        tpStone_do.toStone_save.put(uuid, obj);
         ItemMeta ItemMeta = item.getItemMeta();
-        assert ItemMeta != null;
         ItemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c新的传送石"));
         ItemMeta.setLore(new ArrayList<String>() {
             {
                 this.add(ChatColor.translateAlternateColorCodes('&', "&b传送石槽位&d：&a1"));
             }
         });
-        NBTTagCompound nbt = new NBT_set().NBT_get(item);
-        nbt.setString("uuid", uuid.toString());
+        item.setItemMeta(ItemMeta);
+        NBT_set NBT_set= new NBT_set();
+        NBTTagCompound nbt = NBT_set.NBT_get(item);
+        nbt.setString("uuid", uuid);
+        item = NBT_set.NBT_save(item, nbt);
+        new tpStone_Read().save(obj, uuid);
         return item;
     }
 
@@ -45,11 +50,11 @@ public class tpStone_do {
         if (nbt.hasKeyOfType("uuid", 3)) {
             String uuid = nbt.getString("uuid");
             if (toStone_save.containsKey(uuid)) {
-                tpStone stone = toStone_save.get(uuid);
+                tpStone_save_Obj stone = toStone_save.get(uuid);
                 if (stone.getSlot() == 9)
                     return "c传送石槽位已满";
                 stone.setSlot(stone.getSlot() + 1);
-                new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location());
+                new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location_Obj());
                 new tpStone_Read().save(stone, uuid);
                 return "b传送石已升级";
             }
@@ -62,10 +67,10 @@ public class tpStone_do {
         if (nbt.hasKeyOfType("uuid", 3)) {
             String uuid = nbt.getString("uuid");
             if (toStone_save.containsKey(uuid)) {
-                tpStone stone = toStone_save.get(uuid);
+                tpStone_save_Obj stone = toStone_save.get(uuid);
                 stone.setName(new_name);
                 item.getItemMeta().setDisplayName(new_name);
-                new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location());
+                new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location_Obj());
                 new tpStone_Read().save(stone, uuid);
                 return "b传送石已重命名";
             }

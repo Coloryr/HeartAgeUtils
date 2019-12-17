@@ -1,6 +1,7 @@
 package Color_yr.HeartAge_year.Commder;
 
-import Color_yr.HeartAge_year.Config.tpStone.tpStone_do;
+import Color_yr.HeartAge_year.Config.tpStone_Read;
+import Color_yr.HeartAge_year.tpStone.tpStone_do;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.*;
@@ -76,8 +77,9 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                     uuid = UUID.randomUUID();
                 } while (tpStone_do.toStone_save.containsKey(uuid.toString()));
                 Player player = (Player) sender;
-                player.getInventory().addItem(new tpStone_do().new_tpStone(uuid));
+                player.getInventory().addItem(new tpStone_do().new_tpStone(uuid.toString()));
                 sender.sendMessage("§d[HeartAge_year]§b你获得了一个新的传送石");
+                return true;
             }
         }
         return false;

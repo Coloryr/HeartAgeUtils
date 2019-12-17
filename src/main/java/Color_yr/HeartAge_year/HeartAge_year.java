@@ -2,8 +2,8 @@ package Color_yr.HeartAge_year;
 
 import Color_yr.HeartAge_year.Commder.HeartAge_Commder;
 import Color_yr.HeartAge_year.Commder.toStone_Commder;
-import Color_yr.HeartAge_year.Config.Main.Config_Read;
-import Color_yr.HeartAge_year.Config.tpStone.tpStone_Read;
+import Color_yr.HeartAge_year.Config.Config_Read;
+import Color_yr.HeartAge_year.Config.tpStone_Read;
 import Color_yr.HeartAge_year.Event.Block_event;
 import Color_yr.HeartAge_year.Event.Item_event;
 import org.bukkit.Bukkit;

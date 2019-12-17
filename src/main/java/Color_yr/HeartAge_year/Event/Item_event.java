@@ -1,11 +1,11 @@
 package Color_yr.HeartAge_year.Event;
 
-import Color_yr.HeartAge_year.Config.tpStone.NBT_set;
-import Color_yr.HeartAge_year.Config.tpStone.Obj.Location;
-import Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone;
-import Color_yr.HeartAge_year.Config.tpStone.tpStone_Read;
-import Color_yr.HeartAge_year.Config.tpStone.tpStone_do;
-import Color_yr.HeartAge_year.Config.tpStone.tpStone_set;
+import Color_yr.HeartAge_year.Obj.Location_Obj;
+import Color_yr.HeartAge_year.util.NBT_set;
+import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
+import Color_yr.HeartAge_year.Config.tpStone_Read;
+import Color_yr.HeartAge_year.tpStone.tpStone_do;
+import Color_yr.HeartAge_year.tpStone.tpStone_set;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,10 +20,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Item_event implements Listener {
 
@@ -35,46 +37,53 @@ public class Item_event implements Listener {
         if (item == null)
             return;
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if (item.equals(tpStone_do.item)) {
+            if (item.getType().equals(tpStone_do.item)) {
                 NBT_set NBT_set = new NBT_set();
                 NBTTagCompound ItemNbt = NBT_set.NBT_get(item);
-                if (!ItemNbt.hasKeyOfType("Pack", 2))
+                if (!ItemNbt.hasKey("uuid"))
                     return;
-                String pack_name = ItemNbt.getString("uuid");
+                String uuid = ItemNbt.getString("uuid");
                 Player player = e.getPlayer();
-                if (!tpStone_do.toStone_save.containsKey(pack_name)) {
+                if (!tpStone_do.toStone_save.containsKey(uuid)) {
                     player.sendMessage("§d[HeartAge_year]§c没有这个传送石的数据");
                     return;
                 }
-                tpStone obj = tpStone_do.toStone_save.get(pack_name);
-                Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.CREATIVE, "传送石" + obj.getName() + "设置");
+                tpStone_save_Obj obj = tpStone_do.toStone_save.get(uuid);
+                Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.DISPENSER, "传送石" + obj.getName() + "设置");
                 ItemStack itemStack = new ItemStack(Material.COMPASS);
-                for (Map.Entry<String, Location> temp : obj.getSel().entrySet()) {
+                ItemMeta temp1;
+                for (Map.Entry<String, Location_Obj> temp : obj.getSel().entrySet()) {
                     String solt = temp.getKey().replace("sel", "");
-                    Location location = temp.getValue();
+                    Location_Obj locationObj = temp.getValue();
                     ItemNbt = NBT_set.NBT_get(itemStack);
                     ItemNbt.setBoolean("disable", false);
-                    ItemNbt.setInt("x", location.getX());
-                    ItemNbt.setInt("y", location.getY());
-                    ItemNbt.setInt("z", location.getZ());
-                    itemStack.getItemMeta().setDisplayName("坐标" + solt);
-                    itemStack.getItemMeta().setLore(new ArrayList<String>() {{
+                    ItemNbt.setInt("x", locationObj.getX());
+                    ItemNbt.setInt("y", locationObj.getY());
+                    ItemNbt.setInt("z", locationObj.getZ());
+                    temp1 = itemStack.getItemMeta();
+                    temp1.setDisplayName("坐标" + solt);
+                    temp1.setLore(new ArrayList<String>() {{
                         this.add("§e设置的坐标：");
-                        this.add("§aX：§b" + location.getX() + " §aY：§b" + location.getY() + " §aZ：§b" + location.getZ());
+                        this.add("§aX：§b" + locationObj.getX() + " §aY：§b" + locationObj.getY() + " §aZ：§b" + locationObj.getZ());
                     }});
-                    inv.setItem(Integer.getInteger(solt), itemStack);
+                    inv.setItem(Integer.decode(solt) - 1, itemStack);
+                    itemStack.setItemMeta(temp1);
                 }
                 itemStack = new ItemStack(Material.BARRIER);
-                ItemNbt = NBT_set.NBT_get(itemStack);
-                ItemNbt.setBoolean("disable", true);
-                itemStack.getItemMeta().setDisplayName("§4n未解锁");
-                itemStack.getItemMeta().setLore(new ArrayList<String>() {
+                temp1 = itemStack.getItemMeta();
+                temp1.setDisplayName("§4n未解锁");
+                temp1.setLore(new ArrayList<String>() {
                     {
                         this.add("&7使用升级石来解锁");
                     }
                 });
+                itemStack.setItemMeta(temp1);
+                ItemNbt = NBT_set.NBT_get(itemStack);
+                ItemNbt.setBoolean("disable", true);
+                itemStack = NBT_set.NBT_save(itemStack, ItemNbt);
                 for (int i = 0; i < 9; i++) {
-                    if (inv.getItem(i) == null) {
+                    ItemStack a = inv.getItem(i);
+                    if (a == null) {
                         inv.setItem(i, itemStack);
                     }
                 }
@@ -113,9 +122,9 @@ public class Item_event implements Listener {
                         if (!tpStone_do.toStone_save.containsKey(uuid)) {
                             player.sendMessage("§d[HeartAge_year]§c你的传送石异常");
                         } else {
-                            tpStone stone = tpStone_do.toStone_save.get(uuid);
+                            tpStone_save_Obj stone = tpStone_do.toStone_save.get(uuid);
                             tpStone_set set = new tpStone_set(stone);
-                            Location location1 = new Location();
+                            Location_Obj location1 = new Location_Obj();
                             location1.setX((int) location.getX());
                             location1.setY((int) location.getY());
                             location1.setZ((int) location.getZ());

@@ -1,6 +1,6 @@
-package Color_yr.HeartAge_year.Config.Main.Obj;
+package Color_yr.HeartAge_year.Obj;
 
-public class tpStone {//传送石配置对象
+public class Config_tpStone_Obj {//传送石配置对象
 
     private String main;
     private String update;

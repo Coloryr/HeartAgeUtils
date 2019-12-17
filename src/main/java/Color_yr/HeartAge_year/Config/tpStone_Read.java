@@ -1,18 +1,20 @@
-package Color_yr.HeartAge_year.Config.tpStone;
+package Color_yr.HeartAge_year.Config;
 
-import Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone;
+import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
 import Color_yr.HeartAge_year.HeartAge_year;
+import Color_yr.HeartAge_year.tpStone.tpStone_do;
 import com.google.gson.Gson;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class tpStone_Read {
-    private static File FileName;
+    private static String File_local;
 
     public void init() {
         //文件初始化
-        FileName = new File(HeartAge_year.plugin.getDataFolder().getParent() + "/HeartAge_year/toStone");
+        File_local = HeartAge_year.plugin.getDataFolder().getParent() + "/HeartAge_year/tpStone";
+        File FileName = new File(File_local);
         try {
             if (!HeartAge_year.plugin.getDataFolder().exists())
                 HeartAge_year.plugin.getDataFolder().mkdirs();
@@ -24,7 +26,7 @@ public class tpStone_Read {
                     Gson read_gson = new Gson();
                     reader = new InputStreamReader(new FileInputStream(temp), StandardCharsets.UTF_8);
                     bfreader = new BufferedReader(reader);
-                    tpStone obj = read_gson.fromJson(bfreader, tpStone.class);
+                    tpStone_save_Obj obj = read_gson.fromJson(bfreader, tpStone_save_Obj.class);
                     if (obj != null)
                         tpStone_do.toStone_save.put(temp.getName().replace(".json", ""), obj);
                 }
@@ -34,10 +36,10 @@ public class tpStone_Read {
         }
     }
 
-    public void save(tpStone stone, String uuid) {
+    public void save(tpStone_save_Obj stone, String uuid) {
         //保存传送石储存
         try {
-            File save_file = new File(FileName.getParent() + "/" + uuid + ".json");
+            File save_file = new File(File_local + uuid + ".json");
             if (!save_file.exists())
                 save_file.createNewFile();
             OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(save_file), StandardCharsets.UTF_8);

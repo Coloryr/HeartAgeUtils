@@ -1,6 +1,6 @@
-package Color_yr.HeartAge_year.Config.tpStone.Obj;
+package Color_yr.HeartAge_year.Obj;
 
-public class Location {//传送石坐标储存对象
+public class Location_Obj {//传送石坐标储存对象
 
     private int x = 0;
     private int y = 0;
