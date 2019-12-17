@@ -3,7 +3,7 @@ package Color_yr.HeartAge_year.Config.Main;
 public class Config_Obj {
 
     private String vision;
-    private Item item;
+    private tpStone tpStone;
 
     public String getVision() {
         return vision;
@@ -13,26 +13,26 @@ public class Config_Obj {
         this.vision = vision;
     }
 
-    public Item getItem() {
-        return item;
+    public tpStone getItem() {
+        return tpStone;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItem(tpStone item) {
+        this.tpStone = tpStone;
     }
 }
 
-class Item {
+class tpStone {
 
-    private String hand;
+    private String item;
     private String updata;
 
     public String getHand() {
-        return hand;
+        return item;
     }
 
     public void setHand(String hand) {
-        this.hand = hand;
+        this.item = hand;
     }
 
     public String getUpdata() {

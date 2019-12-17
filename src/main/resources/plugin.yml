@@ -4,6 +4,9 @@ author: Color_yr
 version: 1.0.0
 
 commands:
+  heartage:
+    description: 插件主指令
+    usage: §4[HeartAge_year]§6/heartage help来查看帮助
   tpStone:
     description: 传送石指令
     usage: §4[HeartAge_year]§6/tpStone help来查看帮助

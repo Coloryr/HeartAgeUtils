@@ -9,12 +9,18 @@ import java.util.List;
 
 public class HeartAge_Commder implements CommandExecutor, TabExecutor {
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] arg) {
+        if(command.getName().equalsIgnoreCase("heartage")) {
+            if (arg.length == 0) {
+
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+    public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] arg) {
         return null;
     }
 }
