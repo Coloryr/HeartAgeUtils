@@ -15,6 +15,11 @@ public class HeartAge_Commder implements CommandExecutor, TabExecutor {
                 sender.sendMessage("§d[HeartAge_year]§c错误，请使用/heartage help 获取帮助");
                 return true;
             }
+            else if(arg[0].equalsIgnoreCase("help"))
+            {
+                sender.sendMessage("§d[HeartAge_year]§c错误，请使用/heartage help 获取帮助");
+                return true;
+            }
         }
         return false;
     }

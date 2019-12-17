@@ -1,13 +1,11 @@
 package Color_yr.HeartAge_year.Event;
 
-import Color_yr.HeartAge_year.Config.tpStone.NBTset;
+import Color_yr.HeartAge_year.Config.tpStone.NBT_set;
 import Color_yr.HeartAge_year.Config.tpStone.Obj.Location;
 import Color_yr.HeartAge_year.Config.tpStone.Obj.tpStone;
 import Color_yr.HeartAge_year.Config.tpStone.tpStone_Read;
 import Color_yr.HeartAge_year.Config.tpStone.tpStone_do;
 import Color_yr.HeartAge_year.Config.tpStone.tpStone_set;
-import Color_yr.HeartAge_year.HeartAge_year;
-import com.sun.javafx.collections.MappingChange;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,7 +14,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -30,7 +27,7 @@ import java.util.Map;
 
 public class Item_event implements Listener {
 
-    private static Map<String, Inventory>GUI_save = new HashMap<>();
+    private static Map<String, Inventory> GUI_save = new HashMap<>();
 
     @EventHandler
     public void itemclick(PlayerInteractEvent e) {
@@ -39,8 +36,8 @@ public class Item_event implements Listener {
             return;
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (item.equals(tpStone_do.item)) {
-                NBTset NBTset = new NBTset();
-                NBTTagCompound ItemNbt = NBTset.NBT_get(item);
+                NBT_set NBT_set = new NBT_set();
+                NBTTagCompound ItemNbt = NBT_set.NBT_get(item);
                 if (!ItemNbt.hasKeyOfType("Pack", 2))
                     return;
                 String pack_name = ItemNbt.getString("uuid");
@@ -55,7 +52,7 @@ public class Item_event implements Listener {
                 for (Map.Entry<String, Location> temp : obj.getSel().entrySet()) {
                     String solt = temp.getKey().replace("sel", "");
                     Location location = temp.getValue();
-                    ItemNbt = NBTset.NBT_get(itemStack);
+                    ItemNbt = NBT_set.NBT_get(itemStack);
                     ItemNbt.setBoolean("disable", false);
                     ItemNbt.setInt("x", location.getX());
                     ItemNbt.setInt("y", location.getY());
@@ -67,8 +64,8 @@ public class Item_event implements Listener {
                     }});
                     inv.setItem(Integer.getInteger(solt), itemStack);
                 }
-                itemStack = new ItemStack(Material.BARREL);
-                ItemNbt = NBTset.NBT_get(itemStack);
+                itemStack = new ItemStack(Material.BARRIER);
+                ItemNbt = NBT_set.NBT_get(itemStack);
                 ItemNbt.setBoolean("disable", true);
                 itemStack.getItemMeta().setDisplayName("§4n未解锁");
                 itemStack.getItemMeta().setLore(new ArrayList<String>() {
@@ -90,19 +87,17 @@ public class Item_event implements Listener {
 
     @EventHandler
     public void sel_gui(InventoryClickEvent e) {
-        if(e.getWhoClicked() instanceof Player)
-        {
+        if (e.getWhoClicked() instanceof Player) {
             Player player = (Player) e.getWhoClicked();
             ItemStack hand = player.getInventory().getItemInMainHand();
-            if(hand==null)
+            if (hand == null)
                 return;
-            if(GUI_save.containsKey(player.getName()))
-            {
+            if (GUI_save.containsKey(player.getName())) {
                 e.setCancelled(true);
                 Inventory inv = GUI_save.get(player.getName());
-                if(inv.getViewers().equals(player)) {
+                if (inv.getViewers().equals(player)) {
                     ItemStack item = inv.getItem(e.getSlot());
-                    NBTTagCompound ItemNbt = new NBTset().NBT_get(item);
+                    NBTTagCompound ItemNbt = new NBT_set().NBT_get(item);
                     if (!ItemNbt.getBoolean("disable"))
                         player.sendMessage("§d[HeartAge_year]§c传送石的这个槽位未解锁");
                     else if (e.getClick() == ClickType.LEFT) {
@@ -111,25 +106,20 @@ public class Item_event implements Listener {
                         int z = ItemNbt.getInt("z");
                         player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
                         player.sendMessage("§d[HeartAge_year]§b已将你传送至目的坐标");
-                    }
-                    else if(e.getClick() == ClickType.RIGHT)
-                    {
+                    } else if (e.getClick() == ClickType.RIGHT) {
                         org.bukkit.Location location = player.getLocation();
-                        ItemNbt = new NBTset().NBT_get(hand);
+                        ItemNbt = new NBT_set().NBT_get(hand);
                         String uuid = ItemNbt.getString("uuid");
-                        if(!tpStone_do.toStone_save.containsKey(uuid))
-                        {
+                        if (!tpStone_do.toStone_save.containsKey(uuid)) {
                             player.sendMessage("§d[HeartAge_year]§c你的传送石异常");
-                        }
-                        else
-                        {
-                            tpStone stone  =tpStone_do.toStone_save.get(uuid);
+                        } else {
+                            tpStone stone = tpStone_do.toStone_save.get(uuid);
                             tpStone_set set = new tpStone_set(stone);
                             Location location1 = new Location();
-                            location1.setX((int)location.getX());
-                            location1.setY((int)location.getY());
-                            location1.setZ((int)location.getZ());
-                            set.setsel(tpStone_set.sel_list.get(e.getSlot()),location1);
+                            location1.setX((int) location.getX());
+                            location1.setY((int) location.getY());
+                            location1.setZ((int) location.getZ());
+                            set.setsel(tpStone_set.sel_list.get(e.getSlot()), location1);
                             new tpStone_Read().save(stone, uuid);
                             player.sendMessage("§d[HeartAge_year]§b已保存你脚下的坐标");
                         }

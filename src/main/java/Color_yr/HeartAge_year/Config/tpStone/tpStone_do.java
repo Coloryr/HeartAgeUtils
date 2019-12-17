@@ -19,6 +19,8 @@ public class tpStone_do {
     public static Map<String, tpStone> toStone_save = new HashMap<>();
 
     public ItemStack new_tpStone(UUID uuid) {//获得新的传送石
+        if(tpStone_do.item == null)
+            return null;
         ItemStack item = new ItemStack(tpStone_do.item);
         tpStone obj = new tpStone();
         obj.setSlot(1);
@@ -33,13 +35,13 @@ public class tpStone_do {
                 this.add(ChatColor.translateAlternateColorCodes('&', "&b传送石槽位&d：&a1"));
             }
         });
-        NBTTagCompound nbt = new NBTset().NBT_get(item);
+        NBTTagCompound nbt = new NBT_set().NBT_get(item);
         nbt.setString("uuid", uuid.toString());
         return item;
     }
 
     public String up_tpStone(ItemStack item) {//升级传送石
-        NBTTagCompound nbt = new NBTset().NBT_get(item);
+        NBTTagCompound nbt = new NBT_set().NBT_get(item);
         if (nbt.hasKeyOfType("uuid", 3)) {
             String uuid = nbt.getString("uuid");
             if (toStone_save.containsKey(uuid)) {
@@ -54,8 +56,9 @@ public class tpStone_do {
         }
         return "c传送石异常";
     }
+
     public String rename_tpStone(ItemStack item, String new_name) {//重命名传送石
-        NBTTagCompound nbt = new NBTset().NBT_get(item);
+        NBTTagCompound nbt = new NBT_set().NBT_get(item);
         if (nbt.hasKeyOfType("uuid", 3)) {
             String uuid = nbt.getString("uuid");
             if (toStone_save.containsKey(uuid)) {

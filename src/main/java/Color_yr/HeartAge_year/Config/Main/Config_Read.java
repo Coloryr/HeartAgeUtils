@@ -23,7 +23,7 @@ public class Config_Read {
             main_config = read_gson.fromJson(bfreader, Config_Obj.class);
             //读传送石物品
             if (!main_config.gettpStone().getmain().isEmpty()) {
-                Material temp = Material.matchMaterial(main_config.gettpStone().getmain());
+                Material temp = Material.matchMaterial(main_config.gettpStone().getmain(), true);
                 if (temp == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品找不到");
                 } else {
@@ -34,7 +34,7 @@ public class Config_Read {
             }
             //读传送石升级物品
             if (!main_config.gettpStone().getUpdata().isEmpty()) {
-                Material temp = Material.matchMaterial(main_config.gettpStone().getUpdata());
+                Material temp = Material.matchMaterial(main_config.gettpStone().getUpdata(), true);
                 if (temp == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品找不到");
                 } else {
@@ -44,7 +44,7 @@ public class Config_Read {
                 HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品ID为空");
             }
         } catch (Exception arg0) {
-            HeartAge_year.log.warning("§d[HeartAge_year]§c配置文件 config.yml 读取失败:" + arg0);
+            HeartAge_year.log.warning("§d[HeartAge_year]§c配置文件 config.json 读取失败:" + arg0);
         }
     }
 
