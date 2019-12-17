@@ -2,18 +2,9 @@ package Color_yr.HeartAge_year.Config.tpStone.Obj;
 
 public class Location {//传送石坐标储存对象
 
-    private String name = "";
     private int x = 0;
     private int y = 0;
     private int z = 0;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getX() {
         return x;
