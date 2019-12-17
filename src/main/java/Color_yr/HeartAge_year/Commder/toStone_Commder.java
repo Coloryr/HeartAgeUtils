@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,18 +45,14 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                 }
                 sender.sendMessage("§d[HeartAge_year]§" + new tpStone_do().rename_tpStone(stack, args[1]));
                 return true;
-            } else if (args[0].equalsIgnoreCase("updata")) {//升级传送石
-                if (sender instanceof ConsoleCommandSender) {
+            } else if (args[0].equalsIgnoreCase("uplevel")) {//升级传送石
+                if (!(sender instanceof Player)) {
                     sender.sendMessage("§d[HeartAge_year]§c只能玩家使用这个指令");
                     return true;
                 }
                 Player player = (Player) sender;
-                if (player == null) {
-                    sender.sendMessage("§d[HeartAge_year]§c执行指令的玩家找不到");
-                    return true;
-                }
-                ItemStack stack = player.getInventory().getItemInMainHand();
 
+                ItemStack stack = player.getInventory().getItemInMainHand();
                 Material item = stack.getType();
                 if (!item.equals(tpStone_do.item)) {
                     sender.sendMessage("§d[HeartAge_year]§c请手持传送石后执行");
