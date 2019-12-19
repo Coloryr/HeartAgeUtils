@@ -18,7 +18,7 @@ public class Config_Obj {//主配置对象
     }
 
     public void settpSone(Config_tpStone_Obj item) {
-        this.Config_tpStone_Obj = Config_tpStone_Obj;
+        this.Config_tpStone_Obj = item;
     }
 }
 

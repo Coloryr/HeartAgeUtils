@@ -25,14 +25,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Item_event implements Listener {
 
-    private static Map<String, Inventory> GUI_save = new HashMap<>();
+    private static Map<String, InventoryView> GUI_save = new HashMap<>();
 
     @EventHandler
-    public void itemclick(PlayerInteractEvent e) {
+    public void item_click(PlayerInteractEvent e) {
         ItemStack item = e.getItem();
         if (item == null)
             return;
@@ -53,7 +52,7 @@ public class Item_event implements Listener {
                 ItemStack itemStack = new ItemStack(Material.COMPASS);
                 ItemMeta temp1;
                 for (Map.Entry<String, Location_Obj> temp : obj.getSel().entrySet()) {
-                    String solt = temp.getKey().replace("sel", "");
+                    String slot = temp.getKey().replace("sel", "");
                     Location_Obj locationObj = temp.getValue();
                     ItemNbt = NBT_set.NBT_get(itemStack);
                     ItemNbt.setBoolean("disable", false);
@@ -61,12 +60,12 @@ public class Item_event implements Listener {
                     ItemNbt.setInt("y", locationObj.getY());
                     ItemNbt.setInt("z", locationObj.getZ());
                     temp1 = itemStack.getItemMeta();
-                    temp1.setDisplayName("坐标" + solt);
+                    temp1.setDisplayName("坐标" + slot);
                     temp1.setLore(new ArrayList<String>() {{
                         this.add("§e设置的坐标：");
                         this.add("§aX：§b" + locationObj.getX() + " §aY：§b" + locationObj.getY() + " §aZ：§b" + locationObj.getZ());
                     }});
-                    inv.setItem(Integer.decode(solt) - 1, itemStack);
+                    inv.setItem(Integer.decode(slot) - 1, itemStack);
                     itemStack.setItemMeta(temp1);
                 }
                 itemStack = new ItemStack(Material.BARRIER);
@@ -88,8 +87,7 @@ public class Item_event implements Listener {
                     }
                 }
                 player.closeInventory();
-                InventoryView a = player.openInventory(inv);
-                GUI_save.put(player.getName(), inv);
+                GUI_save.put(player.getName(), player.openInventory(inv));
             }
         }
     }
@@ -99,12 +97,12 @@ public class Item_event implements Listener {
         if (e.getWhoClicked() instanceof Player) {
             Player player = (Player) e.getWhoClicked();
             ItemStack hand = player.getInventory().getItemInMainHand();
-            if (hand == null)
+            if (hand.getType().equals(Material.AIR))
                 return;
             if (GUI_save.containsKey(player.getName())) {
                 e.setCancelled(true);
-                Inventory inv = GUI_save.get(player.getName());
-                if (inv.getViewers().equals(player)) {
+                InventoryView inv = GUI_save.get(player.getName());
+                if (inv.getPlayer().equals(player)) {
                     ItemStack item = inv.getItem(e.getSlot());
                     NBTTagCompound ItemNbt = new NBT_set().NBT_get(item);
                     if (!ItemNbt.getBoolean("disable"))
