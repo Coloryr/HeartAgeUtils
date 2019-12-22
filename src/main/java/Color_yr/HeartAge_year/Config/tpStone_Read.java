@@ -1,7 +1,7 @@
 package Color_yr.HeartAge_year.Config;
 
-import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
 import Color_yr.HeartAge_year.HeartAge_year;
+import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
 import Color_yr.HeartAge_year.tpStone.tpStone_do;
 import com.google.gson.Gson;
 
@@ -22,10 +22,10 @@ public class tpStone_Read {
                 InputStreamReader reader;
                 BufferedReader bfreader;
                 for (File temp : file_list) {
-                    Gson read_gson = new Gson();
+                    Gson json = new Gson();
                     reader = new InputStreamReader(new FileInputStream(temp), StandardCharsets.UTF_8);
                     bfreader = new BufferedReader(reader);
-                    tpStone_save_Obj obj = read_gson.fromJson(bfreader, tpStone_save_Obj.class);
+                    tpStone_save_Obj obj = json.fromJson(bfreader, tpStone_save_Obj.class);
                     tpStone_do.toStone_save.clear();
                     if (obj != null)
                         tpStone_do.toStone_save.put(temp.getName().replace(".json", ""), obj);
@@ -34,7 +34,8 @@ public class tpStone_Read {
                 }
             }
         } catch (Exception e) {
-            HeartAge_year.log.warning("§d[HeartAge_year]§c传送石配置文件初始化失败" + e);
+            HeartAge_year.log.warning("§d[HeartAge_year]§c传送石配置文件初始化失败");
+            e.printStackTrace();
         }
     }
 
@@ -48,7 +49,8 @@ public class tpStone_Read {
             write.write(new Gson().toJson(stone));
             write.close();
         } catch (Exception e) {
-            HeartAge_year.log.warning("§d[HeartAge_year]§c传送石内容保存失败" + e);
+            HeartAge_year.log.warning("§d[HeartAge_year]§c传送石内容保存失败");
+            e.printStackTrace();
         }
     }
 }

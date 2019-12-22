@@ -2,9 +2,22 @@ package Color_yr.HeartAge_year.Obj;
 
 public class Location_Obj {//传送石坐标储存对象
 
+    public Location_Obj(String name) {
+        this.name = name;
+    }
+
+    private String name;
     private int x = 0;
     private int y = 0;
     private int z = 0;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getX() {
         return x;

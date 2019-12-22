@@ -18,6 +18,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.Objects;
 
+import static Color_yr.HeartAge_year.Config.Config_Read.lan;
+
 public class Block_event implements Listener {
 
     private boolean hasPerm(final Location loc, final Player player) {
@@ -35,7 +37,7 @@ public class Block_event implements Listener {
         final boolean hasPerm = this.hasPerm(e.getBlock().getLocation(), e.getPlayer());
         e.setCancelled(!hasPerm);
         if (!hasPerm) {
-            e.getPlayer().sendMessage("禁止破坏领地外的方块");
+            e.getPlayer().sendMessage(lan.getNo_build_destroy());
         }
     }
 
@@ -47,7 +49,7 @@ public class Block_event implements Listener {
         final boolean hasPerm = this.hasPerm(e.getBlock().getLocation(), e.getPlayer());
         e.setCancelled(!hasPerm);
         if (!hasPerm) {
-            e.getPlayer().sendMessage("禁止在领地外放置方块");
+            e.getPlayer().sendMessage(lan.getNo_build_place());
         }
     }
 
@@ -60,7 +62,7 @@ public class Block_event implements Listener {
             final boolean hasPerm = this.hasPerm(Objects.requireNonNull(e.getClickedBlock()).getLocation(), e.getPlayer());
             e.setCancelled(!hasPerm);
             if (!hasPerm) {
-                e.getPlayer().sendMessage("禁止交互");
+                e.getPlayer().sendMessage(lan.getNo_build_ues());
             }
         }
     }
@@ -79,7 +81,7 @@ public class Block_event implements Listener {
         final boolean hasPerm = this.hasPerm(e.getBlockClicked().getLocation(), e.getPlayer());
         e.setCancelled(!hasPerm);
         if (!hasPerm) {
-            e.getPlayer().sendMessage("禁止在领地外使用桶");
+            e.getPlayer().sendMessage(lan.getNo_build_bucket());
         }
     }
 
@@ -91,7 +93,7 @@ public class Block_event implements Listener {
         final boolean hasPerm = this.hasPerm(e.getBlockClicked().getLocation(), e.getPlayer());
         e.setCancelled(!hasPerm);
         if (!hasPerm) {
-            e.getPlayer().sendMessage("禁止在领地外使用桶");
+            e.getPlayer().sendMessage(lan.getNo_build_bucket());
         }
     }
 }

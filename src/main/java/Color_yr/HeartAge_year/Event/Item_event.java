@@ -1,22 +1,23 @@
 package Color_yr.HeartAge_year.Event;
 
-import Color_yr.HeartAge_year.Obj.Location_Obj;
-import Color_yr.HeartAge_year.util.NBT_set;
-import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
 import Color_yr.HeartAge_year.Config.tpStone_Read;
+import Color_yr.HeartAge_year.Obj.Location_Obj;
+import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
 import Color_yr.HeartAge_year.tpStone.tpStone_do;
 import Color_yr.HeartAge_year.tpStone.tpStone_set;
+import Color_yr.HeartAge_year.util.NBT_set;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -25,6 +26,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static Color_yr.HeartAge_year.Config.Config_Read.lan;
 
 public class Item_event implements Listener {
 
@@ -41,14 +44,17 @@ public class Item_event implements Listener {
             NBTTagCompound ItemNbt = NBT_set.NBT_get(item);
             if (!ItemNbt.hasKey("uuid"))
                 return;
+            e.setCancelled(true);
+
             String uuid = ItemNbt.getString("uuid");
             Player player = e.getPlayer();
             if (!tpStone_do.toStone_save.containsKey(uuid)) {
-                player.sendMessage("§d[HeartAge_year]§c没有这个传送石的数据");
+                player.sendMessage(lan.getTitle() + lan.getTpStone_no_date());
                 return;
             }
             tpStone_save_Obj obj = tpStone_do.toStone_save.get(uuid);
-            Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.DISPENSER, "传送石" + obj.getName() + "设置");
+            Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.DISPENSER,
+                    lan.getTpStone_title() + obj.getName());
             ItemStack itemStack = new ItemStack(Material.COMPASS);
             ItemMeta temp1;
             for (Map.Entry<String, Location_Obj> temp : obj.getSel().entrySet()) {
@@ -61,9 +67,9 @@ public class Item_event implements Listener {
                 ItemNbt.setInt("z", locationObj.getZ());
                 itemStack = NBT_set.NBT_save(itemStack, ItemNbt);
                 temp1 = itemStack.getItemMeta();
-                temp1.setDisplayName("坐标" + slot);
+                temp1.setDisplayName(locationObj.getName());
                 temp1.setLore(new ArrayList<String>() {{
-                    this.add("§e设置的坐标：");
+                    this.add(lan.getTpStone_show());
                     this.add("§aX：§b" + locationObj.getX() + " §aY：§b" + locationObj.getY() + " §aZ：§b" + locationObj.getZ());
                 }});
                 itemStack.setItemMeta(temp1);
@@ -71,10 +77,10 @@ public class Item_event implements Listener {
             }
             itemStack = new ItemStack(Material.BARRIER);
             temp1 = itemStack.getItemMeta();
-            temp1.setDisplayName("§4未解锁");
+            temp1.setDisplayName(lan.getTpStone_unlock());
             temp1.setLore(new ArrayList<String>() {
                 {
-                    this.add("使用升级石来解锁");
+                    this.add(lan.getTpStone_unlock_need());
                 }
             });
             itemStack.setItemMeta(temp1);
@@ -88,7 +94,14 @@ public class Item_event implements Listener {
                 }
             }
             player.closeInventory();
+            player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1.0f, 1.0f);
             GUI_save.put(player.getName(), player.openInventory(inv));
+        } else if (e.getHand() == EquipmentSlot.OFF_HAND) {
+            ItemStack offhand = e.getPlayer().getInventory().getItemInOffHand();
+            ItemStack mainhand = e.getPlayer().getInventory().getItemInMainHand();
+            if (mainhand.getType().equals(tpStone_do.item) && offhand.getType().equals(tpStone_do.update_item)) {
+                e.setCancelled(true);
+            }
         }
     }
 
@@ -100,38 +113,44 @@ public class Item_event implements Listener {
             if (hand.getType().equals(Material.AIR))
                 return;
             if (GUI_save.containsKey(player.getName())) {
-                e.setCancelled(true);
                 InventoryView inv = GUI_save.get(player.getName());
+                if (!inv.getTitle().contains(lan.getTpStone_title()))
+                    return;
+                e.setCancelled(true);
                 if (inv.getPlayer().equals(player)) {
                     ItemStack item = inv.getItem(e.getSlot());
                     NBTTagCompound ItemNbt = new NBT_set().NBT_get(item);
-                    if(!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z")))
-                        return;
                     if (ItemNbt.getBoolean("disable"))
-                        player.sendMessage("§d[HeartAge_year]§c传送石的这个槽位未解锁");
+                        player.sendMessage(lan.getTitle() + lan.getTpStone_unlock_slot());
+                    else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z")))
+                        return;
                     else if (e.getClick() == ClickType.LEFT) {
                         int x = ItemNbt.getInt("x");
                         int y = ItemNbt.getInt("y");
                         int z = ItemNbt.getInt("z");
-                        player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
-                        player.sendMessage("§d[HeartAge_year]§b已将你传送至目的坐标");
+                        if (x == 0 && y == 0 && z == 0) {
+                            player.sendMessage(lan.getTitle() + lan.getTpStone_cant_tp());
+                        } else {
+                            player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
+                            player.sendMessage(lan.getTitle() + lan.getTpStone_tp());
+                        }
                     } else if (e.getClick() == ClickType.RIGHT) {
                         org.bukkit.Location location = player.getLocation();
                         ItemNbt = new NBT_set().NBT_get(hand);
                         String uuid = ItemNbt.getString("uuid");
                         if (!tpStone_do.toStone_save.containsKey(uuid)) {
-                            player.sendMessage("§d[HeartAge_year]§c你的传送石异常");
+                            player.sendMessage(lan.getTitle() + lan.getTpStone_error());
                         } else {
                             tpStone_save_Obj stone = tpStone_do.toStone_save.get(uuid);
                             tpStone_set set = new tpStone_set(stone);
-                            Location_Obj location1 = new Location_Obj();
+                            Location_Obj location1 = set.get_sel(e.getSlot());
                             location1.setX((int) location.getX());
                             location1.setY((int) location.getY());
                             location1.setZ((int) location.getZ());
-                            set.setsel(tpStone_set.sel_list.get(e.getSlot()), location1);
+                            set.set_sel(e.getSlot(), location1);
                             new tpStone_Read().save(stone, uuid);
                             tpStone_do.toStone_save.put(uuid, stone);
-                            player.sendMessage("§d[HeartAge_year]§b已保存你脚下的坐标");
+                            player.sendMessage(lan.getTitle() + lan.getTpStone_save());
                         }
                     }
                 }
