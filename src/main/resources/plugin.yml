@@ -2,6 +2,7 @@ name: HeartAge_year
 main: Color_yr.HeartAge_year.HeartAge_year
 author: Color_yr
 version: 1.0.0
+api-version: 1.13
 
 commands:
   heartage:

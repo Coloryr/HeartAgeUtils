@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "tpStone": {
-    "main": "minecraft:stone",
-    "update": "minecraft:stone"
+    "main": "heart_of_the_sea",
+    "update": "stone"
   }
 }

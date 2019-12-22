@@ -22,32 +22,28 @@ public class Config_Read {
             BufferedReader bfreader = new BufferedReader(reader);
             main_config = read_gson.fromJson(bfreader, Config_Obj.class);
             //读传送石物品
-            /*
             if (!main_config.gettpStone().getmain().isEmpty()) {
-                Material temp = Material.matchMaterial(main_config.gettpStone().getmain(), true);
-                if (temp == null) {
+                Material a = Material.matchMaterial(main_config.gettpStone().getmain());
+                if (a == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品找不到");
                 } else {
-                    tpStone_do.item = temp;
+                    tpStone_do.item = a;
                 }
             } else {
                 HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品ID为空");
             }
             //读传送石升级物品
             if (!main_config.gettpStone().getUpdata().isEmpty()) {
-                Material temp = Material.matchMaterial(main_config.gettpStone().getUpdata(), true);
-                if (temp == null) {
+                Material a = Material.matchMaterial(main_config.gettpStone().getmain());
+                if (a == null) {
                     HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品找不到");
                 } else {
-                    tpStone_do.updata_item = temp;
+                    tpStone_do.update_item = a;
                 }
             } else {
                 HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品ID为空");
             }
 
-             */
-            tpStone_do.item = Material.STONE;
-            tpStone_do.updata_item = Material.STONE;
         } catch (Exception arg0) {
             HeartAge_year.log.warning("§d[HeartAge_year]§c配置文件 config.json 读取失败:" + arg0);
         }

@@ -35,60 +35,60 @@ public class Item_event implements Listener {
         ItemStack item = e.getItem();
         if (item == null)
             return;
-        if (e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if (item.getType().equals(tpStone_do.item)) {
-                NBT_set NBT_set = new NBT_set();
-                NBTTagCompound ItemNbt = NBT_set.NBT_get(item);
-                if (!ItemNbt.hasKey("uuid"))
-                    return;
-                String uuid = ItemNbt.getString("uuid");
-                Player player = e.getPlayer();
-                if (!tpStone_do.toStone_save.containsKey(uuid)) {
-                    player.sendMessage("§d[HeartAge_year]§c没有这个传送石的数据");
-                    return;
-                }
-                tpStone_save_Obj obj = tpStone_do.toStone_save.get(uuid);
-                Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.DISPENSER, "传送石" + obj.getName() + "设置");
-                ItemStack itemStack = new ItemStack(Material.COMPASS);
-                ItemMeta temp1;
-                for (Map.Entry<String, Location_Obj> temp : obj.getSel().entrySet()) {
-                    String slot = temp.getKey().replace("sel", "");
-                    Location_Obj locationObj = temp.getValue();
-                    ItemNbt = NBT_set.NBT_get(itemStack);
-                    ItemNbt.setBoolean("disable", false);
-                    ItemNbt.setInt("x", locationObj.getX());
-                    ItemNbt.setInt("y", locationObj.getY());
-                    ItemNbt.setInt("z", locationObj.getZ());
-                    temp1 = itemStack.getItemMeta();
-                    temp1.setDisplayName("坐标" + slot);
-                    temp1.setLore(new ArrayList<String>() {{
-                        this.add("§e设置的坐标：");
-                        this.add("§aX：§b" + locationObj.getX() + " §aY：§b" + locationObj.getY() + " §aZ：§b" + locationObj.getZ());
-                    }});
-                    inv.setItem(Integer.decode(slot) - 1, itemStack);
-                    itemStack.setItemMeta(temp1);
-                }
-                itemStack = new ItemStack(Material.BARRIER);
-                temp1 = itemStack.getItemMeta();
-                temp1.setDisplayName("§4n未解锁");
-                temp1.setLore(new ArrayList<String>() {
-                    {
-                        this.add("&7使用升级石来解锁");
-                    }
-                });
-                itemStack.setItemMeta(temp1);
-                ItemNbt = NBT_set.NBT_get(itemStack);
-                ItemNbt.setBoolean("disable", true);
-                itemStack = NBT_set.NBT_save(itemStack, ItemNbt);
-                for (int i = 0; i < 9; i++) {
-                    ItemStack a = inv.getItem(i);
-                    if (a == null) {
-                        inv.setItem(i, itemStack);
-                    }
-                }
-                player.closeInventory();
-                GUI_save.put(player.getName(), player.openInventory(inv));
+        Material test = item.getType();
+        if (test.equals(tpStone_do.item)) {
+            NBT_set NBT_set = new NBT_set();
+            NBTTagCompound ItemNbt = NBT_set.NBT_get(item);
+            if (!ItemNbt.hasKey("uuid"))
+                return;
+            String uuid = ItemNbt.getString("uuid");
+            Player player = e.getPlayer();
+            if (!tpStone_do.toStone_save.containsKey(uuid)) {
+                player.sendMessage("§d[HeartAge_year]§c没有这个传送石的数据");
+                return;
             }
+            tpStone_save_Obj obj = tpStone_do.toStone_save.get(uuid);
+            Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.DISPENSER, "传送石" + obj.getName() + "设置");
+            ItemStack itemStack = new ItemStack(Material.COMPASS);
+            ItemMeta temp1;
+            for (Map.Entry<String, Location_Obj> temp : obj.getSel().entrySet()) {
+                String slot = temp.getKey().replace("sel", "");
+                Location_Obj locationObj = temp.getValue();
+                ItemNbt = NBT_set.NBT_get(itemStack);
+                ItemNbt.setBoolean("disable", false);
+                ItemNbt.setInt("x", locationObj.getX());
+                ItemNbt.setInt("y", locationObj.getY());
+                ItemNbt.setInt("z", locationObj.getZ());
+                itemStack = NBT_set.NBT_save(itemStack, ItemNbt);
+                temp1 = itemStack.getItemMeta();
+                temp1.setDisplayName("坐标" + slot);
+                temp1.setLore(new ArrayList<String>() {{
+                    this.add("§e设置的坐标：");
+                    this.add("§aX：§b" + locationObj.getX() + " §aY：§b" + locationObj.getY() + " §aZ：§b" + locationObj.getZ());
+                }});
+                itemStack.setItemMeta(temp1);
+                inv.setItem(Integer.decode(slot) - 1, itemStack);
+            }
+            itemStack = new ItemStack(Material.BARRIER);
+            temp1 = itemStack.getItemMeta();
+            temp1.setDisplayName("§4未解锁");
+            temp1.setLore(new ArrayList<String>() {
+                {
+                    this.add("使用升级石来解锁");
+                }
+            });
+            itemStack.setItemMeta(temp1);
+            ItemNbt = NBT_set.NBT_get(itemStack);
+            ItemNbt.setBoolean("disable", true);
+            itemStack = NBT_set.NBT_save(itemStack, ItemNbt);
+            for (int i = 0; i < 9; i++) {
+                ItemStack a = inv.getItem(i);
+                if (a == null) {
+                    inv.setItem(i, itemStack);
+                }
+            }
+            player.closeInventory();
+            GUI_save.put(player.getName(), player.openInventory(inv));
         }
     }
 
@@ -105,7 +105,9 @@ public class Item_event implements Listener {
                 if (inv.getPlayer().equals(player)) {
                     ItemStack item = inv.getItem(e.getSlot());
                     NBTTagCompound ItemNbt = new NBT_set().NBT_get(item);
-                    if (!ItemNbt.getBoolean("disable"))
+                    if(!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z")))
+                        return;
+                    if (ItemNbt.getBoolean("disable"))
                         player.sendMessage("§d[HeartAge_year]§c传送石的这个槽位未解锁");
                     else if (e.getClick() == ClickType.LEFT) {
                         int x = ItemNbt.getInt("x");
@@ -128,6 +130,7 @@ public class Item_event implements Listener {
                             location1.setZ((int) location.getZ());
                             set.setsel(tpStone_set.sel_list.get(e.getSlot()), location1);
                             new tpStone_Read().save(stone, uuid);
+                            tpStone_do.toStone_save.put(uuid, stone);
                             player.sendMessage("§d[HeartAge_year]§b已保存你脚下的坐标");
                         }
                     }

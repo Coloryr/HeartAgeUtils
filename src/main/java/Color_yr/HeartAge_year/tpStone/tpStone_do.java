@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class tpStone_do {
     public static Material item;
-    public static Material updata_item;
+    public static Material update_item;
     public static Map<String, tpStone_save_Obj> toStone_save = new HashMap<>();
 
     public ItemStack new_tpStone(String uuid) {//获得新的传送石
@@ -46,7 +46,7 @@ public class tpStone_do {
 
     public String up_tpStone(ItemStack item) {//升级传送石
         NBTTagCompound nbt = new NBT_set().NBT_get(item);
-        if (nbt.hasKeyOfType("uuid", 3)) {
+        if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");
             if (toStone_save.containsKey(uuid)) {
                 tpStone_save_Obj stone = toStone_save.get(uuid);
@@ -63,12 +63,14 @@ public class tpStone_do {
 
     public String rename_tpStone(ItemStack item, String new_name) {//重命名传送石
         NBTTagCompound nbt = new NBT_set().NBT_get(item);
-        if (nbt.hasKeyOfType("uuid", 3)) {
+        if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");
             if (toStone_save.containsKey(uuid)) {
                 tpStone_save_Obj stone = toStone_save.get(uuid);
                 stone.setName(new_name);
-                item.getItemMeta().setDisplayName(new_name);
+                ItemMeta temp = item.getItemMeta();
+                temp.setDisplayName(new_name);
+                item.setItemMeta(temp);
                 new tpStone_set(stone).setsel(tpStone_set.sel_list.get(stone.getSlot()), new Location_Obj());
                 new tpStone_Read().save(stone, uuid);
                 return "b传送石已重命名";

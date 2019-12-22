@@ -1,6 +1,5 @@
 package Color_yr.HeartAge_year.Commder;
 
-import Color_yr.HeartAge_year.Config.tpStone_Read;
 import Color_yr.HeartAge_year.tpStone.tpStone_do;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class toStone_Commder implements CommandExecutor, TabExecutor {
+public class tpStone_Commder implements CommandExecutor, TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -61,7 +60,7 @@ public class toStone_Commder implements CommandExecutor, TabExecutor {
                 }
                 stack = player.getInventory().getItemInOffHand();
                 item = stack.getType();
-                if (!item.equals(tpStone_do.updata_item)) {
+                if (!item.equals(tpStone_do.update_item)) {
                     sender.sendMessage("§d[HeartAge_year]§c请副手持升级物品");
                     return true;
                 }
