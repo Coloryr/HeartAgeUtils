@@ -114,8 +114,10 @@ public class Item_event implements Listener {
                 return;
             if (GUI_save.containsKey(player.getName())) {
                 InventoryView inv = GUI_save.get(player.getName());
-                if (!inv.getTitle().contains(lan.getTpStone_title()))
+                if (!inv.getTitle().contains(lan.getTpStone_title())) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
                     return;
+                }
                 e.setCancelled(true);
                 if (inv.getPlayer().equals(player)) {
                     ItemStack item = inv.getItem(e.getSlot());
@@ -132,6 +134,7 @@ public class Item_event implements Listener {
                             player.sendMessage(lan.getTitle() + lan.getTpStone_cant_tp());
                         } else {
                             player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
+                            player.playSound(player.getLocation(), Sound.ENTITY_SHULKER_TELEPORT, 1.0f, 1.0f);
                             player.sendMessage(lan.getTitle() + lan.getTpStone_tp());
                         }
                     } else if (e.getClick() == ClickType.RIGHT) {
