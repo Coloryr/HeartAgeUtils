@@ -3,6 +3,7 @@ package Color_yr.HeartAge_year.Command;
 import Color_yr.HeartAge_year.tpStone.tpStone_do;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -59,6 +60,7 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
                     return true;
                 }
                 sender.sendMessage(lan.getTitle() + new tpStone_do().rename_tpStone(stack, args[1]));
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
                 return true;
             } else if (args[0].equalsIgnoreCase("uplevel")) {//升级传送石
                 ItemStack stack = player.getInventory().getItemInMainHand();
@@ -74,6 +76,7 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
                     return true;
                 }
                 sender.sendMessage(lan.getTitle() + new tpStone_do().up_tpStone(player));
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
                 return true;
             } else if (args[0].equalsIgnoreCase("setname")) {
                 ItemStack stack = player.getInventory().getItemInMainHand();
@@ -90,13 +93,13 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_slot_command());
                     return true;
                 }
-                if(!isNumer(args[2]))
-                {
+                if (!isNumer(args[2])) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_number_command());
                     return true;
                 }
                 sender.sendMessage(lan.getTitle() + new tpStone_do()
-                        .set_slot_name(player.getInventory().getItemInMainHand(), Integer.decode(args[2]), args[3]));
+                        .set_slot_name(player.getInventory().getItemInMainHand(), Integer.decode(args[1]), args[2]));
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1.0f, 1.0f);
                 return true;
             } else if (args[0].equalsIgnoreCase("get")) {//给传送石
                 if (!sender.hasPermission("tpStone.give")) {
@@ -109,6 +112,7 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
                 } while (tpStone_do.toStone_save.containsKey(uuid.toString()));
                 player.getInventory().addItem(new tpStone_do().new_tpStone(uuid.toString()));
                 sender.sendMessage(lan.getTitle() + lan.getTpStone_get_stone());
+                player.playSound(player.getLocation(), Sound.ITEM_ARMOR_EQUIP_IRON, 1.0f, 1.0f);
                 return true;
             }
         }
@@ -122,6 +126,7 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
             list.add("help");
             list.add("rename");
             list.add("uplevel");
+            list.add("setname");
             return list;
         }
         return null;

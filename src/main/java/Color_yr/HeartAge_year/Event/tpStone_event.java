@@ -29,7 +29,7 @@ import java.util.Map;
 
 import static Color_yr.HeartAge_year.Config.Config_Read.lan;
 
-public class Item_event implements Listener {
+public class tpStone_event implements Listener {
 
     private static Map<String, InventoryView> GUI_save = new HashMap<>();
 
@@ -45,10 +45,10 @@ public class Item_event implements Listener {
             if (!ItemNbt.hasKey("uuid"))
                 return;
             e.setCancelled(true);
-
             String uuid = ItemNbt.getString("uuid");
             Player player = e.getPlayer();
             if (!tpStone_do.toStone_save.containsKey(uuid)) {
+                player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
                 player.sendMessage(lan.getTitle() + lan.getTpStone_no_date());
                 return;
             }
@@ -115,22 +115,30 @@ public class Item_event implements Listener {
             if (GUI_save.containsKey(player.getName())) {
                 InventoryView inv = GUI_save.get(player.getName());
                 if (!inv.getTitle().contains(lan.getTpStone_title())) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
+                    GUI_save.remove(player.getName());
                     return;
                 }
                 e.setCancelled(true);
                 if (inv.getPlayer().equals(player)) {
                     ItemStack item = inv.getItem(e.getSlot());
                     NBTTagCompound ItemNbt = new NBT_set().NBT_get(item);
-                    if (ItemNbt.getBoolean("disable"))
+                    if (ItemNbt.getBoolean("disable")) {
+                        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
                         player.sendMessage(lan.getTitle() + lan.getTpStone_unlock_slot());
-                    else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z")))
+                    }
+                    else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z"))) {
+                        player.sendMessage(lan.getTitle() + lan.getTpStone_error());
+                        player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
+                        GUI_save.remove(player.getName());
                         return;
+                    }
                     else if (e.getClick() == ClickType.LEFT) {
                         int x = ItemNbt.getInt("x");
                         int y = ItemNbt.getInt("y");
                         int z = ItemNbt.getInt("z");
                         if (x == 0 && y == 0 && z == 0) {
+                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1.0f, 1.0f);
                             player.sendMessage(lan.getTitle() + lan.getTpStone_cant_tp());
                         } else {
                             player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
@@ -142,6 +150,7 @@ public class Item_event implements Listener {
                         ItemNbt = new NBT_set().NBT_get(hand);
                         String uuid = ItemNbt.getString("uuid");
                         if (!tpStone_do.toStone_save.containsKey(uuid)) {
+                            player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
                             player.sendMessage(lan.getTitle() + lan.getTpStone_error());
                         } else {
                             tpStone_save_Obj stone = tpStone_do.toStone_save.get(uuid);
@@ -153,6 +162,7 @@ public class Item_event implements Listener {
                             set.set_sel(e.getSlot(), location1);
                             new tpStone_Read().save(stone, uuid);
                             tpStone_do.toStone_save.put(uuid, stone);
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
                             player.sendMessage(lan.getTitle() + lan.getTpStone_save());
                         }
                     }

@@ -108,9 +108,9 @@ public class tpStone_do {
                 if (slot > stone.getSlot())
                     return lan.getTpStone_unlock_slot();
                 tpStone_set set = new tpStone_set(stone);
-                Location_Obj locationObj = set.get_sel(slot);
+                Location_Obj locationObj = set.get_sel(slot - 1);
                 locationObj.setName(new_name);
-                set.set_sel(slot, locationObj);
+                set.set_sel(slot - 1, locationObj);
                 new tpStone_Read().save(stone, uuid);
                 return lan.getTpStone_slot_rename();
             }

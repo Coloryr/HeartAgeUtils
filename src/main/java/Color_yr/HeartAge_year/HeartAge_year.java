@@ -5,7 +5,7 @@ import Color_yr.HeartAge_year.Command.tpStone_Command;
 import Color_yr.HeartAge_year.Config.Config_Read;
 import Color_yr.HeartAge_year.Config.tpStone_Read;
 import Color_yr.HeartAge_year.Event.Block_event;
-import Color_yr.HeartAge_year.Event.Item_event;
+import Color_yr.HeartAge_year.Event.tpStone_event;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,7 +31,7 @@ public class HeartAge_year extends JavaPlugin {
         Bukkit.getPluginCommand("tpStone").setExecutor(new tpStone_Command());//注册传送石指令
         log.info("§d[HeartAge_year]§e事件注册中");
         Bukkit.getPluginManager().registerEvents(new Block_event(), this);//注册方块事件
-        Bukkit.getPluginManager().registerEvents(new Item_event(), this);//注册物品事件
+        Bukkit.getPluginManager().registerEvents(new tpStone_event(), this);//注册物品事件
 
         log.info("§d[HeartAge_year]§e已启动-" + Version);
 
