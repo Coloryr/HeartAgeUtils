@@ -24,6 +24,7 @@ public class Language_Obj {
     private String no_build_place;
     private String no_build_ues;
     private String no_build_bucket;
+    private String no_PVP;
     private String new_point;
     private String new_stone;
     private String tpStone_no_date;
@@ -103,6 +104,7 @@ public class Language_Obj {
     public String getNo_build_bucket() {
         return no_build_bucket;
     }
+    public String getNo_PVP(){return no_PVP;}
     public String getNew_point() {
         return new_point;
     }

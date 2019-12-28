@@ -30,7 +30,8 @@
     "no_build_destroy": "§c禁止破坏领地外的方块",
     "no_build_place": "§c禁止在领地外放置方块",
     "no_build_ues": "§c禁止交互",
-    "no_build_bucket": "禁止在领地外使用桶",
+    "no_build_bucket": "§c禁止在领地外使用桶",
+    "no_PVP":"§c禁止PVP",
     "new_point": "新的传送点",
     "new_stone": "新的传送石",
     "tpStone_no_date": "§c没有这个传送石的数据",
@@ -47,7 +48,7 @@
     "tpStone_cant_tp": "§c无法传送至未设置的点",
     "tpStone_tp": "§b已将你传送至目的坐标",
     "tpStone_save": "§b已保存你脚下的坐标",
-    "tpStone_slot": "§b传送石槽位&d：&a",
+    "tpStone_slot": "§b传送石槽位§d：§a",
     "tpStone_title": "传送石："
   }
 }

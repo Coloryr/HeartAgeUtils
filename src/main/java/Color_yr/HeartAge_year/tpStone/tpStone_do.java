@@ -4,7 +4,6 @@ import Color_yr.HeartAge_year.Config.tpStone_Read;
 import Color_yr.HeartAge_year.Obj.Location_Obj;
 import Color_yr.HeartAge_year.Obj.tpStone_save_Obj;
 import Color_yr.HeartAge_year.util.NBT_set;
-import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,7 +36,7 @@ public class tpStone_do {
         obj.setName(lan.getNew_stone());
         ItemMeta.setLore(new ArrayList<String>() {
             {
-                this.add(lan.getTpStone_slot());
+                this.add(lan.getTpStone_slot() + "1");
             }
         });
         item.setItemMeta(ItemMeta);

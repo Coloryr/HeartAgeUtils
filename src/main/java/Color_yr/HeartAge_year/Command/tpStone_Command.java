@@ -85,15 +85,15 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_hand_command());
                     return true;
                 }
-                if (args.length == 1) {
+                else if (args.length == 1) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_command());
                     return true;
                 }
-                if (args.length == 2) {
+                else if (args.length == 2) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_slot_command());
                     return true;
                 }
-                if (!isNumer(args[2])) {
+                else if (!isNumer(args[1])) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_number_command());
                     return true;
                 }
