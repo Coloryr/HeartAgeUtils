@@ -90,8 +90,8 @@ public class Block_event implements Listener {
         if (e.getPlayer().isOp()) {
             return;
         }
-        if ((e.getAction() == Action.PHYSICAL && Objects.requireNonNull(e.getClickedBlock()).getType() == Material.SOUL_SAND) || e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            final boolean hasPerm = this.hasPerm(Objects.requireNonNull(e.getClickedBlock()).getLocation(), e.getPlayer());
+        if ((e.getAction() == Action.PHYSICAL && e.getClickedBlock().getType() == Material.SOUL_SAND)) {
+            final boolean hasPerm = this.hasPerm(e.getClickedBlock().getLocation(), e.getPlayer());
             e.setCancelled(!hasPerm);
             if (!hasPerm) {
                 e.getPlayer().sendMessage(lan.getNo_build_ues());
