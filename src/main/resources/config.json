@@ -1,13 +1,27 @@
 {
-  "version": "1.0.0",
   "tpStone": {
     "main": "heart_of_the_sea",
     "update": "ender_eye"
   },
+  "respawnStone": {
+    "main": "nautilus_shell"
+  },
+  "Death": {
+    "Location": {
+      "name": "§d复活倒计时 ",
+      "x": 67,
+      "y": 68,
+      "z": -886
+    },
+    "Time": 10,
+    "Title": "§e目的地：主城",
+    "Title1": "§e目的地：传送石"
+  },
   "language": {
-    "title" : "§d[HeartAge_year]",
+    "title": "§d[HeartAge_year]",
     "unknown_command_heartage": "§c错误，请使用/heartage help 获取帮助",
     "unknown_command_tpStone": "§c错误，请使用/tpStone help 获取帮助",
+    "unknown_command_respawnStone": "§c错误，请使用/respawnStone help 获取帮助",
     "help_command_heartage": [
       "§b输入/heartage reload 重读配置文件"
     ],
@@ -15,6 +29,11 @@
       "§b输入/tpStone rename [名字] 修改传送石名字",
       "§b输入/tpStone setname [槽位] [名字] 设置槽位的名字",
       "§b输入/tpStone uplevel 升级传送石"
+    ],
+    "help_command_respawnStone": [
+      "§b输入/respawnStone rename [名字] 修改复活石名字",
+      "§b左键可以启用或者关闭复活石",
+      "§b右键可以保存复活坐标"
     ],
     "noPermission_command": "§c你没有权限使用这条指令",
     "reload_command": "§b已重读",
@@ -27,16 +46,26 @@
     "tpStone_set_name_slot_command": "§c请输入你要设置的槽位的名字",
     "tpStone_set_name_number_command": "§c输入设置的槽位是数字",
     "tpStone_get_stone": "§b你获得了一个新的传送石",
+    "respawnStone_hand_command": "§c请手持复活石后执行",
+    "respawnStone_new_name_command": "§c请输入新的复活石名字",
+    "respawnStone_get_stone": "§b你获得了一个新的复活石",
+    "respawnStone_no_date": "§c没有这个复活石的数据",
+    "respawnStone_rename": "§b复活石已重命名",
+    "respawnStone_now": "§d复活石状态：",
+    "respawnStone_on": "§b启用",
+    "respawnStone_off": "§c禁用",
+    "respawnStone_set": "§b已设置你脚下的坐标为复活传送点",
     "no_build_destroy": "§c禁止破坏领地外的方块",
     "no_build_place": "§c禁止在领地外放置方块",
     "no_build_ues": "§c禁止交互",
     "no_build_bucket": "§c禁止在领地外使用桶",
-    "no_PVP":"§c禁止PVP",
+    "no_PVP": "§c禁止PVP",
     "new_point": "新的传送点",
     "new_stone": "新的传送石",
+    "new_respawnStone": "新的复活石",
     "tpStone_no_date": "§c没有这个传送石的数据",
     "tpStone_show": "§e设置的坐标：",
-    "tpStone_unlock": "§e设置的坐标：",
+    "tpStone_unlock": "§e未解锁",
     "tpStone_unlock_need": "§8使用升级石来解锁",
     "tpStone_slot_full": "§c传送石槽位已满",
     "tpStone_update": "§b传送石已升级",

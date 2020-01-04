@@ -1,13 +1,20 @@
 package Color_yr.HeartAge_year.Obj;
 
-public class Location_Obj {//传送石坐标储存对象
+public class respawnStone_save_Obj {
 
     private String name;
-    private int x = 0;
-    private int y = 0;
-    private int z = 0;
-    public Location_Obj(String name) {
-        this.name = name;
+    private String world;
+    private int x;
+    private int y;
+    private int z;
+    private boolean use;
+
+    public String getWorld() {
+        return world;
+    }
+
+    public void setWorld(String world) {
+        this.world = world;
     }
 
     public String getName() {
@@ -40,5 +47,13 @@ public class Location_Obj {//传送石坐标储存对象
 
     public void setZ(int z) {
         this.z = z;
+    }
+
+    public boolean isUse() {
+        return use;
+    }
+
+    public void setUse(boolean use) {
+        this.use = use;
     }
 }

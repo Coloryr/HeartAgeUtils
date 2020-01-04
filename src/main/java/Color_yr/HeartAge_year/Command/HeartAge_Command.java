@@ -1,6 +1,7 @@
 package Color_yr.HeartAge_year.Command;
 
 import Color_yr.HeartAge_year.Config.Config_Read;
+import Color_yr.HeartAge_year.Config.respawnStone_Read;
 import Color_yr.HeartAge_year.Config.tpStone_Read;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,6 +32,7 @@ public class HeartAge_Command implements CommandExecutor, TabExecutor {
                 if (sender.hasPermission("heartage.admin")) {
                     new Config_Read().setConfig();
                     new tpStone_Read().init();
+                    new respawnStone_Read().init();
                     sender.sendMessage(lan.getTitle() + lan.getReload_command());
                     return true;
                 } else

@@ -11,3 +11,6 @@ commands:
   tpStone:
     description: 传送石指令
     usage: §4[HeartAge_year]§6/tpStone help来查看帮助
+  respawnStone:
+    description: 复活石指令
+    usage: §4[HeartAge_year]§6/respawnStone help来查看帮助

@@ -126,14 +126,12 @@ public class tpStone_event implements Listener {
                     if (ItemNbt.getBoolean("disable")) {
                         player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
                         player.sendMessage(lan.getTitle() + lan.getTpStone_unlock_slot());
-                    }
-                    else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z"))) {
+                    } else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z"))) {
                         player.sendMessage(lan.getTitle() + lan.getTpStone_error());
                         player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
                         GUI_save.remove(player.getName());
                         return;
-                    }
-                    else if (e.getClick() == ClickType.LEFT) {
+                    } else if (e.getClick() == ClickType.LEFT) {
                         int x = ItemNbt.getInt("x");
                         int y = ItemNbt.getInt("y");
                         int z = ItemNbt.getInt("z");

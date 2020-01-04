@@ -3,6 +3,7 @@ package Color_yr.HeartAge_year.Config;
 import Color_yr.HeartAge_year.HeartAge_year;
 import Color_yr.HeartAge_year.Obj.Config_Obj;
 import Color_yr.HeartAge_year.Obj.Language_Obj;
+import Color_yr.HeartAge_year.respawnStone.respawnStone_do;
 import Color_yr.HeartAge_year.tpStone.tpStone_do;
 import com.google.gson.Gson;
 import org.bukkit.Material;
@@ -30,23 +31,34 @@ public class Config_Read {
             if (!main_config.gettpStone().getmain().isEmpty()) {
                 Material a = Material.matchMaterial(main_config.gettpStone().getmain());
                 if (a == null) {
-                    HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品找不到");
+                    HeartAge_year.log.warning("§d[HeartAge_year]§c传送石手中物品找不到");
                 } else {
                     tpStone_do.item = a;
                 }
             } else {
-                HeartAge_year.log.warning("§d[HeartAge_year]§c手中物品ID为空");
+                HeartAge_year.log.warning("§d[HeartAge_year]§c传送石手中物品ID为空");
             }
             //读传送石升级物品
             if (!main_config.gettpStone().getUpdata().isEmpty()) {
                 Material a = Material.matchMaterial(main_config.gettpStone().getUpdata());
                 if (a == null) {
-                    HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品找不到");
+                    HeartAge_year.log.warning("§d[HeartAge_year]§c传送石升级物品找不到");
                 } else {
                     tpStone_do.update_item = a;
                 }
             } else {
-                HeartAge_year.log.warning("§d[HeartAge_year]§c升级物品ID为空");
+                HeartAge_year.log.warning("§d[HeartAge_year]§c传送石升级物品ID为空");
+            }
+            //读复活石物品
+            if (!main_config.getRespawnStone().getMain().isEmpty()) {
+                Material a = Material.matchMaterial(main_config.getRespawnStone().getMain());
+                if (a == null) {
+                    HeartAge_year.log.warning("§d[HeartAge_year]§c复活石物品找不到");
+                } else {
+                    respawnStone_do.item = a;
+                }
+            } else {
+                HeartAge_year.log.warning("§d[HeartAge_year]§c复活石物品ID为空");
             }
 
         } catch (Exception arg0) {

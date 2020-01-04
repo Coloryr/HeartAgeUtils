@@ -1,6 +1,7 @@
 package Color_yr.HeartAge_year.Command;
 
 import Color_yr.HeartAge_year.tpStone.tpStone_do;
+import Color_yr.HeartAge_year.util.IsNumber;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -11,21 +12,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static Color_yr.HeartAge_year.Config.Config_Read.lan;
 
 public class tpStone_Command implements CommandExecutor, TabExecutor {
-
-    private boolean isNumer(String str) {
-        Pattern pattern = Pattern.compile("-?[0-9]+\\.?[0-9]*");
-        Matcher isNum = pattern.matcher(str);
-        if (!isNum.matches()) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -33,7 +23,7 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
             if (args.length == 0) {
                 sender.sendMessage(lan.getTitle() + lan.getUnknown_command_tpStone());
                 return true;
-            }else if (sender instanceof ConsoleCommandSender) {
+            } else if (sender instanceof ConsoleCommandSender) {
                 sender.sendMessage(lan.getTitle() + lan.getPlayer_only_command());
                 return true;
             }
@@ -41,10 +31,8 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
             if (player == null) {
                 sender.sendMessage(lan.getTitle() + lan.getNo_player_command());
                 return true;
-            }
-            else if (args[0].equalsIgnoreCase("help")) {//获取帮助
-                for(String a: lan.getHelp_command_tpStone())
-                {
+            } else if (args[0].equalsIgnoreCase("help")) {//获取帮助
+                for (String a : lan.getHelp_command_tpStone()) {
                     sender.sendMessage(lan.getTitle() + a);
                 }
                 return true;
@@ -56,7 +44,7 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
                     return true;
                 }
                 if (args.length != 2) {
-                    sender.sendMessage(lan.getTitle() +lan.getTpStone_new_name_command());
+                    sender.sendMessage(lan.getTitle() + lan.getTpStone_new_name_command());
                     return true;
                 }
                 sender.sendMessage(lan.getTitle() + new tpStone_do().rename_tpStone(stack, args[1]));
@@ -84,16 +72,13 @@ public class tpStone_Command implements CommandExecutor, TabExecutor {
                 if (!item.equals(tpStone_do.item)) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_hand_command());
                     return true;
-                }
-                else if (args.length == 1) {
+                } else if (args.length == 1) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_command());
                     return true;
-                }
-                else if (args.length == 2) {
+                } else if (args.length == 2) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_slot_command());
                     return true;
-                }
-                else if (!isNumer(args[1])) {
+                } else if (!(new IsNumber().isNumber(args[1]))) {
                     sender.sendMessage(lan.getTitle() + lan.getTpStone_set_name_number_command());
                     return true;
                 }
