@@ -6,6 +6,7 @@ public class Location_Obj {//传送石坐标储存对象
     private int x = 0;
     private int y = 0;
     private int z = 0;
+
     public Location_Obj(String name) {
         this.name = name;
     }
