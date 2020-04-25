@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
+    compile 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 	dependencies { compile fileTree(dir:'lib',include:['*.jar'])}
 }
 
@@ -31,7 +31,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId "Color_yr"
-            artifactId "HeartAge_year"
+            artifactId "HeartAgeUtils"
             version "$majorVersion.$minorVersion-SNAPSHOT"
             from components.java
         }
