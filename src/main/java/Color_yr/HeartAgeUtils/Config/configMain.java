@@ -1,8 +1,11 @@
 package Color_yr.HeartAgeUtils.Config;
 
+import Color_yr.HeartAgeUtils.API.IConfig;
+import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
+import Color_yr.HeartAgeUtils.Drawer.drawerBlock;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
-import Color_yr.HeartAgeUtils.Obj.ConfigObj;
-import Color_yr.HeartAgeUtils.Obj.LanguageObj;
+import Color_yr.HeartAgeUtils.Obj.configObj;
+import Color_yr.HeartAgeUtils.Obj.languageObj;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import com.google.gson.Gson;
 import org.bukkit.Material;
@@ -11,15 +14,19 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-public class ConfigMain {
+public class configMain {
 
-    public ConfigObj Config;   //主配置文件对象
-    public LanguageObj lan;
-    public SaveTaskDo SaveTask;
+    public static IConfig deathChest = new deathChestRead();
+    public static IConfig drawer = new drawerRead();
+    public static IConfig tpStone = new tpStoneRead();
+
+    public configObj Config;   //主配置文件对象
+    public languageObj lan;
+    public saveTaskDo SaveTask;
     private File FileName;  //文件缓存
 
-    public ConfigMain() {
-        SaveTask = new SaveTaskDo();
+    public configMain() {
+        SaveTask = new saveTaskDo();
         setConfig();
     }
 
@@ -28,13 +35,15 @@ public class ConfigMain {
             Gson json = new Gson();
             InputStreamReader reader = new InputStreamReader(new FileInputStream(FileName), StandardCharsets.UTF_8);
             BufferedReader bf = new BufferedReader(reader);
-            Config = json.fromJson(bf, ConfigObj.class);
+            Config = json.fromJson(bf, configObj.class);
             lan = Config.getLanguage();
             reader.close();
             bf.close();
+
+            tpStone.init();
             //读传送石物品
-            if (!Config.gettpStone().getmain().isEmpty()) {
-                Material a = Material.matchMaterial(Config.gettpStone().getmain());
+            if (!Config.getTpStone().getmain().isEmpty()) {
+                Material a = Material.matchMaterial(Config.getTpStone().getmain());
                 if (a == null) {
                     HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石手中物品找不到");
                 } else {
@@ -44,8 +53,9 @@ public class ConfigMain {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石手中物品ID为空");
             }
             //读传送石升级物品
-            if (!Config.gettpStone().getUpdata().isEmpty()) {
-                Material a = Material.matchMaterial(Config.gettpStone().getUpdata());
+            tpStone.init();
+            if (!Config.getTpStone().getUpdata().isEmpty()) {
+                Material a = Material.matchMaterial(Config.getTpStone().getUpdata());
                 if (a == null) {
                     HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石升级物品找不到");
                 } else {
@@ -53,6 +63,19 @@ public class ConfigMain {
                 }
             } else {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石升级物品ID为空");
+            }
+            //更新死亡箱子
+            deathChestDo.GenHelp();
+            deathChest.init();
+            if (!Config.getTpStone().getmain().isEmpty()) {
+                Material a = Material.matchMaterial(Config.getTpStone().getmain());
+                if (a == null) {
+                    HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块找不到");
+                } else {
+                    drawerBlock.block = a;
+                }
+            } else {
+                HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块ID为空");
             }
 
         } catch (Exception arg0) {

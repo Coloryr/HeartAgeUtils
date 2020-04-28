@@ -12,12 +12,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SaveTaskDo {
-    private final List<SaveTaskObj> Tasks = new ArrayList<>();
+public class saveTaskDo {
+    private final List<saveTaskObj> Tasks = new ArrayList<>();
     private boolean isSave;
     private ScheduledExecutorService service;
 
-    public SaveTaskDo() {
+    public saveTaskDo() {
         service = Executors.newSingleThreadScheduledExecutor();
         Runnable runnable = () -> {
             try {
@@ -40,14 +40,20 @@ public class SaveTaskDo {
         }
     }
 
-    public void addTask(SaveTaskObj save) {
+    public void addTask(saveTaskObj save) {
         while (isSave) ;
+        for (saveTaskObj item : Tasks) {
+            if (item.getFile().equals(save.getFile())) {
+                Tasks.remove(item);
+                break;
+            }
+        }
         Tasks.add(save);
     }
 
     private void save() {
         if (Tasks.size() != 0) {
-            for (SaveTaskObj save : Tasks) {
+            for (saveTaskObj save : Tasks) {
                 try {
                     if (!save.getFile().exists())
                         save.getFile().createNewFile();

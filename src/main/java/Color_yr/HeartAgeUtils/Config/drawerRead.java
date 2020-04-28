@@ -2,24 +2,24 @@ package Color_yr.HeartAgeUtils.Config;
 
 import Color_yr.HeartAgeUtils.API.IConfig;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
-import Color_yr.HeartAgeUtils.Obj.tpStoneSaveObj;
+import Color_yr.HeartAgeUtils.tpStone.tpStoneSaveObj;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import com.google.gson.Gson;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class DrawerRead implements IConfig {
-    private static File File_local;
+class drawerRead implements IConfig {
+    private static File fileLocal;
 
     @Override
     public void init() {
         //文件初始化
-        File_local = new File(HeartAgeUtils.plugin.getDataFolder().getParent() + "/HeartAgeUtils/tpStone");
+        fileLocal = new File(HeartAgeUtils.plugin.getDataFolder().getParent() + "/HeartAgeUtils/Drawer");
         try {
-            if (!File_local.exists())
-                File_local.mkdirs();
-            File[] file_list = File_local.listFiles((dir, name) -> name.endsWith(".json"));
+            if (!fileLocal.exists())
+                fileLocal.mkdirs();
+            File[] file_list = fileLocal.listFiles((dir, name) -> name.endsWith(".json"));
             if (file_list != null) {
                 InputStreamReader reader;
                 BufferedReader bfreader;
@@ -36,14 +36,13 @@ public class DrawerRead implements IConfig {
                 }
             }
         } catch (Exception e) {
-            HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石配置文件初始化失败");
+            HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉配置文件初始化失败");
             e.printStackTrace();
         }
     }
 
     public void save(Object stone, String uuid) {
-        //保存传送石储存
-        File save_file = new File(File_local, uuid + ".json");
-        HeartAgeUtils.ConfigMain.SaveTask.addTask(new SaveTaskObj(stone, save_file));
+        File saveFile = new File(fileLocal, uuid + ".json");
+        HeartAgeUtils.ConfigMain.SaveTask.addTask(new saveTaskObj(stone, saveFile));
     }
 }

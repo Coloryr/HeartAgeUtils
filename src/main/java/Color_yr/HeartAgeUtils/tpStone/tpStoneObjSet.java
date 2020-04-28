@@ -1,8 +1,5 @@
 package Color_yr.HeartAgeUtils.tpStone;
 
-import Color_yr.HeartAgeUtils.Obj.LocationObj;
-import Color_yr.HeartAgeUtils.Obj.tpStoneSaveObj;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,13 +25,13 @@ public class tpStoneObjSet {
         tpStone = tpStone_save_Obj;
     }
 
-    public void setSel(int sel, LocationObj locationObj) {//设置槽位的坐标
+    public void setSel(int sel, locationObj locationObj) {//设置槽位的坐标
         if (!selList.containsKey(sel))
             return;
         tpStone.getSel().put(selList.get(sel), locationObj);
     }
 
-    public LocationObj getSel(int sel) {//读取槽位的坐标
+    public locationObj getSel(int sel) {//读取槽位的坐标
         if (selList.containsKey(sel))
             return tpStone.getSel().get(selList.get(sel));
         return null;

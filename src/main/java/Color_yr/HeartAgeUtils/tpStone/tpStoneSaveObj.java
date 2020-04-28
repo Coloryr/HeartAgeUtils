@@ -1,4 +1,4 @@
-package Color_yr.HeartAgeUtils.Obj;
+package Color_yr.HeartAgeUtils.tpStone;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 public class tpStoneSaveObj {//传送石储存对象
     private String name;
     private int slot;
-    private Map<String, LocationObj> sel = new HashMap<>();
+    private final Map<String, locationObj> sel = new HashMap<>();
 
     public String getName() {
         return name;
@@ -24,7 +24,7 @@ public class tpStoneSaveObj {//传送石储存对象
         this.slot = slot;
     }
 
-    public Map<String, LocationObj> getSel() {
+    public Map<String, locationObj> getSel() {
         return sel;
     }
 }

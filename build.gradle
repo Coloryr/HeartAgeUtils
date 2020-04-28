@@ -20,10 +20,12 @@ repositories {
         name 'Spigot'
         url 'https://hub.spigotmc.org/nexus/content/groups/public'
     }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     compile 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
 	dependencies { compile fileTree(dir:'lib',include:['*.jar'])}
 }
 

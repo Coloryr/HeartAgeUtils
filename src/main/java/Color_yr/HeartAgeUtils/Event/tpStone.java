@@ -1,10 +1,10 @@
 package Color_yr.HeartAgeUtils.Event;
 
-import Color_yr.HeartAgeUtils.Config.tpStoneRead;
+import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
-import Color_yr.HeartAgeUtils.Obj.LanguageObj;
-import Color_yr.HeartAgeUtils.Obj.LocationObj;
-import Color_yr.HeartAgeUtils.Obj.tpStoneSaveObj;
+import Color_yr.HeartAgeUtils.Obj.languageObj;
+import Color_yr.HeartAgeUtils.tpStone.locationObj;
+import Color_yr.HeartAgeUtils.tpStone.tpStoneSaveObj;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneObjSet;
 import Color_yr.HeartAgeUtils.Utils.NBTSet;
@@ -46,10 +46,10 @@ public class tpStone implements Listener {
             e.setCancelled(true);
             String uuid = ItemNbt.getString("uuid");
             Player player = e.getPlayer();
-            LanguageObj lan = HeartAgeUtils.ConfigMain.lan;
+            languageObj lan = HeartAgeUtils.ConfigMain.lan;
             if (!tpStoneDo.toStoneSave.containsKey(uuid)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
-                player.sendMessage(lan.getTitle() + lan.getTpStone_no_date());
+                player.sendMessage(lan.getTitle() + lan.getTpStoneNoDate());
                 return;
             }
             tpStoneSaveObj obj = tpStoneDo.toStoneSave.get(uuid);
@@ -57,9 +57,9 @@ public class tpStone implements Listener {
                     lan.getTpStone_title() + obj.getName());
             ItemStack itemStack = new ItemStack(Material.COMPASS);
             ItemMeta temp1;
-            for (Map.Entry<String, LocationObj> temp : obj.getSel().entrySet()) {
+            for (Map.Entry<String, locationObj> temp : obj.getSel().entrySet()) {
                 String slot = temp.getKey().replace("sel", "");
-                LocationObj locationObj = temp.getValue();
+                locationObj locationObj = temp.getValue();
                 ItemNbt = NBTSet.NBT_get(itemStack);
                 ItemNbt.setBoolean("disable", false);
                 ItemNbt.setInt("x", locationObj.getX());
@@ -69,7 +69,7 @@ public class tpStone implements Listener {
                 temp1 = itemStack.getItemMeta();
                 temp1.setDisplayName(locationObj.getName());
                 temp1.setLore(new ArrayList<String>() {{
-                    this.add(lan.getTpStone_show());
+                    this.add(lan.getTpStoneShow());
                     this.add("§aX：§b" + locationObj.getX() + " §aY：§b" + locationObj.getY() + " §aZ：§b" + locationObj.getZ());
                 }});
                 itemStack.setItemMeta(temp1);
@@ -77,10 +77,10 @@ public class tpStone implements Listener {
             }
             itemStack = new ItemStack(Material.BARRIER);
             temp1 = itemStack.getItemMeta();
-            temp1.setDisplayName(lan.getTpStone_unlock());
+            temp1.setDisplayName(lan.getTpStoneUnlock());
             temp1.setLore(new ArrayList<String>() {
                 {
-                    this.add(lan.getTpStone_unlock_need());
+                    this.add(lan.getTpStoneUnlockNeed());
                 }
             });
             itemStack.setItemMeta(temp1);
@@ -112,7 +112,7 @@ public class tpStone implements Listener {
             ItemStack hand = player.getInventory().getItemInMainHand();
             if (hand.getType().equals(Material.AIR))
                 return;
-            LanguageObj lan = HeartAgeUtils.ConfigMain.lan;
+            languageObj lan = HeartAgeUtils.ConfigMain.lan;
             if (GUI_save.containsKey(player.getName())) {
                 InventoryView inv = GUI_save.get(player.getName());
                 if (!inv.getTitle().contains(lan.getTpStone_title())) {
@@ -126,9 +126,9 @@ public class tpStone implements Listener {
                     NBTTagCompound ItemNbt = NBTSet.NBT_get(item);
                     if (ItemNbt.getBoolean("disable")) {
                         player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
-                        player.sendMessage(lan.getTitle() + lan.getTpStone_unlock_slot());
+                        player.sendMessage(lan.getTitle() + lan.getTpStoneUnlockSlot());
                     } else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z"))) {
-                        player.sendMessage(lan.getTitle() + lan.getTpStone_error());
+                        player.sendMessage(lan.getTitle() + lan.getTpStoneError());
                         player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
                         GUI_save.remove(player.getName());
                         return;
@@ -138,11 +138,11 @@ public class tpStone implements Listener {
                         int z = ItemNbt.getInt("z");
                         if (x == 0 && y == 0 && z == 0) {
                             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStone_cant_tp());
+                            player.sendMessage(lan.getTitle() + lan.getTpStoneCantTp());
                         } else {
                             player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
                             player.playSound(player.getLocation(), Sound.ENTITY_SHULKER_TELEPORT, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStone_tp());
+                            player.sendMessage(lan.getTitle() + lan.getTpStoneTp());
                         }
                     } else if (e.getClick() == ClickType.RIGHT) {
                         org.bukkit.Location location = player.getLocation();
@@ -150,19 +150,19 @@ public class tpStone implements Listener {
                         String uuid = ItemNbt.getString("uuid");
                         if (!tpStoneDo.toStoneSave.containsKey(uuid)) {
                             player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStone_error());
+                            player.sendMessage(lan.getTitle() + lan.getTpStoneError());
                         } else {
                             tpStoneSaveObj stone = tpStoneDo.toStoneSave.get(uuid);
                             tpStoneObjSet set = new tpStoneObjSet(stone);
-                            LocationObj location1 = set.getSel(e.getSlot());
+                            locationObj location1 = set.getSel(e.getSlot());
                             location1.setX((int) location.getX());
                             location1.setY((int) location.getY());
                             location1.setZ((int) location.getZ());
                             set.setSel(e.getSlot(), location1);
-                            new tpStoneRead().save(stone, uuid);
+                            configMain.tpStone.save(stone, uuid);
                             tpStoneDo.toStoneSave.put(uuid, stone);
                             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStone_save());
+                            player.sendMessage(lan.getTitle() + lan.getTpStoneSave());
                         }
                     }
                 }

@@ -1,13 +1,13 @@
-package Color_yr.HeartAgeUtils.Obj;
+package Color_yr.HeartAgeUtils.tpStone;
 
-public class LocationObj {//传送石坐标储存对象
+public class locationObj {//传送石坐标储存对象
 
     private String name;
     private int x = 0;
     private int y = 0;
     private int z = 0;
 
-    public LocationObj(String name) {
+    public locationObj(String name) {
         this.name = name;
     }
 

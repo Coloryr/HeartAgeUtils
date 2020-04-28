@@ -1,4 +1,4 @@
-package Color_yr.HeartAgeUtils.Obj;
+package Color_yr.HeartAgeUtils.tpStone;
 
 public class tpStoneConfigObj {//传送石配置对象
 

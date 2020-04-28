@@ -2,11 +2,11 @@ package Color_yr.HeartAgeUtils.Config;
 
 import java.io.File;
 
-public class SaveTaskObj {
-    private Object saveobj;
-    private File file;
+public class saveTaskObj {
+    private final Object saveobj;
+    private final File file;
 
-    public SaveTaskObj(Object saveobj, File file) {
+    public saveTaskObj(Object saveobj, File file) {
         this.saveobj = saveobj;
         this.file = file;
     }

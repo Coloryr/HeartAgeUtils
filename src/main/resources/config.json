@@ -6,46 +6,94 @@
   "drawer": {
     "block": "end_portal_frame"
   },
+  "deathChest": {
+    "disable": [],
+    "cost": {
+      "enable": false,
+      "saveInChest": 100,
+      "saveInLocal": 50,
+      "noDrop": 500
+    }
+  },
   "language": {
     "title": "§d[HeartAgeUtils]",
-    "unknown_command_heartage": "§c错误，请使用/heartageutils help 获取帮助",
-    "unknown_command_tpStone": "§c错误，请使用/heartageutils tpStone help 获取帮助",
-    "help_command_heartage": [
-      "§b/heartage tpstone 使用传送石"
+    "unknownCommandHeartAge": "§c错误，请使用/heartageutils help 获取帮助",
+    "unknownCommandTpStone": "§c错误，请使用/heartageutils tpStone help 获取帮助",
+    "unknownCommandDeathChest": "§c错误，请使用/heartageutils tpStone help 获取帮助",
+    "helpCommandHeartAge": [
+      "§b/heartageutils tpstone 使用传送石",
+      "§b/heartageutils deathchest 使用死亡箱子"
     ],
-    "help_command_tpStone": [
+    "helpCommandTpStone": [
       "§btpStone rename [名字] 修改传送石名字",
       "§btpStone setname [槽位] [名字] 设置槽位的名字",
       "§btpStone uplevel 升级传送石"
     ],
-    "noPermission_command": "§c你没有权限使用这条指令",
-    "reload_command": "§b已重读",
-    "player_only_command": "§c只能玩家使用这个指令",
-    "no_player_command": "§c执行指令的玩家找不到",
-    "tpStone_hand_command": "§c请手持传送石后执行",
-    "tpStone_offhand_command": "§c请副手持升级物品",
-    "tpStone_new_name_command": "§c请输入新的传送石名字",
-    "tpStone_set_name_command": "§c请输入你要设置的槽位",
-    "tpStone_set_name_slot_command": "§c请输入你要设置的槽位的名字",
-    "tpStone_set_name_number_command": "§c输入设置的槽位是数字",
-    "tpStone_get_stone": "§b你获得了一个新的传送石",
-    "new_point": "新的传送点",
-    "new_stone": "新的传送石",
-    "tpStone_no_date": "§c没有这个传送石的数据",
-    "tpStone_show": "§e设置的坐标：",
-    "tpStone_unlock": "§e未解锁",
-    "tpStone_unlock_need": "§8使用升级石来解锁",
-    "tpStone_slot_full": "§c传送石槽位已满",
-    "tpStone_update": "§b传送石已升级",
-    "tpStone_error": "§c传送石异常",
-    "tpStone_rename": "§b传送石已重命名",
-    "tpStone_no_slot": "§c请输入有效的槽位",
-    "tpStone_unlock_slot": "§c该槽位未解锁",
-    "tpStone_slot_rename": "§b槽位已重命名",
-    "tpStone_cant_tp": "§c无法传送至未设置的点",
-    "tpStone_tp": "§b已将你传送至目的坐标",
-    "tpStone_save": "§b已保存你脚下的坐标",
-    "tpStone_slot": "§b传送石槽位§d：§a",
-    "tpStone_title": "传送石："
+    "helpCommandDeathChest": [
+      "§ddeathchest set 来设置保存的箱子（需要你看着箱子）",
+      "§ddeathchest mode [mode] 来设置死亡掉落保护模式"
+    ],
+    "helpModeDeathChest": {
+      "0": "§e模式0，不开启死亡掉落保护",
+      "1": "§e模式1，只保存到死亡箱子",
+      "2": "§e模式2，只保存到设置的箱子",
+      "3": "§e模式3，死亡不掉落",
+      "4": "§e模式4，优先级：不掉落->设置的箱子->死亡箱子",
+      "5": "§e模式5，优先级：不掉落->设置的箱子",
+      "6": "§e模式6，优先级：不掉落->死亡箱子",
+      "7": "§e模式7，优先级：设置的箱子->死亡箱子"
+    },
+    "helpCostDeathChest": {
+      "0": "§e死亡箱子花费：%Cost%",
+      "1": "§e设置的箱子花费：%Cost%",
+      "2": "§e不掉落花费：%Cost%"
+    },
+    "noPermissionCommand": "§c你没有权限使用这条指令",
+    "reloadCommand": "§b已重读",
+    "playerOnlyCommand": "§c只能玩家使用这个指令",
+    "noPlayerCommand": "§c执行指令的玩家找不到",
+    "tpStoneHandCommand": "§c请手持传送石后执行",
+    "tpStoneOffhandCommand": "§c请副手持升级物品",
+    "tpStoneNewNameCommand": "§c请输入新的传送石名字",
+    "tpStoneSetNameCommand": "§c请输入你要设置的槽位",
+    "tpStoneSetNameSlotCommand": "§c请输入你要设置的槽位的名字",
+    "tpStoneSetNameNumberCommand": "§c输入设置的槽位是数字",
+    "tpStoneGetStone": "§b你获得了一个新的传送石",
+    "newPoint": "新的传送点",
+    "newStone": "新的传送石",
+    "tpStoneNoDate": "§c没有这个传送石的数据",
+    "tpStoneShow": "§e设置的坐标：",
+    "tpStoneUnlock": "§e未解锁",
+    "tpStoneUnlockNeed": "§8使用升级石来解锁",
+    "tpStoneSlotFull": "§c传送石槽位已满",
+    "tpStoneUpdate": "§b传送石已升级",
+    "tpStoneError": "§c传送石异常",
+    "tpStoneRename": "§b传送石已重命名",
+    "tpStoneNoSlot": "§c请输入有效的槽位",
+    "tpStoneUnlockSlot": "§c该槽位未解锁",
+    "tpStoneSlotRename": "§b槽位已重命名",
+    "tpStoneCantTp": "§c无法传送至未设置的点",
+    "tpStoneTp": "§b已将你传送至目的坐标",
+    "tpStoneSave": "§b已保存你脚下的坐标",
+    "tpStoneSlot": "§b传送石槽位§d：§a",
+    "tpStoneTitle": "传送石：",
+    "deathChestCantPlace": "§d你有一些物品无法放进箱子",
+    "deathChestCantGen": "§d无法生成箱子",
+    "deathChestGen": "§d你的死亡箱子生成在了%x%, %y%, %z%",
+    "deathChestCost": "§d生成死亡箱子花费了%Money%",
+    "deathChestCost1": "§d保存到设置的箱子花费了%Money%",
+    "deathChestCost2": "§d死亡不掉落花费了%Money%",
+    "deathChestNoMoney": "§d你没有足够的钱生成死亡箱子",
+    "deathChestNoMoney1": "§d你没有足够的钱保存到设置的箱子",
+    "deathChestNoMoney2": "§d你没有足够的钱生成死亡箱子",
+    "deathLockAt": "§d你必须看向一个箱子",
+    "deathLockChest": "§d你看向的方块必须是箱子",
+    "deathChestSet": "§d已设置位置x:%x% y:%y% z:%z%的箱子",
+    "deathChestNum": "§d请输入数字",
+    "deathChestModeError": "§d指定模式错误",
+    "deathChestModeNo": "§d该模式无效",
+    "deathChestModeSet": "§d已设置你的模式为%Mode%",
+    "deathChestError": "§d设置的箱子异常",
+    "deathChestMode": "§d你的死亡掉落保护模式为：%Mode%"
   }
 }
