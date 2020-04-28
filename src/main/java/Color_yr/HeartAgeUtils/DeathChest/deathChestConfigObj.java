@@ -3,18 +3,18 @@ package Color_yr.HeartAgeUtils.DeathChest;
 import java.util.List;
 
 public class deathChestConfigObj {
-    private final costObj Cost;
-    private List<Integer> Disable;
-
-    public List<Integer> getDisable() {
-        return Disable;
-    }
+    private final costObj cost;
+    private List<Integer> disable;
 
     public deathChestConfigObj() {
-        Cost = new costObj();
+        cost = new costObj();
+    }
+
+    public List<Integer> getDisable() {
+        return disable;
     }
 
     public costObj getCost() {
-        return Cost;
+        return cost;
     }
 }

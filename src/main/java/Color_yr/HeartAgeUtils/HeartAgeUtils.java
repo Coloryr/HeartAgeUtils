@@ -2,6 +2,7 @@ package Color_yr.HeartAgeUtils;
 
 import Color_yr.HeartAgeUtils.Command.commandList;
 import Color_yr.HeartAgeUtils.Config.configMain;
+import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.Event.deathChest;
 import Color_yr.HeartAgeUtils.Event.drawerBlock;
 import Color_yr.HeartAgeUtils.Event.tpStone;
@@ -19,12 +20,12 @@ public class HeartAgeUtils extends JavaPlugin {
     public static Logger log;
     public static configMain ConfigMain;
 
-    public static void LoadConfig()
-    {
-        if(ConfigMain == null)
+    public static void LoadConfig() {
+        if (ConfigMain == null)
             ConfigMain = new configMain();
         else
             ConfigMain.setConfig();
+        deathChestDo.GenHelp();
     }
 
     @Override

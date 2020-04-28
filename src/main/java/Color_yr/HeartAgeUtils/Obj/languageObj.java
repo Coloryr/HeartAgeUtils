@@ -55,7 +55,7 @@ public class languageObj {
     private String deathLockAt;
     private String deathLockChest;
     private String deathChestSet;
-    private String deathChestNum;;
+    private String deathChestNum;
     private String deathChestModeError;
     private String deathChestModeNo;
     private String deathChestModeSet;
@@ -109,6 +109,7 @@ public class languageObj {
     public String getDeathChestCantPlace() {
         return deathChestCantPlace;
     }
+
     public String getDeathChestCost() {
         return deathChestCost;
     }

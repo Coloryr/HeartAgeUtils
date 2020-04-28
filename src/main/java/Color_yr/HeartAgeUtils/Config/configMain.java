@@ -1,7 +1,6 @@
 package Color_yr.HeartAgeUtils.Config;
 
 import Color_yr.HeartAgeUtils.API.IConfig;
-import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.Drawer.drawerBlock;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.configObj;
@@ -53,7 +52,6 @@ public class configMain {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石手中物品ID为空");
             }
             //读传送石升级物品
-            tpStone.init();
             if (!Config.getTpStone().getUpdata().isEmpty()) {
                 Material a = Material.matchMaterial(Config.getTpStone().getUpdata());
                 if (a == null) {
@@ -65,10 +63,9 @@ public class configMain {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石升级物品ID为空");
             }
             //更新死亡箱子
-            deathChestDo.GenHelp();
             deathChest.init();
-            if (!Config.getTpStone().getmain().isEmpty()) {
-                Material a = Material.matchMaterial(Config.getTpStone().getmain());
+            if (!Config.getDrawer().getBlock().isEmpty()) {
+                Material a = Material.matchMaterial(Config.getDrawer().getBlock());
                 if (a == null) {
                     HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块找不到");
                 } else {
@@ -78,8 +75,10 @@ public class configMain {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块ID为空");
             }
 
+            drawer.init();
         } catch (Exception arg0) {
-            HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c配置文件 config.json 读取失败:" + arg0);
+            HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c配置文件读取失败");
+            arg0.printStackTrace();
         }
     }
 

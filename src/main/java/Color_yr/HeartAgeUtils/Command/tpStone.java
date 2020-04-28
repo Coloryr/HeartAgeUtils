@@ -3,12 +3,13 @@ package Color_yr.HeartAgeUtils.Command;
 import Color_yr.HeartAgeUtils.API.ICommand;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import Color_yr.HeartAgeUtils.Utils.isNumber;
+import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.command.*;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -21,7 +22,7 @@ class tpStone implements ICommand {
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
         languageObj lan = HeartAgeUtils.ConfigMain.lan;
-        if (args.length == 1) {
+        if (args.length == 0) {
             sender.sendMessage(lan.getTitle() + lan.getUnknownCommandTpStone());
             return true;
         } else if (sender instanceof ConsoleCommandSender) {
@@ -86,21 +87,22 @@ class tpStone implements ICommand {
             sender.sendMessage(lan.getTitle() + tpStoneDo.setSlotName(player.getInventory().getItemInMainHand(), Integer.decode(args[1]), args[2]));
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1.0f, 1.0f);
             return true;
-        } else if (args[0].equalsIgnoreCase("get")) {//给传送石
-            if (!sender.hasPermission("tpStone.give")) {
-                sender.sendMessage(lan.getTitle() + lan.getNoPermissionCommand());
-                return true;
-            }
+        } else if (args[0].equalsIgnoreCase("get")
+                && sender.hasPermission("tpStone.give")) {//给传送石
             UUID uuid;
+            String uuids;
             do {
                 uuid = UUID.randomUUID();
-            } while (tpStoneDo.toStoneSave.containsKey(uuid.toString()));
-            player.getInventory().addItem(tpStoneDo.newTpStone(uuid.toString()));
+                uuids = uuid.toString().replace("-", "");
+            } while (tpStoneDo.toStoneSave.containsKey(uuids));
+            player.getInventory().addItem(tpStoneDo.newTpStone(uuids));
             sender.sendMessage(lan.getTitle() + lan.getTpStoneGetStone());
             player.playSound(player.getLocation(), Sound.ITEM_ARMOR_EQUIP_IRON, 1.0f, 1.0f);
             return true;
+        } else {
+            sender.sendMessage(lan.getTitle() + lan.getUnknownCommandTpStone());
+            return true;
         }
-        return false;
     }
 
     @Override

@@ -4,8 +4,6 @@ import Color_yr.HeartAgeUtils.API.IConfig;
 import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.DeathChest.playSetObj;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
-import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
-import Color_yr.HeartAgeUtils.tpStone.tpStoneSaveObj;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;

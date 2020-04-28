@@ -12,17 +12,29 @@ public class playSetObj {
         return z;
     }
 
+    public void setZ(int z) {
+        this.z = z;
+    }
+
     public int getY() {
         return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getX() {
         return x;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
     public int getMode() {
         int b = 0;
-        if(HeartAgeUtils.ConfigMain.Config.getDeathChest().getDisable().contains(mode)) {
+        if (HeartAgeUtils.ConfigMain.Config.getDeathChest().getDisable().contains(mode)) {
             for (int a : HeartAgeUtils.ConfigMain.Config.getDeathChest().getDisable()) {
                 if (a == b)
                     b++;
@@ -33,18 +45,6 @@ public class playSetObj {
             }
         }
         return mode;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
     }
 
     public void setMode(int mode) {

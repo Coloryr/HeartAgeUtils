@@ -22,8 +22,7 @@ class deathChest implements ICommand {
         if (args.length == 0) {
             sender.sendMessage(lan.getUnknownCommandDeathChest());
             return true;
-        }
-        if (args[0].equalsIgnoreCase("help")) {
+        } else if (args[0].equalsIgnoreCase("help")) {
             for (String help : lan.getHelpCommandDeathChest()) {
                 sender.sendMessage(help);
             }
@@ -46,7 +45,7 @@ class deathChest implements ICommand {
             set.setZ(block.getZ());
             deathChestDo.setPlayerSet(((Player) sender).getUniqueId(), set);
             sender.sendMessage(lan.getDeathChestSet().replace("%x%", "" + set.getX())
-            .replace("%y%", "" + set.getY()).replace("%y%", "" + set.getZ()));
+                    .replace("%y%", "" + set.getY()).replace("%y%", "" + set.getZ()));
             return true;
         } else if (args[0].equalsIgnoreCase("mode") && args.length == 2) {
             if (!isNumber.isNumber(args[1])) {
@@ -66,24 +65,23 @@ class deathChest implements ICommand {
             deathChestDo.setPlayerSet(((Player) sender).getUniqueId(), set);
             sender.sendMessage(lan.getDeathChestModeSet().replace("%Mode%", "" + set.getMode()));
             return true;
+        } else {
+            sender.sendMessage(lan.getUnknownCommandDeathChest());
+            return true;
         }
-        return false;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, String[] args) {
-        ArrayList<String> arguments = null;
         if (args.length == 1) {
-            arguments = new ArrayList<>();
+            ArrayList<String> arguments = new ArrayList<>();
             arguments.add("help");
             arguments.add("set");
             arguments.add("mode");
-            if (sender.hasPermission("DeathChest.admin")) {
-                arguments.add("reload");
-            }
+            return arguments;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("mode")) {
             return deathChestDo.enable;
         }
-        return arguments;
+        return null;
     }
 }

@@ -3,11 +3,11 @@ package Color_yr.HeartAgeUtils.Event;
 import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
+import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
 import Color_yr.HeartAgeUtils.tpStone.locationObj;
-import Color_yr.HeartAgeUtils.tpStone.tpStoneSaveObj;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneObjSet;
-import Color_yr.HeartAgeUtils.Utils.NBTSet;
+import Color_yr.HeartAgeUtils.tpStone.tpStoneSaveObj;
 import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -40,7 +40,7 @@ public class tpStone implements Listener {
             return;
         Material test = item.getType();
         if (test.equals(tpStoneDo.item)) {
-            NBTTagCompound ItemNbt = NBTSet.NBT_get(item);
+            NBTTagCompound ItemNbt = itemNBTSet.getNBT(item);
             if (!ItemNbt.hasKey("uuid"))
                 return;
             e.setCancelled(true);
@@ -60,12 +60,12 @@ public class tpStone implements Listener {
             for (Map.Entry<String, locationObj> temp : obj.getSel().entrySet()) {
                 String slot = temp.getKey().replace("sel", "");
                 locationObj locationObj = temp.getValue();
-                ItemNbt = NBTSet.NBT_get(itemStack);
+                ItemNbt = itemNBTSet.getNBT(itemStack);
                 ItemNbt.setBoolean("disable", false);
                 ItemNbt.setInt("x", locationObj.getX());
                 ItemNbt.setInt("y", locationObj.getY());
                 ItemNbt.setInt("z", locationObj.getZ());
-                itemStack = NBTSet.NBT_save(itemStack, ItemNbt);
+                itemStack = itemNBTSet.saveNBT(itemStack, ItemNbt);
                 temp1 = itemStack.getItemMeta();
                 temp1.setDisplayName(locationObj.getName());
                 temp1.setLore(new ArrayList<String>() {{
@@ -84,9 +84,9 @@ public class tpStone implements Listener {
                 }
             });
             itemStack.setItemMeta(temp1);
-            ItemNbt = NBTSet.NBT_get(itemStack);
+            ItemNbt = itemNBTSet.getNBT(itemStack);
             ItemNbt.setBoolean("disable", true);
-            itemStack = NBTSet.NBT_save(itemStack, ItemNbt);
+            itemStack = itemNBTSet.saveNBT(itemStack, ItemNbt);
             for (int i = 0; i < 9; i++) {
                 ItemStack a = inv.getItem(i);
                 if (a == null) {
@@ -123,7 +123,7 @@ public class tpStone implements Listener {
                 e.setCancelled(true);
                 if (inv.getPlayer().equals(player)) {
                     ItemStack item = inv.getItem(e.getSlot());
-                    NBTTagCompound ItemNbt = NBTSet.NBT_get(item);
+                    NBTTagCompound ItemNbt = itemNBTSet.getNBT(item);
                     if (ItemNbt.getBoolean("disable")) {
                         player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
                         player.sendMessage(lan.getTitle() + lan.getTpStoneUnlockSlot());
@@ -146,7 +146,7 @@ public class tpStone implements Listener {
                         }
                     } else if (e.getClick() == ClickType.RIGHT) {
                         org.bukkit.Location location = player.getLocation();
-                        ItemNbt = NBTSet.NBT_get(hand);
+                        ItemNbt = itemNBTSet.getNBT(hand);
                         String uuid = ItemNbt.getString("uuid");
                         if (!tpStoneDo.toStoneSave.containsKey(uuid)) {
                             player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);

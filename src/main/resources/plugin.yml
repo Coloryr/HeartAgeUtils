@@ -2,10 +2,14 @@ name: HeartAgeUtils
 main: Color_yr.HeartAgeUtils.HeartAgeUtils
 author: Color_yr
 version: 1.0.0
-api-version: 1.13
+api-version: 1.15
+
+loadbefore: [vault]
+
+softdepend: [vault]
 
 commands:
-  heartage:
+  heartageutils:
     description: 插件主指令
     usage: §4[HeartAgeUtils]§6/heartageutils help来查看帮助
   hau:
