@@ -6,6 +6,7 @@
   },
   "drawer": {
     "enable": true,
+    "lock": true,
     "block": "end_portal_frame"
   },
   "deathChest": {
@@ -23,6 +24,7 @@
     "unknownCommandHeartAge": "§c错误，请使用/heartageutils help 获取帮助",
     "unknownCommandTpStone": "§c错误，请使用/heartageutils tpStone help 获取帮助",
     "unknownCommandDeathChest": "§c错误，请使用/heartageutils tpStone help 获取帮助",
+    "unknownCommandDrawer": "§c错误，请使用/heartageutils drawer help 获取帮助",
     "helpCommandHeartAge": [
       "§b/heartageutils tpstone 使用传送石",
       "§b/heartageutils deathchest 使用死亡箱子"
@@ -35,6 +37,9 @@
     "helpCommandDeathChest": [
       "§ddeathchest set 来设置保存的箱子（需要你看着箱子）",
       "§ddeathchest mode [mode] 来设置死亡掉落保护模式"
+    ],
+    "helpDrawer": [
+      "§ddrawer break 拆下抽屉（需要你看着抽屉）"
     ],
     "helpModeDeathChest": {
       "0": "§e模式0，不开启死亡掉落保护",
@@ -98,6 +103,15 @@
     "deathChestModeSet": "§d已设置你的模式为%Mode%",
     "deathChestError": "§d设置的箱子异常",
     "deathChestMode": "§d你的死亡掉落保护模式为：%Mode%",
-    "deathChestNull": "§d你的箱子已经清空"
+    "deathChestNull": "§d你的箱子已经清空",
+    "drawerGet": "§e你获得了一个抽屉",
+    "drawerError": "§e你的抽屉异常",
+    "drawerCheck": "§e抽屉物品:%Item%，数量:%Amount%",
+    "drawerLock": "§e这个抽屉已上锁",
+    "drawerNo": "§e这个不是抽屉方块",
+    "drawerEmpty": "§e这个不是抽屉不为空",
+    "drawerNoEmpty": "§e你的背包已满",
+    "drawerBreak": "§e抽屉已拆除",
+    "drawerName": "§e抽屉方块"
   }
 }

@@ -34,6 +34,7 @@ public class saveTaskDo {
     }
 
     public void closeTimer() {
+        save();
         if (service != null) {
             service.shutdown();
             service = null;

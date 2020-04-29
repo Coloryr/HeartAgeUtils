@@ -2,24 +2,14 @@ package Color_yr.HeartAgeUtils.Command;
 
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
-import net.minecraft.server.v1_15_R1.TileEntity;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.material.MaterialData;
-import org.bukkit.metadata.LazyMetadataValue;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.metadata.MetadataValueAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 class HAU implements CommandExecutor, TabExecutor {
     @Override
@@ -49,27 +39,12 @@ class HAU implements CommandExecutor, TabExecutor {
                 String[] ss = new String[arg.length - 1];
                 System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.deathChest.onCommand(sender, ss);
+            } else if (arg[0].equalsIgnoreCase("drawer")) {
+                String[] ss = new String[arg.length - 1];
+                System.arraycopy(arg, 1, ss, 0, ss.length);
+                return commandList.drawer.onCommand(sender, ss);
             } else if (arg[0].equalsIgnoreCase("test")) {
                 Player player = (Player) sender;
-                Block block = player.getTargetBlockExact(5);
-                if (block == null) {
-                    sender.sendMessage(lan.getDeathLockAt());
-                    return true;
-                }
-                BlockState temp = block.getState();
-                temp.setMetadata("NoDrop", new MetadataValueAdapter(HeartAgeUtils.plugin) {
-                    @Override
-                    public Object value() {
-                        return false;
-                    }
-
-                    @Override
-                    public void invalidate() {
-
-                    }
-                });
-                List<MetadataValue> list = temp.getMetadata("NoDrop");
-                boolean test = list.get(0).asBoolean();
                 return true;
             }
         }
@@ -85,6 +60,7 @@ class HAU implements CommandExecutor, TabExecutor {
             }
             temp.add("tpstone");
             temp.add("deathchest");
+            temp.add("drawer");
             temp.add("help");
             return temp;
         } else if (arg.length >= 2) {
@@ -96,6 +72,10 @@ class HAU implements CommandExecutor, TabExecutor {
                 String[] ss = new String[arg.length - 1];
                 System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.deathChest.onTabComplete(sender, ss);
+            } else if (arg[0].equalsIgnoreCase("drawer")) {
+                String[] ss = new String[arg.length - 1];
+                System.arraycopy(arg, 1, ss, 0, ss.length);
+                return commandList.drawer.onTabComplete(sender, ss);
             }
         }
         return null;

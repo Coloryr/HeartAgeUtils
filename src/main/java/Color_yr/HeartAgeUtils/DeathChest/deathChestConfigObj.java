@@ -3,9 +3,14 @@ package Color_yr.HeartAgeUtils.DeathChest;
 import java.util.List;
 
 public class deathChestConfigObj {
-    private final costObj cost;
+    private costObj cost;
     private List<Integer> disable;
     private boolean enable;
+    private boolean lock;
+
+    public boolean isLock() {
+        return lock;
+    }
 
     public boolean isEnable() {
         return enable;

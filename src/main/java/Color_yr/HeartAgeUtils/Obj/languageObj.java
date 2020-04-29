@@ -9,9 +9,11 @@ public class languageObj {
     private String unknownCommandHeartAge;
     private String unknownCommandTpStone;
     private String unknownCommandDeathChest;
+    private String unknownCommandDrawer;
     private List<String> helpCommandHeartAge;
     private List<String> helpCommandTpStone;
     private List<String> helpCommandDeathChest;
+    private List<String> helpDrawer;
     private Map<Integer, String> helpModeDeathChest;
     private Map<Integer, String> helpCostDeathChest;
     private String noPermissionCommand;
@@ -62,6 +64,54 @@ public class languageObj {
     private String deathChestError;
     private String deathChestMode;
     private String deathChestNull;
+    private String drawerGet;
+    private String drawerError;
+    private String drawerCheck;
+    private String drawerLock;
+    private String drawerNo;
+    private String drawerEmpty;
+    private String drawerNoEmpty;
+    private String drawerName;
+
+    public String getDrawerName() {
+        return drawerName;
+    }
+
+    public String getDrawerEmpty() {
+        return drawerEmpty;
+    }
+
+    public String getDrawerNoEmpty() {
+        return drawerNoEmpty;
+    }
+
+    public String getDrawerNo() {
+        return drawerNo;
+    }
+
+    public String getDrawerLock() {
+        return drawerLock;
+    }
+
+    public String getDrawerCheck() {
+        return drawerCheck;
+    }
+
+    public String getDrawerError() {
+        return drawerError;
+    }
+
+    public String getDrawerGet() {
+        return drawerGet;
+    }
+
+    public String getUnknownCommandDrawer() {
+        return unknownCommandDrawer;
+    }
+
+    public List<String> getHelpDrawer() {
+        return helpDrawer;
+    }
 
     public String getDeathChestNull() {
         return deathChestNull;

@@ -1,7 +1,7 @@
 package Color_yr.HeartAgeUtils.Config;
 
 import Color_yr.HeartAgeUtils.API.IConfig;
-import Color_yr.HeartAgeUtils.Drawer.drawerBlock;
+import Color_yr.HeartAgeUtils.Drawer.drawerDo;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.configObj;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
@@ -69,7 +69,7 @@ public class configMain {
                 if (a == null) {
                     HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块找不到");
                 } else {
-                    drawerBlock.block = a;
+                    drawerDo.block = a;
                 }
             } else {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块ID为空");

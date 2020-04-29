@@ -22,11 +22,11 @@ class deathChestRead implements IConfig {
         try {
             if (!fileLocal.exists())
                 fileLocal.mkdirs();
-            File[] file_list = fileLocal.listFiles((dir, name) -> name.endsWith(".json"));
-            if (file_list != null) {
+            File[] files = fileLocal.listFiles((dir, name) -> name.endsWith(".json"));
+            if (files != null) {
                 InputStreamReader reader;
                 BufferedReader bfreader;
-                for (File temp : file_list) {
+                for (File temp : files) {
                     Gson json = new Gson();
                     reader = new InputStreamReader(new FileInputStream(temp), StandardCharsets.UTF_8);
                     bfreader = new BufferedReader(reader);

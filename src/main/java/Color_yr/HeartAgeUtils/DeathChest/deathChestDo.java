@@ -15,6 +15,7 @@ import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.MetadataValueAdapter;
@@ -24,6 +25,7 @@ import java.util.*;
 public class deathChestDo {
     public static final List<String> enable = new ArrayList<>();
     public static final Map<String, playSetObj> deathChestSet = new HashMap<>();
+    public static final Map<String, InventoryView> GUI_save = new HashMap<>();
     public static boolean enableLocal = false;
     public static String help = "";
 

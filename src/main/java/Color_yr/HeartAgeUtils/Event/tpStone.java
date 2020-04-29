@@ -1,6 +1,7 @@
 package Color_yr.HeartAgeUtils.Event;
 
 import Color_yr.HeartAgeUtils.Config.configMain;
+import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
 import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
@@ -26,12 +27,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class tpStone implements Listener {
-
-    private static final Map<String, InventoryView> GUI_save = new HashMap<>();
 
     @EventHandler
     public void itemClick(PlayerInteractEvent e) {
@@ -95,7 +93,7 @@ public class tpStone implements Listener {
             }
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1.0f, 1.0f);
-            GUI_save.put(player.getName(), player.openInventory(inv));
+            deathChestDo.GUI_save.put(player.getName(), player.openInventory(inv));
         } else if (e.getHand() == EquipmentSlot.OFF_HAND) {
             ItemStack offhand = e.getPlayer().getInventory().getItemInOffHand();
             ItemStack mainhand = e.getPlayer().getInventory().getItemInMainHand();
@@ -113,11 +111,11 @@ public class tpStone implements Listener {
             if (hand.getType().equals(Material.AIR))
                 return;
             languageObj lan = HeartAgeUtils.configMain.lan;
-            if (GUI_save.containsKey(player.getName())) {
-                InventoryView inv = GUI_save.get(player.getName());
+            if (deathChestDo.GUI_save.containsKey(player.getName())) {
+                InventoryView inv = deathChestDo.GUI_save.get(player.getName());
                 if (!inv.getTitle().contains(lan.getTpStone_title())) {
                     player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
-                    GUI_save.remove(player.getName());
+                    deathChestDo.GUI_save.remove(player.getName());
                     return;
                 }
                 e.setCancelled(true);
@@ -130,7 +128,7 @@ public class tpStone implements Listener {
                     } else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z"))) {
                         player.sendMessage(lan.getTitle() + lan.getTpStoneError());
                         player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
-                        GUI_save.remove(player.getName());
+                        deathChestDo.GUI_save.remove(player.getName());
                         return;
                     } else if (e.getClick() == ClickType.LEFT) {
                         int x = ItemNbt.getInt("x");
@@ -167,7 +165,7 @@ public class tpStone implements Listener {
                     }
                 }
                 player.closeInventory();
-                GUI_save.remove(player.getName());
+                deathChestDo.GUI_save.remove(player.getName());
             }
         }
     }
