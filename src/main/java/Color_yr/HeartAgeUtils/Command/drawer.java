@@ -6,6 +6,8 @@ import Color_yr.HeartAgeUtils.Drawer.drawerSaveObj;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
+import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
+import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -62,6 +64,10 @@ class drawer implements ICommand {
             lore.add(data);
             meta.setLore(lore);
             item.setItemMeta(meta);
+            NBTTagCompound nbt = itemNBTSet.getNBT(item);
+            nbt.setString("type", "drawer");
+            nbt.setString("uuid", obj.getUuid());
+            item = itemNBTSet.saveNBT(item, nbt);
             inventory.addItem(item);
 
             return true;
