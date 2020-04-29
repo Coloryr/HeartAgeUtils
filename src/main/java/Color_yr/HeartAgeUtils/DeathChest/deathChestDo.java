@@ -27,7 +27,7 @@ public class deathChestDo {
     public static boolean enableLocal = false;
     public static String help = "";
 
-    private static MetadataValue drop =  new MetadataValueAdapter(HeartAgeUtils.plugin) {
+    private static final MetadataValue drop =  new MetadataValueAdapter(HeartAgeUtils.plugin) {
         @Override
         public Object value() {
             return true;
