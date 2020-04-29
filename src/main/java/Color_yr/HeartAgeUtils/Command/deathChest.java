@@ -45,7 +45,7 @@ class deathChest implements ICommand {
             set.setZ(block.getZ());
             deathChestDo.setPlayerSet(((Player) sender).getUniqueId(), set);
             sender.sendMessage(lan.getDeathChestSet().replace("%x%", "" + set.getX())
-                    .replace("%y%", "" + set.getY()).replace("%y%", "" + set.getZ()));
+                    .replace("%y%", "" + set.getY()).replace("%z%", "" + set.getZ()));
             return true;
         } else if (args[0].equalsIgnoreCase("mode") && args.length == 2) {
             if (!isNumber.isNumber(args[1])) {

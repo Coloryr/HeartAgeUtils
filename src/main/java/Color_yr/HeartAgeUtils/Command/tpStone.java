@@ -95,9 +95,16 @@ class tpStone implements ICommand {
                 uuid = UUID.randomUUID();
                 uuids = uuid.toString().replace("-", "");
             } while (tpStoneDo.toStoneSave.containsKey(uuids));
-            player.getInventory().addItem(tpStoneDo.newTpStone(uuids));
-            sender.sendMessage(lan.getTitle() + lan.getTpStoneGetStone());
-            player.playSound(player.getLocation(), Sound.ITEM_ARMOR_EQUIP_IRON, 1.0f, 1.0f);
+            if (args.length == 2) {
+                player = Bukkit.getPlayer(args[1]);
+            } else {
+                player = (Player) sender;
+            }
+            if (player != null) {
+                player.getInventory().addItem(tpStoneDo.newTpStone(uuids));
+                sender.sendMessage(lan.getTitle() + lan.getTpStoneGetStone());
+                player.playSound(player.getLocation(), Sound.ITEM_ARMOR_EQUIP_IRON, 1.0f, 1.0f);
+            }
             return true;
         } else {
             sender.sendMessage(lan.getTitle() + lan.getUnknownCommandTpStone());

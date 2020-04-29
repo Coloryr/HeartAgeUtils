@@ -8,6 +8,7 @@ import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
 import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
 import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -73,10 +74,17 @@ class drawer implements ICommand {
             return true;
         } else if (args[0].equalsIgnoreCase("get")
                 && sender.hasPermission("drawer.give")) {
-            ItemStack item = drawerDo.getDrawer();
-            Player player = (Player) sender;
-            player.getInventory().addItem(item);
-            player.sendMessage(lan.getDrawerGet());
+            Player player;
+            if (args.length == 2) {
+                player = Bukkit.getPlayer(args[1]);
+            } else {
+                player = (Player) sender;
+            }
+            if (player != null) {
+                ItemStack item = drawerDo.getDrawer();
+                player.getInventory().addItem(item);
+                player.sendMessage(lan.getDrawerGet());
+            }
             return true;
         } else {
             sender.sendMessage(lan.getUnknownCommandDrawer());
