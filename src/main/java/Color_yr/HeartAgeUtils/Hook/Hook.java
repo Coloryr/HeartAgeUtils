@@ -10,7 +10,7 @@ public class Hook {
 
     public static void init() {
         vault = new vault();
-        if (!HeartAgeUtils.ConfigMain.Config.getDeathChest().getCost().isEnable()
+        if (!HeartAgeUtils.configMain.Config.getDeathChest().getCost().isEnable()
                 || vault.setupEconomy()) {
             vaultHook = true;
             HeartAgeUtils.log.info("[HeartAgeUtils]vault已挂钩");

@@ -61,6 +61,11 @@ public class languageObj {
     private String deathChestModeSet;
     private String deathChestError;
     private String deathChestMode;
+    private String deathChestNull;
+
+    public String getDeathChestNull() {
+        return deathChestNull;
+    }
 
     public String getDeathChestMode() {
         return deathChestMode;

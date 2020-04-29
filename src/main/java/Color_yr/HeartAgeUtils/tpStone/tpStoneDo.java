@@ -23,7 +23,7 @@ public class tpStoneDo {
     public static ItemStack newTpStone(String uuid) {//获得新的传送石
         if (item == null)
             return null;
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        languageObj lan = HeartAgeUtils.configMain.lan;
         ItemStack item = new ItemStack(tpStoneDo.item);
         tpStoneSaveObj obj = new tpStoneSaveObj();
         obj.setSlot(1);
@@ -50,7 +50,7 @@ public class tpStoneDo {
         ItemStack item = player.getInventory().getItemInMainHand();
         ItemMeta meta = item.getItemMeta();
         NBTTagCompound nbt = itemNBTSet.getNBT(item);
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        languageObj lan = HeartAgeUtils.configMain.lan;
         if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");
             if (toStoneSave.containsKey(uuid)) {
@@ -80,7 +80,7 @@ public class tpStoneDo {
 
     public static String renameTpStone(ItemStack item, String new_name) {//重命名传送石
         NBTTagCompound nbt = itemNBTSet.getNBT(item);
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        languageObj lan = HeartAgeUtils.configMain.lan;
         if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");
             if (toStoneSave.containsKey(uuid)) {
@@ -98,7 +98,7 @@ public class tpStoneDo {
 
     public static String setSlotName(ItemStack item, int slot, String new_name) {  //设置传送点名字
         NBTTagCompound nbt = itemNBTSet.getNBT(item);
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        languageObj lan = HeartAgeUtils.configMain.lan;
         if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");
             if (toStoneSave.containsKey(uuid)) {

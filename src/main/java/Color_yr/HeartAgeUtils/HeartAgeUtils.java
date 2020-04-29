@@ -18,13 +18,13 @@ public class HeartAgeUtils extends JavaPlugin {
     private static final String Version = "1.0.0";
     public static Plugin plugin;
     public static Logger log;
-    public static configMain ConfigMain;
+    public static configMain configMain;
 
     public static void LoadConfig() {
-        if (ConfigMain == null)
-            ConfigMain = new configMain();
+        if (configMain == null)
+            configMain = new configMain();
         else
-            ConfigMain.setConfig();
+            configMain.setConfig();
         deathChestDo.GenHelp();
     }
 
@@ -41,15 +41,18 @@ public class HeartAgeUtils extends JavaPlugin {
         Bukkit.getPluginCommand("heartageutils").setExecutor(commandList.command);//注册插件主指令
         Bukkit.getPluginCommand("hau").setExecutor(commandList.command);//注册插件主指令
         log.info("[HeartAgeUtils]事件注册中");
-        Bukkit.getPluginManager().registerEvents(new drawerBlock(), this);//注册方块事件
-        Bukkit.getPluginManager().registerEvents(new tpStone(), this);//注册物品事件
-        Bukkit.getPluginManager().registerEvents(new deathChest(), this);//注册物品事件
+        if (configMain.Config.getDrawer().isEnable())
+            Bukkit.getPluginManager().registerEvents(new drawerBlock(), this);//注册方块事件
+        if (configMain.Config.getTpStone().isEnable())
+            Bukkit.getPluginManager().registerEvents(new tpStone(), this);//注册物品事件
+        if (configMain.Config.getDeathChest().isEnable())
+            Bukkit.getPluginManager().registerEvents(new deathChest(), this);//注册物品事件
         log.info("[HeartAgeUtils]已启动-" + Version);
     }
 
     @Override
     public void onDisable() {
-        ConfigMain.SaveTask.closeTimer();
+        configMain.SaveTask.closeTimer();
         log.info("§d[HeartAgeUtils]§e已停止，感谢使用");
     }
 }

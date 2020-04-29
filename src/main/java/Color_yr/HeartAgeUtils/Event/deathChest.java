@@ -7,13 +7,23 @@ import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
 import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.MetadataValue;
+
+import java.util.List;
 
 public class deathChest implements Listener {
 
@@ -23,8 +33,8 @@ public class deathChest implements Listener {
             return;
         Player player = e.getEntity();
         playSetObj set = deathChestDo.getPlayerSet(player.getUniqueId(), true);
-        deathChestConfigObj config = HeartAgeUtils.ConfigMain.Config.getDeathChest();
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        deathChestConfigObj config = HeartAgeUtils.configMain.Config.getDeathChest();
+        languageObj lan = HeartAgeUtils.configMain.lan;
         switch (set.getMode()) {
             case 1: {
                 if (Hook.vaultCheck(player,
@@ -153,8 +163,8 @@ public class deathChest implements Listener {
 
     @EventHandler
     public void PlayerJoin(PlayerJoinEvent e) {
-        deathChestConfigObj config = HeartAgeUtils.ConfigMain.Config.getDeathChest();
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        deathChestConfigObj config = HeartAgeUtils.configMain.Config.getDeathChest();
+        languageObj lan = HeartAgeUtils.configMain.lan;
         Player player = e.getPlayer();
         playSetObj save = deathChestDo.getPlayerSet(player.getUniqueId(), true);
         String temp = lan.getDeathChestMode();
@@ -177,9 +187,33 @@ public class deathChest implements Listener {
 
     @EventHandler
     public void de(BlockBreakEvent e) {
-        NBTTagCompound nbt = blockNBTSet.getNBT(e.getBlock()).b();
-        if (nbt != null && nbt.hasKey("Nodrop")) {
-            e.getPlayer().sendMessage("Has");
+        Block block = e.getBlock();
+        List<MetadataValue> list = block.getMetadata("NoDrop");
+        if (list.size() > 0 && list.get(0).asBoolean()) {
+            e.setDropItems(false);
+        }
+    }
+
+    @EventHandler
+    public void selGui(InventoryCloseEvent e) {
+        if (e.getPlayer() instanceof Player) {
+            Player player = (Player) e.getPlayer();
+            Inventory inventory = e.getInventory();
+            Location location = inventory.getLocation();
+            Block block = player.getWorld().getBlockAt(location);
+            if (block.getType().equals(Material.CHEST)) {
+                List<MetadataValue> list = block.getMetadata("NoDrop");
+                if (list.size() > 0 && list.get(0).asBoolean()) {
+                    for (ItemStack item : inventory) {
+                        if (item != null &&
+                                !item.getType().equals(Material.AIR)) {
+                            return;
+                        }
+                    }
+                    block.setType(Material.AIR);
+                    player.sendMessage(HeartAgeUtils.configMain.lan.getDeathChestNull());
+                }
+            }
         }
     }
 

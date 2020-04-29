@@ -5,21 +5,28 @@ import Color_yr.HeartAgeUtils.Obj.languageObj;
 import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import net.minecraft.server.v1_15_R1.TileEntity;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.material.MaterialData;
+import org.bukkit.metadata.LazyMetadataValue;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.metadata.MetadataValueAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 class HAU implements CommandExecutor, TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] arg) {
         if (command.getName().equalsIgnoreCase("heartageutils")
                 || command.getName().equalsIgnoreCase("hau")) {
-            languageObj lan = HeartAgeUtils.ConfigMain.lan;
+            languageObj lan = HeartAgeUtils.configMain.lan;
             if (arg.length == 0) {
                 sender.sendMessage(lan.getTitle() + lan.getUnknownCommandHeartAge());
                 return true;
@@ -49,14 +56,20 @@ class HAU implements CommandExecutor, TabExecutor {
                     sender.sendMessage(lan.getDeathLockAt());
                     return true;
                 }
-                TileEntity te = blockNBTSet.getNBT(block);
-                NBTTagCompound nbt = te.b();
-                nbt.setBoolean("Nodrop", true);
-                te = TileEntity.create(nbt);
-                nbt = te.b();
-                player.sendMessage(nbt.toString());
-                blockNBTSet.setNBT(block, te);
+                BlockState temp = block.getState();
+                temp.setMetadata("NoDrop", new MetadataValueAdapter(HeartAgeUtils.plugin) {
+                    @Override
+                    public Object value() {
+                        return false;
+                    }
 
+                    @Override
+                    public void invalidate() {
+
+                    }
+                });
+                List<MetadataValue> list = temp.getMetadata("NoDrop");
+                boolean test = list.get(0).asBoolean();
                 return true;
             }
         }

@@ -46,6 +46,6 @@ class tpStoneRead implements IConfig {
     @Override
     public void save(Object stone, String uuid) {
         File saveFile = new File(fileLocal, uuid + ".json");
-        HeartAgeUtils.ConfigMain.SaveTask.addTask(new saveTaskObj(stone, saveFile));
+        HeartAgeUtils.configMain.SaveTask.addTask(new saveTaskObj(stone, saveFile));
     }
 }

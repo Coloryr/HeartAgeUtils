@@ -5,6 +5,11 @@ import java.util.List;
 public class deathChestConfigObj {
     private final costObj cost;
     private List<Integer> disable;
+    private boolean enable;
+
+    public boolean isEnable() {
+        return enable;
+    }
 
     public deathChestConfigObj() {
         cost = new costObj();

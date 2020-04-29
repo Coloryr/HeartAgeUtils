@@ -21,7 +21,7 @@ class tpStone implements ICommand {
 
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        languageObj lan = HeartAgeUtils.configMain.lan;
         if (args.length == 0) {
             sender.sendMessage(lan.getTitle() + lan.getUnknownCommandTpStone());
             return true;

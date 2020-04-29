@@ -1,12 +1,15 @@
 {
   "tpStone": {
+    "enable": true,
     "main": "heart_of_the_sea",
     "update": "ender_eye"
   },
   "drawer": {
+    "enable": true,
     "block": "end_portal_frame"
   },
   "deathChest": {
+    "enable": true,
     "disable": [],
     "cost": {
       "enable": false,
@@ -94,6 +97,7 @@
     "deathChestModeNo": "§d该模式无效",
     "deathChestModeSet": "§d已设置你的模式为%Mode%",
     "deathChestError": "§d设置的箱子异常",
-    "deathChestMode": "§d你的死亡掉落保护模式为：%Mode%"
+    "deathChestMode": "§d你的死亡掉落保护模式为：%Mode%",
+    "deathChestNull": "§d你的箱子已经清空"
   }
 }

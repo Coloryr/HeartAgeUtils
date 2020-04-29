@@ -5,7 +5,6 @@ import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.configObj;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Obj.posObj;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -17,6 +16,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.metadata.MetadataValueAdapter;
 
 import java.util.*;
 
@@ -26,6 +27,18 @@ public class deathChestDo {
     public static boolean enableLocal = false;
     public static String help = "";
 
+    private static MetadataValue drop =  new MetadataValueAdapter(HeartAgeUtils.plugin) {
+        @Override
+        public Object value() {
+            return true;
+        }
+
+        @Override
+        public void invalidate() {
+
+        }
+    };
+
     public static class RE {
         public boolean ok;
         public Location location;
@@ -34,8 +47,8 @@ public class deathChestDo {
     public static void GenHelp() {
         help = "";
         enable.clear();
-        configObj config = HeartAgeUtils.ConfigMain.Config;
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        configObj config = HeartAgeUtils.configMain.Config;
+        languageObj lan = HeartAgeUtils.configMain.lan;
 
         for (int a = 0; a < 8; a++) {
             if (!config.getDeathChest().getDisable().contains(a)) {
@@ -92,8 +105,8 @@ public class deathChestDo {
     }
 
     public static void GenChest(Player player, Location pos) {
-        deathChestConfigObj config = HeartAgeUtils.ConfigMain.Config.getDeathChest();
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        deathChestConfigObj config = HeartAgeUtils.configMain.Config.getDeathChest();
+        languageObj lan = HeartAgeUtils.configMain.lan;
         String temp = lan.getDeathChestCost();
         temp = temp.replace("%Money%", "" + config.getCost().getSaveInLocal());
         Hook.vaultCost(player, config.getCost().getSaveInLocal(), temp);
@@ -105,16 +118,16 @@ public class deathChestDo {
     }
 
     public static void GenLocalChest(Player player) {
-        deathChestConfigObj config = HeartAgeUtils.ConfigMain.Config.getDeathChest();
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        deathChestConfigObj config = HeartAgeUtils.configMain.Config.getDeathChest();
+        languageObj lan = HeartAgeUtils.configMain.lan;
         String temp = lan.getDeathChestCost1();
         temp = temp.replace("%Money%", "" + config.getCost().getSaveInChest());
         Hook.vaultCost(player, config.getCost().getSaveInChest(), temp);
     }
 
     public static void NoDrop(Player player) {
-        deathChestConfigObj config = HeartAgeUtils.ConfigMain.Config.getDeathChest();
-        languageObj lan = HeartAgeUtils.ConfigMain.lan;
+        deathChestConfigObj config = HeartAgeUtils.configMain.Config.getDeathChest();
+        languageObj lan = HeartAgeUtils.configMain.lan;
         String temp = lan.getDeathChestCost2();
         temp = temp.replace("%Money%", "" + config.getCost().getNoDrop());
         Hook.vaultCost(player, config.getCost().getNoDrop(), temp);
@@ -192,10 +205,8 @@ public class deathChestDo {
                     if (state instanceof Chest)
                         list.add(((Chest) state).getBlockInventory());
 
-//                    NBTTagCompound nbt = blockNBTSet.getNBT(temp);
-//                    nbt.setBoolean("Nodrop", true);
-//                    nbt = blockNBTSet.getNBT(temp1);
-//                    nbt.setBoolean("Nodrop", true);
+                    temp.setMetadata("NoDrop", drop);
+                    temp1.setMetadata("NoDrop", drop);
 
                     return list;
                 }
@@ -229,14 +240,7 @@ public class deathChestDo {
         BlockState state = temp.getState();
         if (state instanceof Chest)
             list.add(((Chest) state).getBlockInventory());
-
-//        Block finalTemp = temp;
-//        Bukkit.getScheduler().runTaskLater(HeartAgeUtils.plugin, ()
-//                -> {
-//            NBTTagCompound nbt = blockNBTSet.getNBT(finalTemp);
-//            nbt.setBoolean("Nodrop", true);
-//        }, 1000);
-
+        temp.setMetadata("NoDrop", drop);
 
         return list;
     }
@@ -318,7 +322,7 @@ public class deathChestDo {
             }
         }
         if (e.getDrops().size() > 0) {
-            languageObj lan = HeartAgeUtils.ConfigMain.lan;
+            languageObj lan = HeartAgeUtils.configMain.lan;
             player.sendMessage(lan.getDeathChestCantPlace());
         }
         return true;

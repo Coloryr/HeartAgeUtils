@@ -46,7 +46,7 @@ public class tpStone implements Listener {
             e.setCancelled(true);
             String uuid = ItemNbt.getString("uuid");
             Player player = e.getPlayer();
-            languageObj lan = HeartAgeUtils.ConfigMain.lan;
+            languageObj lan = HeartAgeUtils.configMain.lan;
             if (!tpStoneDo.toStoneSave.containsKey(uuid)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
                 player.sendMessage(lan.getTitle() + lan.getTpStoneNoDate());
@@ -112,7 +112,7 @@ public class tpStone implements Listener {
             ItemStack hand = player.getInventory().getItemInMainHand();
             if (hand.getType().equals(Material.AIR))
                 return;
-            languageObj lan = HeartAgeUtils.ConfigMain.lan;
+            languageObj lan = HeartAgeUtils.configMain.lan;
             if (GUI_save.containsKey(player.getName())) {
                 InventoryView inv = GUI_save.get(player.getName());
                 if (!inv.getTitle().contains(lan.getTpStone_title())) {
