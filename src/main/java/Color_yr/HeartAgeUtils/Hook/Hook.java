@@ -13,15 +13,19 @@ public class Hook {
     private static boolean blockLockerHook;
 
     public static void init() {
-        vault = new vault();
+
         if (HeartAgeUtils.configMain.Config.getDeathChest().getCost().isEnable()
-                && vault.setupEconomy()) {
-            vaultHook = true;
-            HeartAgeUtils.log.info("[HeartAgeUtils]vault已挂钩");
+                && Bukkit.getPluginManager().getPlugin("value") != null) {
+            vault = new vault();
+            if(vault.setupEconomy()) {
+                vaultHook = true;
+                HeartAgeUtils.log.info("[HeartAgeUtils]vault已挂钩");
+            }
         }
-        blocklocker = new blocklocker();
+
         if (HeartAgeUtils.configMain.Config.getDrawer().isEnable()
-                && blocklocker.isRun()) {
+                && Bukkit.getPluginManager().getPlugin("BlockLocker") != null) {
+            blocklocker = new blocklocker();
             blockLockerHook = true;
             HeartAgeUtils.log.info("[HeartAgeUtils]BlockLocker已挂钩");
         }
