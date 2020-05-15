@@ -45,8 +45,10 @@ class drawer implements ICommand {
                 return true;
             }
             drawerSaveObj obj = drawerDo.getDrawerSave(player, block);
-            if (obj == null)
+            if (obj == null) {
+                player.sendMessage(lan.getDrawerError());
                 return true;
+            }
             Inventory inventory = player.getInventory();
             if (inventory.firstEmpty() == -1) {
                 player.sendMessage(lan.getDrawerNoEmpty());
@@ -85,6 +87,18 @@ class drawer implements ICommand {
                 player.getInventory().addItem(item);
                 player.sendMessage(lan.getDrawerGet());
             }
+            return true;
+        } else if (args[0].equalsIgnoreCase("set")
+                && sender.hasPermission("drawer.set")) {
+            Player player = (Player) sender;
+            if (args.length != 2) {
+                player.sendMessage("没有UUID");
+                return true;
+            }
+
+            Block block = player.getTargetBlockExact(5);
+            block.setMetadata("uuid", drawerDo.getTag(args[1]));
+            player.sendMessage("以设置方块的uuid：" + args[1]);
             return true;
         } else {
             sender.sendMessage(lan.getUnknownCommandDrawer());

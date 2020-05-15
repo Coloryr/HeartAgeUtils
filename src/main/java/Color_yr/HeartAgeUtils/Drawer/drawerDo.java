@@ -82,6 +82,9 @@ public class drawerDo {
                 }
                 return obj;
             }
+            else {
+                HeartAgeUtils.log.info("方块没有uuid");
+            }
         }
         return null;
     }
