@@ -1,9 +1,20 @@
 package Color_yr.HeartAgeUtils.Obj;
 
+import org.bukkit.Location;
+
 public class posObj {
     private int x = 0;
     private int y = 0;
     private int z = 0;
+
+    public posObj(Location location) {
+        this.x = location.getBlockX();
+        this.y = location.getBlockY();
+        this.z = location.getBlockZ();
+    }
+
+    public posObj() {
+    }
 
     public int getX() {
         return x;

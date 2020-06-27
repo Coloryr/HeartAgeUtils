@@ -5,6 +5,7 @@ import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.Event.deathChest;
 import Color_yr.HeartAgeUtils.Event.drawer;
+import Color_yr.HeartAgeUtils.Event.oreGen;
 import Color_yr.HeartAgeUtils.Event.tpStone;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import org.bukkit.Bukkit;
@@ -47,6 +48,8 @@ public class HeartAgeUtils extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new tpStone(), this);//注册物品事件
         if (configMain.Config.getDeathChest().isEnable())
             Bukkit.getPluginManager().registerEvents(new deathChest(), this);//注册物品事件
+        if (configMain.Config.getOreGen().isEnable())
+            Bukkit.getPluginManager().registerEvents(new oreGen(), this);//注册物品事件
         log.info("[HeartAgeUtils]已启动-" + Version);
     }
 

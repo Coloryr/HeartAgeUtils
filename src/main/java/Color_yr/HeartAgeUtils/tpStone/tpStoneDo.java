@@ -3,8 +3,7 @@ package Color_yr.HeartAgeUtils.tpStone;
 import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import Color_yr.HeartAgeUtils.Utils.ItemNBTSet;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -39,9 +38,9 @@ public class tpStoneDo {
             }
         });
         item.setItemMeta(ItemMeta);
-        NBTTagCompound nbt = itemNBTSet.getNBT(item);
-        nbt.setString("uuid", uuid);
-        item = itemNBTSet.saveNBT(item, nbt);
+        ItemNBTSet nbt = new ItemNBTSet(item);
+        nbt.setNbt("uuid", uuid);
+        item = nbt.saveNBT();
         configMain.tpStone.save(obj, uuid);
         return item;
     }
@@ -49,7 +48,7 @@ public class tpStoneDo {
     public static String upTpStone(Player player) {//升级传送石
         ItemStack item = player.getInventory().getItemInMainHand();
         ItemMeta meta = item.getItemMeta();
-        NBTTagCompound nbt = itemNBTSet.getNBT(item);
+        ItemNBTSet nbt = new ItemNBTSet(item);
         languageObj lan = HeartAgeUtils.configMain.lan;
         if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");
@@ -79,7 +78,7 @@ public class tpStoneDo {
     }
 
     public static String renameTpStone(ItemStack item, String new_name) {//重命名传送石
-        NBTTagCompound nbt = itemNBTSet.getNBT(item);
+        ItemNBTSet nbt = new ItemNBTSet(item);
         languageObj lan = HeartAgeUtils.configMain.lan;
         if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");
@@ -97,7 +96,7 @@ public class tpStoneDo {
     }
 
     public static String setSlotName(ItemStack item, int slot, String new_name) {  //设置传送点名字
-        NBTTagCompound nbt = itemNBTSet.getNBT(item);
+        ItemNBTSet nbt = new ItemNBTSet(item);
         languageObj lan = HeartAgeUtils.configMain.lan;
         if (nbt.hasKey("uuid")) {
             String uuid = nbt.getString("uuid");

@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 class tpStoneRead implements IConfig {
-    private static File fileLocal;
+    private File fileLocal;
 
     public void init() {
         //文件初始化

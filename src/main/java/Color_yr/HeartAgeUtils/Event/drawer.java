@@ -4,10 +4,8 @@ import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.Drawer.drawerDo;
 import Color_yr.HeartAgeUtils.Drawer.drawerSaveObj;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
-import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import Color_yr.HeartAgeUtils.Utils.ItemNBTSet;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -18,9 +16,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.MetadataValue;
-
-import java.util.List;
 
 
 public class drawer implements Listener {
@@ -93,9 +88,15 @@ public class drawer implements Listener {
     @EventHandler
     public void place(BlockPlaceEvent e) {
         ItemStack item = e.getItemInHand();
-        NBTTagCompound nbt = itemNBTSet.getNBT(item);
+        ItemNBTSet nbt = new ItemNBTSet(item);
         if (nbt.hasKey("type") && nbt.getString("type").equals("drawer")) {
-            e.getBlockPlaced().setMetadata("uuid", drawerDo.getTag(nbt.getString("uuid")));
+            boolean a = drawerDo.setLocal(e.getBlockPlaced(), nbt.getString("uuid"));
+            if (!a) {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage(HeartAgeUtils.configMain.lan.getDrawerError());
+            } else {
+                e.getPlayer().sendMessage(HeartAgeUtils.configMain.lan.getDrawerPlace());
+            }
         }
     }
 

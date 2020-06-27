@@ -4,35 +4,19 @@ import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import Color_yr.HeartAgeUtils.Obj.posObj;
+import Color_yr.HeartAgeUtils.Utils.ItemNBTSet;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.metadata.MetadataValueAdapter;
 
 import java.util.*;
 
 public class drawerDo {
     public static Material block;
     public static final Map<String, drawerSaveObj> drawerList = new HashMap<>();
-
-    public static MetadataValue getTag(String uuid) {
-        return new MetadataValueAdapter(HeartAgeUtils.plugin) {
-            @Override
-            public Object value() {
-                return uuid;
-            }
-
-            @Override
-            public void invalidate() {
-
-            }
-        };
-    }
 
     public static ItemStack getDrawer() {
         if (block == null)
@@ -47,10 +31,10 @@ public class drawerDo {
         drawerSaveObj obj = new drawerSaveObj(uuids);
         languageObj lan = HeartAgeUtils.configMain.lan;
         drawerList.put(uuids, obj);
-        NBTTagCompound nbt = itemNBTSet.getNBT(item);
-        nbt.setString("type", "drawer");
-        nbt.setString("uuid", uuids);
-        item = itemNBTSet.saveNBT(item, nbt);
+        ItemNBTSet nbt = new ItemNBTSet(item);
+        nbt.setNbt("type", "drawer");
+        nbt.setNbt("uuid", uuids);
+        item = nbt.saveNBT();
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(lan.getDrawerName());
         List<String> lore = new ArrayList<>();
@@ -66,26 +50,26 @@ public class drawerDo {
     }
 
     public static drawerSaveObj getDrawerSave(Player player, Block block) {
+        languageObj lan = HeartAgeUtils.configMain.lan;
         if (block.getType().equals(drawerDo.block)) {
-            List<MetadataValue> list = block.getMetadata("uuid");
-            if (list.size() > 0) {
-                languageObj lan = HeartAgeUtils.configMain.lan;
-                String uuid = list.get(0).asString();
-                if (!Hook.isAllowed(player, block)) {
-                    player.sendMessage(lan.getDrawerLock());
+            for (drawerSaveObj obj : drawerList.values()) {
+                if (obj.checkPos(block.getLocation())) {
+                    if (!Hook.isAllowed(player, block)) {
+                        player.sendMessage(lan.getDrawerLock());
+                    }
+                    return obj;
                 }
-                drawerSaveObj obj = drawerDo.drawerList.get(uuid);
-                if (obj == null) {
-                    player.sendMessage(lan.getDrawerError());
-                    block.setType(Material.AIR);
-                    return null;
-                }
-                return obj;
-            }
-            else {
-                HeartAgeUtils.log.info("方块没有uuid");
             }
         }
         return null;
+    }
+
+    public static boolean setLocal(Block block, String uuid) {
+        if (!drawerList.containsKey(uuid))
+            return false;
+        drawerSaveObj obj = drawerList.get(uuid);
+        obj.setPos(new posObj(block.getLocation()));
+        drawerList.put(uuid, obj);
+        return true;
     }
 }

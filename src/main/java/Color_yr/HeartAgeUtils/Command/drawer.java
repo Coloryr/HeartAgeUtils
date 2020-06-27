@@ -4,10 +4,8 @@ import Color_yr.HeartAgeUtils.API.ICommand;
 import Color_yr.HeartAgeUtils.Drawer.drawerDo;
 import Color_yr.HeartAgeUtils.Drawer.drawerSaveObj;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
-import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.itemNBTSet;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import Color_yr.HeartAgeUtils.Utils.ItemNBTSet;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.metadata.MetadataValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +30,7 @@ class drawer implements ICommand {
             sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
             return true;
         } else if (args[0].equalsIgnoreCase("help")) {
-            for (String help : lan.getHelpDrawer()) {
+            for (String help : lan.getHelpCommandDrawer()) {
                 sender.sendMessage(help);
             }
             return true;
@@ -46,7 +43,6 @@ class drawer implements ICommand {
             }
             drawerSaveObj obj = drawerDo.getDrawerSave(player, block);
             if (obj == null) {
-                player.sendMessage(lan.getDrawerError());
                 return true;
             }
             Inventory inventory = player.getInventory();
@@ -67,10 +63,10 @@ class drawer implements ICommand {
             lore.add(data);
             meta.setLore(lore);
             item.setItemMeta(meta);
-            NBTTagCompound nbt = itemNBTSet.getNBT(item);
-            nbt.setString("type", "drawer");
-            nbt.setString("uuid", obj.getUuid());
-            item = itemNBTSet.saveNBT(item, nbt);
+            ItemNBTSet nbt = new ItemNBTSet(item);
+            nbt.setNbt("type", "drawer");
+            nbt.setNbt("uuid", obj.getUuid());
+            item = nbt.saveNBT();
             inventory.addItem(item);
 
             return true;
@@ -87,18 +83,6 @@ class drawer implements ICommand {
                 player.getInventory().addItem(item);
                 player.sendMessage(lan.getDrawerGet());
             }
-            return true;
-        } else if (args[0].equalsIgnoreCase("set")
-                && sender.hasPermission("drawer.set")) {
-            Player player = (Player) sender;
-            if (args.length != 2) {
-                player.sendMessage("没有UUID");
-                return true;
-            }
-
-            Block block = player.getTargetBlockExact(5);
-            block.setMetadata("uuid", drawerDo.getTag(args[1]));
-            player.sendMessage("以设置方块的uuid：" + args[1]);
             return true;
         } else {
             sender.sendMessage(lan.getUnknownCommandDrawer());

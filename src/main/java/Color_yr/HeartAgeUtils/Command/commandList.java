@@ -7,4 +7,5 @@ public class commandList {
     public static ICommand tpStone = new tpStone();
     public static ICommand deathChest = new deathChest();
     public static ICommand drawer = new drawer();
+    public static ICommand oreGen = new oreGen();
 }

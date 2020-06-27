@@ -10,12 +10,15 @@ public class languageObj {
     private String unknownCommandTpStone;
     private String unknownCommandDeathChest;
     private String unknownCommandDrawer;
+    private String unknownCommandOreGen;
     private List<String> helpCommandHeartAge;
     private List<String> helpCommandTpStone;
     private List<String> helpCommandDeathChest;
-    private List<String> helpDrawer;
+    private List<String> helpCommandDrawer;
+    private List<String> helpCommandOreGen;
     private Map<Integer, String> helpModeDeathChest;
     private Map<Integer, String> helpCostDeathChest;
+    private Map<Integer, String> helpOreGenType;
     private String noPermissionCommand;
     private String reloadCommand;
     private String playerOnlyCommand;
@@ -68,25 +71,51 @@ public class languageObj {
     private String drawerError;
     private String drawerCheck;
     private String drawerLock;
-    private String drawerNo;
-    private String drawerEmpty;
     private String drawerNoEmpty;
     private String drawerName;
+    private String drawerPlace;
+    private String oreGenEnable;
+    private String oreGenDisable;
+    private String oreGenAuto;
+    private String oreGenGet;
+
+    public Map<Integer, String> getHelpOreGenType() {
+        return helpOreGenType;
+    }
+
+    public List<String> getHelpCommandOreGen() {
+        return helpCommandOreGen;
+    }
+
+    public String getUnknownCommandOreGen() {
+        return unknownCommandOreGen;
+    }
+
+    public String getOreGenDisable() {
+        return oreGenDisable;
+    }
+
+    public String getOreGenAuto() {
+        return oreGenAuto;
+    }
+
+    public String getOreGenEnable() {
+        return oreGenEnable;
+    }
+    public String getOreGenGet() {
+        return oreGenGet;
+    }
+
+    public String getDrawerPlace() {
+        return drawerPlace;
+    }
 
     public String getDrawerName() {
         return drawerName;
     }
 
-    public String getDrawerEmpty() {
-        return drawerEmpty;
-    }
-
     public String getDrawerNoEmpty() {
         return drawerNoEmpty;
-    }
-
-    public String getDrawerNo() {
-        return drawerNo;
     }
 
     public String getDrawerLock() {
@@ -109,8 +138,8 @@ public class languageObj {
         return unknownCommandDrawer;
     }
 
-    public List<String> getHelpDrawer() {
-        return helpDrawer;
+    public List<String> getHelpCommandDrawer() {
+        return helpCommandDrawer;
     }
 
     public String getDeathChestNull() {
@@ -339,9 +368,5 @@ public class languageObj {
 
     public String getTpStoneSlot() {
         return tpStoneSlot;
-    }
-
-    public String getTpStone_title() {
-        return tpStoneTitle;
     }
 }

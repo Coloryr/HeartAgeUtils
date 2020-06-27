@@ -25,7 +25,7 @@ import java.util.*;
 public class deathChestDo {
     public static final List<String> enable = new ArrayList<>();
     public static final Map<String, playSetObj> deathChestSet = new HashMap<>();
-    public static final Map<String, InventoryView> GUI_save = new HashMap<>();
+    public static final Map<String, InventoryView> guiSave = new HashMap<>();
     public static boolean enableLocal = false;
     public static String help = "";
 

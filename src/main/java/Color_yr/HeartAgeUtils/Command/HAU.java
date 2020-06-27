@@ -43,6 +43,10 @@ class HAU implements CommandExecutor, TabExecutor {
                 String[] ss = new String[arg.length - 1];
                 System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.drawer.onCommand(sender, ss);
+            } else if (arg[0].equalsIgnoreCase("ore")) {
+                String[] ss = new String[arg.length - 1];
+                System.arraycopy(arg, 1, ss, 0, ss.length);
+                return commandList.oreGen.onCommand(sender, ss);
             } else if (arg[0].equalsIgnoreCase("test")) {
                 Player player = (Player) sender;
                 return true;
@@ -61,6 +65,7 @@ class HAU implements CommandExecutor, TabExecutor {
             temp.add("tpstone");
             temp.add("deathchest");
             temp.add("drawer");
+            temp.add("ore");
             temp.add("help");
             return temp;
         } else if (arg.length >= 2) {
@@ -76,6 +81,10 @@ class HAU implements CommandExecutor, TabExecutor {
                 String[] ss = new String[arg.length - 1];
                 System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.drawer.onTabComplete(sender, ss);
+            } else if (arg[0].equalsIgnoreCase("ore")) {
+                String[] ss = new String[arg.length - 1];
+                System.arraycopy(arg, 1, ss, 0, ss.length);
+                return commandList.oreGen.onTabComplete(sender, ss);
             }
         }
         return null;

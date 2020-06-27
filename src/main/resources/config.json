@@ -19,12 +19,29 @@
       "noDrop": 500
     }
   },
+  "oreGen": {
+    "Enable": true,
+    "Count" : 1000,
+    "Coal": 50,
+    "Iron": 25,
+    "Gold": 10,
+    "Diamond": 5,
+    "RedStone": 15,
+    "Lapis": 10,
+    "emerald": 5,
+    "netherglod": 0,
+    "glowstone": 0,
+    "quartz": 0,
+    "ExtCost": 2,
+    "Block": ["stone"]
+  },
   "language": {
     "title": "§d[HeartAgeUtils]",
     "unknownCommandHeartAge": "§c错误，请使用/heartageutils help 获取帮助",
     "unknownCommandTpStone": "§c错误，请使用/heartageutils tpStone help 获取帮助",
     "unknownCommandDeathChest": "§c错误，请使用/heartageutils tpStone help 获取帮助",
     "unknownCommandDrawer": "§c错误，请使用/heartageutils drawer help 获取帮助",
+    "unknownCommandOreGen": "§c错误，请使用/heartageutils ore help 获取帮助",
     "helpCommandHeartAge": [
       "§b/heartageutils tpstone 使用传送石",
       "§b/heartageutils deathchest 使用死亡箱子"
@@ -38,8 +55,12 @@
       "§ddeathchest set 来设置保存的箱子（需要你看着箱子）",
       "§ddeathchest mode [mode] 来设置死亡掉落保护模式"
     ],
-    "helpDrawer": [
+    "helpCommandDrawer": [
       "§ddrawer break 拆下抽屉（需要你看着抽屉）"
+    ],
+    "helpCommandOreGen": [
+      "§dore enable 启用矿石奖励",
+      "§dore disable 关闭矿石奖励"
     ],
     "helpModeDeathChest": {
       "0": "§e模式0，不开启死亡掉落保护",
@@ -55,6 +76,18 @@
       "0": "§e死亡箱子花费：%Cost%",
       "1": "§e设置的箱子花费：%Cost%",
       "2": "§e不掉落花费：%Cost%"
+    },
+    "helpOreGenType": {
+      "0": "§e煤炭",
+      "1": "§e铁矿",
+      "2": "§e金矿",
+      "3": "§e钻石矿",
+      "4": "§e红石矿",
+      "5": "§e青金石矿",
+      "6": "§e绿宝石矿",
+      "7": "§e地狱金矿",
+      "8": "§e萤石",
+      "9": "§e下界石英矿"
     },
     "noPermissionCommand": "§c你没有权限使用这条指令",
     "reloadCommand": "§b已重读",
@@ -108,10 +141,13 @@
     "drawerError": "§e你的抽屉异常",
     "drawerCheck": "§e抽屉物品:%Item%，数量:%Amount%",
     "drawerLock": "§e这个抽屉已上锁",
-    "drawerNo": "§e这个不是抽屉方块",
-    "drawerEmpty": "§e这个不是抽屉不为空",
+    "drawerPlace": "§e抽屉已放置",
     "drawerNoEmpty": "§e你的背包已满",
     "drawerBreak": "§e抽屉已拆除",
-    "drawerName": "§e抽屉方块"
+    "drawerName": "§e抽屉方块",
+    "oreGenEnable": "§d随机矿石已启用",
+    "oreGenDisable": "§d随机矿石已关闭",
+    "oreGenAuto": "§c经验不足，已自动关闭",
+    "oreGenGet": "§d你获得了矿石：%ore%"
   }
 }

@@ -5,7 +5,7 @@ import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.DeathChest.playSetObj;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.isNumber;
+import Color_yr.HeartAgeUtils.Utils.Tools;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -48,7 +48,7 @@ class deathChest implements ICommand {
                     .replace("%y%", "" + set.getY()).replace("%z%", "" + set.getZ()));
             return true;
         } else if (args[0].equalsIgnoreCase("mode") && args.length == 2) {
-            if (!isNumber.isNumber(args[1])) {
+            if (!Tools.isNumber(args[1])) {
                 sender.sendMessage(lan.getDeathChestNum());
                 return true;
             }

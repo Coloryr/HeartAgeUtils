@@ -3,7 +3,7 @@ package Color_yr.HeartAgeUtils.Command;
 import Color_yr.HeartAgeUtils.API.ICommand;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.isNumber;
+import Color_yr.HeartAgeUtils.Utils.Tools;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -80,7 +80,7 @@ class tpStone implements ICommand {
             } else if (args.length == 2) {
                 sender.sendMessage(lan.getTitle() + lan.getTpStoneSetNameSlotCommand());
                 return true;
-            } else if (!(isNumber.isNumber(args[1]))) {
+            } else if (!(Tools.isNumber(args[1]))) {
                 sender.sendMessage(lan.getTitle() + lan.getTpStoneSetNameNumberCommand());
                 return true;
             }
