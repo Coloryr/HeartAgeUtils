@@ -65,7 +65,7 @@ public class deathChestDo {
                     || !config.getDeathChest().getDisable().contains(5)
                     || !config.getDeathChest().getDisable().contains(7)) {
                 help += lan.getHelpCostDeathChest().get(0).replace("%Cost%",
-                        "" + config.getDeathChest().getCost().getSaveInLocal()) + "\n";
+                        "" + config.getDeathChest().getCost().getSaveInChest()) + "\n";
             }
             if (!config.getDeathChest().getDisable().contains(2)
                     || !config.getDeathChest().getDisable().contains(4)
@@ -82,7 +82,7 @@ public class deathChestDo {
                     || !config.getDeathChest().getDisable().contains(5)
                     || !config.getDeathChest().getDisable().contains(6)) {
                 help += lan.getHelpCostDeathChest().get(2).replace("%Cost%",
-                        "" + config.getDeathChest().getCost().getSaveInLocal()) + "\n";
+                        "" + config.getDeathChest().getCost().getNoDrop()) + "\n";
             }
         }
     }
