@@ -74,10 +74,20 @@ public class languageObj {
     private String drawerNoEmpty;
     private String drawerName;
     private String drawerPlace;
+    private String drawerBreak;
+    private String drawerNot;
     private String oreGenEnable;
     private String oreGenDisable;
     private String oreGenAuto;
     private String oreGenGet;
+
+    public String getDrawerNot() {
+        return drawerNot;
+    }
+
+    public String getDrawerBreak() {
+        return drawerBreak;
+    }
 
     public Map<Integer, String> getHelpOreGenType() {
         return helpOreGenType;

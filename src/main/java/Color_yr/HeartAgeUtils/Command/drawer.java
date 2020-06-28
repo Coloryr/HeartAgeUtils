@@ -38,11 +38,12 @@ class drawer implements ICommand {
             Player player = (Player) sender;
             Block block = player.getTargetBlockExact(5);
             if (block == null) {
-                player.sendMessage(lan.getDeathLockAt());
+                player.sendMessage(lan.getDrawerNot());
                 return true;
             }
             drawerSaveObj obj = drawerDo.getDrawerSave(player, block);
             if (obj == null) {
+                player.sendMessage(lan.getDrawerNot());
                 return true;
             }
             Inventory inventory = player.getInventory();
@@ -68,6 +69,8 @@ class drawer implements ICommand {
             nbt.setNbt("uuid", obj.getUuid());
             item = nbt.saveNBT();
             inventory.addItem(item);
+
+            player.sendMessage(lan.getDrawerBreak());
 
             return true;
         } else if (args[0].equalsIgnoreCase("get")

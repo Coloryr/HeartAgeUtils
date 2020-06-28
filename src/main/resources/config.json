@@ -39,7 +39,7 @@
     "title": "§d[HeartAgeUtils]",
     "unknownCommandHeartAge": "§c错误，请使用/heartageutils help 获取帮助",
     "unknownCommandTpStone": "§c错误，请使用/heartageutils tpStone help 获取帮助",
-    "unknownCommandDeathChest": "§c错误，请使用/heartageutils tpStone help 获取帮助",
+    "unknownCommandDeathChest": "§c错误，请使用/heartageutils deathchest help 获取帮助",
     "unknownCommandDrawer": "§c错误，请使用/heartageutils drawer help 获取帮助",
     "unknownCommandOreGen": "§c错误，请使用/heartageutils ore help 获取帮助",
     "helpCommandHeartAge": [
@@ -144,6 +144,7 @@
     "drawerPlace": "§e抽屉已放置",
     "drawerNoEmpty": "§e你的背包已满",
     "drawerBreak": "§e抽屉已拆除",
+    "drawerNot": "§e你看着的不是抽屉方块",
     "drawerName": "§e抽屉方块",
     "oreGenEnable": "§d随机矿石已启用",
     "oreGenDisable": "§d随机矿石已关闭",
