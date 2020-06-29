@@ -65,14 +65,14 @@ public class deathChestDo {
                     || !config.getDeathChest().getDisable().contains(5)
                     || !config.getDeathChest().getDisable().contains(7)) {
                 help += lan.getHelpCostDeathChest().get(0).replace("%Cost%",
-                        "" + config.getDeathChest().getCost().getSaveInChest()) + "\n";
+                        "" + config.getDeathChest().getCost().getSaveInLocal()) + "\n";
             }
             if (!config.getDeathChest().getDisable().contains(2)
                     || !config.getDeathChest().getDisable().contains(4)
                     || !config.getDeathChest().getDisable().contains(5)
                     || !config.getDeathChest().getDisable().contains(7)) {
                 help += lan.getHelpCostDeathChest().get(1).replace("%Cost%",
-                        "" + config.getDeathChest().getCost().getSaveInLocal()) + "\n";
+                        "" + config.getDeathChest().getCost().getSaveInChest()) + "\n";
                 enableLocal = true;
             } else {
                 enableLocal = false;

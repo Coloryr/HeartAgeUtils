@@ -1,10 +1,10 @@
 package Color_yr.HeartAgeUtils.DeathChest;
 
 public class costObj {
-    private final int SaveInChest;
-    private final int SaveInLocal;
-    private final int NoDrop;
-    private final boolean Enable;
+    private int SaveInChest;
+    private int SaveInLocal;
+    private int NoDrop;
+    private boolean Enable;
 
     public costObj() {
         Enable = true;
