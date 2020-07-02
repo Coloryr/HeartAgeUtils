@@ -14,20 +14,22 @@ public class Hook {
 
     public static void init() {
 
-        if (HeartAgeUtils.configMain.Config.getDeathChest().getCost().isEnable()
-                && Bukkit.getPluginManager().getPlugin("value") != null) {
+        if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
             vault = new vault();
-            if(vault.setupEconomy()) {
+            if (vault.setupEconomy()) {
                 vaultHook = true;
                 HeartAgeUtils.log.info("[HeartAgeUtils]vault已挂钩");
+            } else {
+                HeartAgeUtils.log.info("[HeartAgeUtils]vault未挂钩");
             }
         }
 
-        if (HeartAgeUtils.configMain.Config.getDrawer().isEnable()
-                && Bukkit.getPluginManager().getPlugin("BlockLocker") != null) {
+        if (Bukkit.getPluginManager().getPlugin("BlockLocker") != null) {
             blocklocker = new blocklocker();
             blockLockerHook = true;
             HeartAgeUtils.log.info("[HeartAgeUtils]BlockLocker已挂钩");
+        } else {
+            HeartAgeUtils.log.info("[HeartAgeUtils]BlockLocker未挂钩");
         }
     }
 
