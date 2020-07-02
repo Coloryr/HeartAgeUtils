@@ -11,6 +11,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Map;
@@ -39,7 +40,6 @@ public class enchantmentDo {
         }
         ItemStack itemOff = player.getInventory().getItemInOffHand();
         Map<Enchantment, Integer> Enchantment = itemHand.getItemMeta().getEnchants();
-        Map<Enchantment, Integer> Enchantment1 = itemOff.getItemMeta().getEnchants();
         if (f) {//Add
             if (!itemOff.getType().equals(Material.ENCHANTED_BOOK)) {
                 player.sendMessage(lan.getEnchantmentNoEMBook());
@@ -47,7 +47,9 @@ public class enchantmentDo {
                 player.sendMessage(lan.getEnchantmentNoMoney());
             } else if (Exp.getExpPoints(player) < obj.getAddExp()) {
                 player.sendMessage(lan.getEnchantmentNoExp());
-            } else if (Enchantment1.size() == 0) {
+            }
+            Map<Enchantment, Integer> Enchantment1 = ((EnchantmentStorageMeta)itemOff.getItemMeta()).getStoredEnchants();
+            if (Enchantment1.size() == 0) {
                 player.sendMessage(lan.getEnchantmentNo());
             } else {
                 Hook.vaultCost(player, obj.getAddCost(), "已花费" + obj.getAddCost());
@@ -89,7 +91,9 @@ public class enchantmentDo {
                     if (itemOff.getAmount() > 1) {
                         itemOff.setAmount(itemOff.getAmount() - 1);
                         ItemStack item1 = new ItemStack(Material.ENCHANTED_BOOK);
-                        item1.addUnsafeEnchantment(item.getKey(), item.getValue());
+                        EnchantmentStorageMeta data = (EnchantmentStorageMeta)item1.getItemMeta();
+                        data.addStoredEnchant(item.getKey(), item.getValue(), true);
+                        item1.setItemMeta(data);
                         if (Tools.CheckIsFull(player))
                             player.getLocation().getWorld().dropItem(player.getLocation(), item1);
                         else

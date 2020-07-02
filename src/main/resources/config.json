@@ -36,9 +36,9 @@
     "Block": ["stone"]
   },
   "enchantment": {
-    "breakExp": 5000,
+    "breakExp": 2000,
     "breakCost": 2000,
-    "addExp": 15000,
+    "addExp": 5000,
     "addCost": 20000
   },
   "language": {
