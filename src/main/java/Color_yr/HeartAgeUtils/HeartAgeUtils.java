@@ -8,6 +8,7 @@ import Color_yr.HeartAgeUtils.Event.drawer;
 import Color_yr.HeartAgeUtils.Event.oreGen;
 import Color_yr.HeartAgeUtils.Event.tpStone;
 import Color_yr.HeartAgeUtils.Hook.Hook;
+import Color_yr.HeartAgeUtils.enchantment.enchantmentDo;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,7 +27,9 @@ public class HeartAgeUtils extends JavaPlugin {
             configMain = new configMain();
         else
             configMain.setConfig();
+
         deathChestDo.GenHelp();
+        enchantmentDo.GetHelp();
     }
 
     @Override

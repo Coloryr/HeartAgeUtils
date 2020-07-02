@@ -1,12 +1,14 @@
 package Color_yr.HeartAgeUtils.Config;
 
 import Color_yr.HeartAgeUtils.API.IConfig;
+import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.Drawer.drawerDo;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.configObj;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
 import Color_yr.HeartAgeUtils.OreGen.oreGenDo;
 import Color_yr.HeartAgeUtils.OreGen.oreGenObj;
+import Color_yr.HeartAgeUtils.enchantment.enchantmentDo;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import com.google.gson.Gson;
 import org.bukkit.Material;
@@ -97,7 +99,7 @@ public class configMain {
             oreGenDo.Blocks.clear();
             for (String item : obj.getBlock()) {
                 Material a = Material.matchMaterial(item);
-                if (a != null && !oreGenDo.Blocks.contains(a)) {
+                if (a != null) {
                     oreGenDo.Blocks.add(a);
                 }
             }

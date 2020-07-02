@@ -31,25 +31,19 @@ class HAU implements CommandExecutor, TabExecutor {
                     sender.sendMessage(lan.getTitle() + lan.getReloadCommand());
                     return true;
                 }
-            } else if (arg[0].equalsIgnoreCase("tpstone")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
+            }
+            String[] ss = new String[arg.length - 1];
+            System.arraycopy(arg, 1, ss, 0, ss.length);
+            if (arg[0].equalsIgnoreCase("tpstone")) {
                 return commandList.tpStone.onCommand(sender, ss);
             } else if (arg[0].equalsIgnoreCase("deathchest")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.deathChest.onCommand(sender, ss);
             } else if (arg[0].equalsIgnoreCase("drawer")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.drawer.onCommand(sender, ss);
             } else if (arg[0].equalsIgnoreCase("ore")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.oreGen.onCommand(sender, ss);
-            } else if (arg[0].equalsIgnoreCase("test")) {
-                Player player = (Player) sender;
-                return true;
+            } else if (arg[0].equalsIgnoreCase("em")) {
+                return commandList.enchantment.onCommand(sender, ss);
             }
         }
         return false;
@@ -67,24 +61,21 @@ class HAU implements CommandExecutor, TabExecutor {
             temp.add("drawer");
             temp.add("ore");
             temp.add("help");
+            temp.add("em");
             return temp;
         } else if (arg.length >= 2) {
+            String[] ss = new String[arg.length - 1];
+            System.arraycopy(arg, 1, ss, 0, ss.length);
             if (arg[0].equalsIgnoreCase("tpstone")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.tpStone.onTabComplete(sender, ss);
             } else if (arg[0].equalsIgnoreCase("deathchest")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.deathChest.onTabComplete(sender, ss);
             } else if (arg[0].equalsIgnoreCase("drawer")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.drawer.onTabComplete(sender, ss);
             } else if (arg[0].equalsIgnoreCase("ore")) {
-                String[] ss = new String[arg.length - 1];
-                System.arraycopy(arg, 1, ss, 0, ss.length);
                 return commandList.oreGen.onTabComplete(sender, ss);
+            } else if (arg[0].equalsIgnoreCase("em")) {
+                return commandList.enchantment.onTabComplete(sender, ss);
             }
         }
         return null;

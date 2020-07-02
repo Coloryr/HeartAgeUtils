@@ -11,14 +11,17 @@ public class languageObj {
     private String unknownCommandDeathChest;
     private String unknownCommandDrawer;
     private String unknownCommandOreGen;
+    private String unknownCommandEnchantment;
     private List<String> helpCommandHeartAge;
     private List<String> helpCommandTpStone;
     private List<String> helpCommandDeathChest;
     private List<String> helpCommandDrawer;
     private List<String> helpCommandOreGen;
+    private List<String> helpCommandEnchantment;
     private Map<Integer, String> helpModeDeathChest;
     private Map<Integer, String> helpCostDeathChest;
     private Map<Integer, String> helpOreGenType;
+    private Map<Integer, String> helpCostEnchantment;
     private String noPermissionCommand;
     private String reloadCommand;
     private String playerOnlyCommand;
@@ -80,6 +83,63 @@ public class languageObj {
     private String oreGenDisable;
     private String oreGenAuto;
     private String oreGenGet;
+    private String enchantmentNoExp;
+    private String enchantmentNoMoney;
+    private String enchantmentAdd;
+    private String enchantmentBreak;
+    private String enchantmentNoBook;
+    private String enchantmentNoEMBook;
+    private String enchantmentNoTool;
+    private String enchantmentNoEM;
+    private String enchantmentNo;
+
+    public String getEnchantmentNo() {
+        return enchantmentNo;
+    }
+
+    public String getEnchantmentNoEM() {
+        return enchantmentNoEM;
+    }
+
+    public String getEnchantmentAdd() {
+        return enchantmentAdd;
+    }
+
+    public String getEnchantmentBreak() {
+        return enchantmentBreak;
+    }
+
+    public String getEnchantmentNoBook() {
+        return enchantmentNoBook;
+    }
+
+    public String getEnchantmentNoEMBook() {
+        return enchantmentNoEMBook;
+    }
+
+    public String getEnchantmentNoExp() {
+        return enchantmentNoExp;
+    }
+
+    public String getEnchantmentNoMoney() {
+        return enchantmentNoMoney;
+    }
+
+    public String getEnchantmentNoTool() {
+        return enchantmentNoTool;
+    }
+
+    public Map<Integer, String> getHelpCostEnchantment() {
+        return helpCostEnchantment;
+    }
+
+    public String getUnknownCommandEnchantment() {
+        return unknownCommandEnchantment;
+    }
+
+    public List<String> getHelpCommandEnchantment() {
+        return helpCommandEnchantment;
+    }
 
     public String getDrawerNot() {
         return drawerNot;
@@ -112,6 +172,7 @@ public class languageObj {
     public String getOreGenEnable() {
         return oreGenEnable;
     }
+
     public String getOreGenGet() {
         return oreGenGet;
     }

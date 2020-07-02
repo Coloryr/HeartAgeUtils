@@ -6,6 +6,7 @@ import Color_yr.HeartAgeUtils.Drawer.drawerSaveObj;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
 import Color_yr.HeartAgeUtils.Utils.ItemNBTSet;
+import Color_yr.HeartAgeUtils.Utils.Tools;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -23,13 +24,10 @@ class drawer implements ICommand {
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
         languageObj lan = HeartAgeUtils.configMain.lan;
-        if (args.length == 0) {
-            sender.sendMessage(lan.getUnknownCommandDrawer());
-            return true;
-        } else if (sender instanceof ConsoleCommandSender) {
+        if (sender instanceof ConsoleCommandSender) {
             sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
             return true;
-        } else if (args[0].equalsIgnoreCase("help")) {
+        } else if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
             for (String help : lan.getHelpCommandDrawer()) {
                 sender.sendMessage(help);
             }
@@ -83,7 +81,10 @@ class drawer implements ICommand {
             }
             if (player != null) {
                 ItemStack item = drawerDo.getDrawer();
-                player.getInventory().addItem(item);
+                if (Tools.CheckIsFull(player))
+                    player.getLocation().getWorld().dropItem(player.getLocation(), item);
+                else
+                    player.getInventory().addItem(item);
                 player.sendMessage(lan.getDrawerGet());
             }
             return true;

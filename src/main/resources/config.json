@@ -35,32 +35,48 @@
     "ExtCost": 2,
     "Block": ["stone"]
   },
+  "enchantment": {
+    "breakExp": 5000,
+    "breakCost": 2000,
+    "addExp": 15000,
+    "addCost": 20000
+  },
   "language": {
     "title": "§d[HeartAgeUtils]",
-    "unknownCommandHeartAge": "§c错误，请使用/heartageutils help 获取帮助",
-    "unknownCommandTpStone": "§c错误，请使用/heartageutils tpStone help 获取帮助",
-    "unknownCommandDeathChest": "§c错误，请使用/heartageutils deathchest help 获取帮助",
-    "unknownCommandDrawer": "§c错误，请使用/heartageutils drawer help 获取帮助",
-    "unknownCommandOreGen": "§c错误，请使用/heartageutils ore help 获取帮助",
+    "unknownCommandHeartAge": "§c错误，请使用/hau help 获取帮助",
+    "unknownCommandTpStone": "§c错误，请使用/hau tpStone help 获取帮助",
+    "unknownCommandDeathChest": "§c错误，请使用/hau deathchest help 获取帮助",
+    "unknownCommandDrawer": "§c错误，请使用/hau drawer help 获取帮助",
+    "unknownCommandOreGen": "§c错误，请使用/hau ore help 获取帮助",
+    "unknownCommandEnchantment": "§c错误，请使用/hau em help 获取帮助",
     "helpCommandHeartAge": [
-      "§b/heartageutils tpstone 使用传送石",
-      "§b/heartageutils deathchest 使用死亡箱子"
+      "§b/hau tpstone 使用传送石",
+      "§b/hau deathchest 使用死亡箱子",
+      "§b/hau drawer help 使用抽屉",
+      "§b/hau ore 使用矿物奖励"
     ],
     "helpCommandTpStone": [
-      "§btpStone rename [名字] 修改传送石名字",
-      "§btpStone setname [槽位] [名字] 设置槽位的名字",
-      "§btpStone uplevel 升级传送石"
+      "§b/hau tpStone rename [名字] 修改传送石名字",
+      "§b/hau tpStone setname [槽位] [名字] 设置槽位的名字",
+      "§b/hau tpStone uplevel 升级传送石"
     ],
     "helpCommandDeathChest": [
-      "§ddeathchest set 来设置保存的箱子（需要你看着箱子）",
-      "§ddeathchest mode [mode] 来设置死亡掉落保护模式"
+      "§b/hau deathchest set 来设置保存的箱子（需要你看着箱子）",
+      "§b/hau deathchest mode [mode] 来设置死亡掉落保护模式"
     ],
     "helpCommandDrawer": [
-      "§ddrawer break 拆下抽屉（需要你看着抽屉）"
+      "§b/hau drawer break 拆下抽屉（需要你看着抽屉）"
     ],
     "helpCommandOreGen": [
-      "§dore enable 启用矿石奖励",
-      "§dore disable 关闭矿石奖励"
+      "§b/hau ore enable 启用矿石奖励",
+      "§b/hau ore disable 关闭矿石奖励"
+    ],
+    "helpCommandEnchantment":
+    [
+      "§b主手那种你要附魔的东西，副手拿书或者附魔书",
+      "§b/hau em break 拆分附魔",
+      "§b/hau em add 强制附魔",
+      "§b注意，相同的附魔会被代替"
     ],
     "helpModeDeathChest": {
       "0": "§e模式0，不开启死亡掉落保护",
@@ -78,7 +94,7 @@
       "2": "§e不掉落花费：%Cost%"
     },
     "helpOreGenType": {
-      "0": "§e煤炭",
+      "0": "§e煤矿",
       "1": "§e铁矿",
       "2": "§e金矿",
       "3": "§e钻石矿",
@@ -88,6 +104,10 @@
       "7": "§e地狱金矿",
       "8": "§e萤石",
       "9": "§e下界石英矿"
+    },
+    "helpCostEnchantment": {
+      "0": "§e拆分附魔花费：%Cost%，消耗经验：%Exp%",
+      "1": "§e强制附魔花费：%Cost%，消耗经验：%Exp%"
     },
     "noPermissionCommand": "§c你没有权限使用这条指令",
     "reloadCommand": "§b已重读",
@@ -149,6 +169,15 @@
     "oreGenEnable": "§d随机矿石已启用",
     "oreGenDisable": "§d随机矿石已关闭",
     "oreGenAuto": "§c经验不足，已自动关闭",
-    "oreGenGet": "§d你获得了矿石：%ore%"
+    "oreGenGet": "§d你获得了矿石：%ore%",
+    "enchantmentNoExp": "§c你没有足够的经验",
+    "enchantmentNoMoney": "§c你没有足够的金钱",
+    "enchantmentAdd": "§6已强制附魔",
+    "enchantmentBreak": "§6已拆分附魔",
+    "enchantmentNoBook": "§c副手不是书",
+    "enchantmentNoEMBook": "§c副手不是附魔书",
+    "enchantmentNoTool": "§c主手为空",
+    "enchantmentNoEM": "§c工具无附魔",
+    "enchantmentNo": "§c需要拆分后的附魔书"
   }
 }

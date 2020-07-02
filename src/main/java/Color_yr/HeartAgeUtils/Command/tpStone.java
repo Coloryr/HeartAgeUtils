@@ -22,21 +22,19 @@ class tpStone implements ICommand {
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
         languageObj lan = HeartAgeUtils.configMain.lan;
-        if (args.length == 0) {
-            sender.sendMessage(lan.getTitle() + lan.getUnknownCommandTpStone());
-            return true;
-        } else if (sender instanceof ConsoleCommandSender) {
+        if (sender instanceof ConsoleCommandSender) {
             sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
+            return true;
+        }
+        if (args.length == 0 || args[0].equalsIgnoreCase("help")) {//获取帮助
+            for (String a : lan.getHelpCommandTpStone()) {
+                sender.sendMessage(lan.getTitle() + a);
+            }
             return true;
         }
         Player player = Bukkit.getPlayer(sender.getName());
         if (player == null) {
             sender.sendMessage(lan.getTitle() + lan.getNoPlayerCommand());
-            return true;
-        } else if (args[0].equalsIgnoreCase("help")) {//获取帮助
-            for (String a : lan.getHelpCommandTpStone()) {
-                sender.sendMessage(lan.getTitle() + a);
-            }
             return true;
         } else if (args[0].equalsIgnoreCase("rename")) {//重命名传送石
             ItemStack stack = player.getInventory().getItemInMainHand();
@@ -101,7 +99,11 @@ class tpStone implements ICommand {
                 player = (Player) sender;
             }
             if (player != null) {
-                player.getInventory().addItem(tpStoneDo.newTpStone(uuids));
+                ItemStack item = tpStoneDo.newTpStone(uuids);
+                if (Tools.CheckIsFull(player))
+                    player.getLocation().getWorld().dropItem(player.getLocation(), item);
+                else
+                    player.getInventory().addItem(item);
                 sender.sendMessage(lan.getTitle() + lan.getTpStoneGetStone());
                 player.playSound(player.getLocation(), Sound.ITEM_ARMOR_EQUIP_IRON, 1.0f, 1.0f);
             }

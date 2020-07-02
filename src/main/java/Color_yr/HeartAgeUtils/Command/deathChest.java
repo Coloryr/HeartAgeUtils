@@ -19,10 +19,7 @@ class deathChest implements ICommand {
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
         languageObj lan = HeartAgeUtils.configMain.lan;
-        if (args.length == 0) {
-            sender.sendMessage(lan.getUnknownCommandDeathChest());
-            return true;
-        } else if (args[0].equalsIgnoreCase("help")) {
+        if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
             for (String help : lan.getHelpCommandDeathChest()) {
                 sender.sendMessage(help);
             }
