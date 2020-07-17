@@ -1,5 +1,6 @@
 package Color_yr.HeartAgeUtils.DeathChest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class deathChestConfigObj {
@@ -18,6 +19,7 @@ public class deathChestConfigObj {
 
     public deathChestConfigObj() {
         cost = new costObj();
+        disable = new ArrayList<>();
     }
 
     public List<Integer> getDisable() {

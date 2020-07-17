@@ -14,9 +14,9 @@
     "disable": [],
     "cost": {
       "enable": false,
-      "saveInChest": 100,
-      "saveInLocal": 50,
-      "noDrop": 500
+      "SaveInChest": 100,
+      "SaveInLocal": 50,
+      "NoDrop": 500
     }
   },
   "oreGen": {
