@@ -48,28 +48,58 @@ public class enchantmentDo {
             } else if (Exp.getExpPoints(player) < obj.getAddExp()) {
                 player.sendMessage(lan.getEnchantmentNoExp());
             } else {
-                Map<Enchantment, Integer> Enchantment1 = ((EnchantmentStorageMeta) itemOff.getItemMeta()).getStoredEnchants();
-                if (Enchantment1.size() == 0) {
-                    player.sendMessage(lan.getEnchantmentNo());
-                } else {
-                    Hook.vaultCost(player, obj.getAddCost(), "已花费" + obj.getAddCost());
-                    Exp.subtractExpPoints(player, obj.getAddExp());
-                    for (Map.Entry<Enchantment, Integer> item : Enchantment1.entrySet()) {
-                        if (Enchantment.containsKey(item.getKey())) {
-                            int level1 = Enchantment.get(item.getKey());
-                            int level2 = item.getValue();
-                            if (level2 > level1) {
-                                itemHand.addUnsafeEnchantment(item.getKey(), level2);
-                            } else if (level2 == level1) {
-                                itemHand.addUnsafeEnchantment(item.getKey(), level2 + 1);
+                if(itemHand.getType().equals(Material.ENCHANTED_BOOK)) {
+                    Map<Enchantment, Integer> Enchantment1 = ((EnchantmentStorageMeta) itemOff.getItemMeta()).getStoredEnchants();
+                    Map<Enchantment, Integer> Enchantment2 = ((EnchantmentStorageMeta) itemHand.getItemMeta()).getStoredEnchants();
+                    EnchantmentStorageMeta data1 = ((EnchantmentStorageMeta) itemHand.getItemMeta());
+                    if (Enchantment1.size() == 0) {
+                        player.sendMessage(lan.getEnchantmentNo());
+                    } else {
+                        Hook.vaultCost(player, obj.getAddCost(), "已花费" + obj.getAddCost());
+                        Exp.subtractExpPoints(player, obj.getAddExp());
+                        for (Map.Entry<Enchantment, Integer> item : Enchantment1.entrySet()) {
+                            if (Enchantment2.containsKey(item.getKey())) {
+                                int level1 = Enchantment2.get(item.getKey());
+                                int level2 = item.getValue();
+                                if (level2 > level1) {
+                                    data1.addStoredEnchant(item.getKey(), level2, true);
+                                } else if (level2 == level1) {
+                                    data1.addStoredEnchant(item.getKey(), level2 + 1, true);
+                                }
+                            } else {
+                                data1.addStoredEnchant(item.getKey(), item.getValue(), true);
                             }
-                        } else {
-                            itemHand.addUnsafeEnchantment(item.getKey(), item.getValue());
                         }
+                        itemHand.setItemMeta(data1);
+                        player.getInventory().setItemInMainHand(itemHand);
+                        player.getInventory().setItemInOffHand(null);
+                        player.sendMessage(lan.getEnchantmentAdd());
                     }
-                    player.getInventory().setItemInMainHand(itemHand);
-                    player.getInventory().setItemInOffHand(null);
-                    player.sendMessage(lan.getEnchantmentAdd());
+                }
+                else {
+                    Map<Enchantment, Integer> Enchantment1 = ((EnchantmentStorageMeta) itemOff.getItemMeta()).getStoredEnchants();
+                    if (Enchantment1.size() == 0) {
+                        player.sendMessage(lan.getEnchantmentNo());
+                    } else {
+                        Hook.vaultCost(player, obj.getAddCost(), "已花费" + obj.getAddCost());
+                        Exp.subtractExpPoints(player, obj.getAddExp());
+                        for (Map.Entry<Enchantment, Integer> item : Enchantment1.entrySet()) {
+                            if (Enchantment.containsKey(item.getKey())) {
+                                int level1 = Enchantment.get(item.getKey());
+                                int level2 = item.getValue();
+                                if (level2 > level1) {
+                                    itemHand.addUnsafeEnchantment(item.getKey(), level2);
+                                } else if (level2 == level1) {
+                                    itemHand.addUnsafeEnchantment(item.getKey(), level2 + 1);
+                                }
+                            } else {
+                                itemHand.addUnsafeEnchantment(item.getKey(), item.getValue());
+                            }
+                        }
+                        player.getInventory().setItemInMainHand(itemHand);
+                        player.getInventory().setItemInOffHand(null);
+                        player.sendMessage(lan.getEnchantmentAdd());
+                    }
                 }
             }
         } else {//Break
