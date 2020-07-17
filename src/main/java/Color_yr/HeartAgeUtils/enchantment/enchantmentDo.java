@@ -47,29 +47,30 @@ public class enchantmentDo {
                 player.sendMessage(lan.getEnchantmentNoMoney());
             } else if (Exp.getExpPoints(player) < obj.getAddExp()) {
                 player.sendMessage(lan.getEnchantmentNoExp());
-            }
-            Map<Enchantment, Integer> Enchantment1 = ((EnchantmentStorageMeta)itemOff.getItemMeta()).getStoredEnchants();
-            if (Enchantment1.size() == 0) {
-                player.sendMessage(lan.getEnchantmentNo());
             } else {
-                Hook.vaultCost(player, obj.getAddCost(), "已花费" + obj.getAddCost());
-                Exp.subtractExpPoints(player, obj.getAddExp());
-                for (Map.Entry<Enchantment, Integer> item : Enchantment1.entrySet()) {
-                    if (Enchantment.containsKey(item.getKey())) {
-                        int level1 = Enchantment.get(item.getKey());
-                        int level2 = item.getValue();
-                        if (level2 > level1) {
-                            itemHand.addUnsafeEnchantment(item.getKey(), level2);
-                        } else if (level2 == level1) {
-                            itemHand.addUnsafeEnchantment(item.getKey(), level2 + 1);
+                Map<Enchantment, Integer> Enchantment1 = ((EnchantmentStorageMeta) itemOff.getItemMeta()).getStoredEnchants();
+                if (Enchantment1.size() == 0) {
+                    player.sendMessage(lan.getEnchantmentNo());
+                } else {
+                    Hook.vaultCost(player, obj.getAddCost(), "已花费" + obj.getAddCost());
+                    Exp.subtractExpPoints(player, obj.getAddExp());
+                    for (Map.Entry<Enchantment, Integer> item : Enchantment1.entrySet()) {
+                        if (Enchantment.containsKey(item.getKey())) {
+                            int level1 = Enchantment.get(item.getKey());
+                            int level2 = item.getValue();
+                            if (level2 > level1) {
+                                itemHand.addUnsafeEnchantment(item.getKey(), level2);
+                            } else if (level2 == level1) {
+                                itemHand.addUnsafeEnchantment(item.getKey(), level2 + 1);
+                            }
+                        } else {
+                            itemHand.addUnsafeEnchantment(item.getKey(), item.getValue());
                         }
-                    } else {
-                        itemHand.addUnsafeEnchantment(item.getKey(), item.getValue());
                     }
+                    player.getInventory().setItemInMainHand(itemHand);
+                    player.getInventory().setItemInOffHand(null);
+                    player.sendMessage(lan.getEnchantmentAdd());
                 }
-                player.getInventory().setItemInMainHand(itemHand);
-                player.getInventory().setItemInOffHand(null);
-                player.sendMessage(lan.getEnchantmentAdd());
             }
         } else {//Break
             if (!itemOff.getType().equals(Material.BOOK)) {
@@ -79,7 +80,7 @@ public class enchantmentDo {
             } else if (Exp.getExpPoints(player) < obj.getBreakExp()) {
                 player.sendMessage(lan.getEnchantmentNoExp());
             } else {
-                Hook.vaultCost(player, obj.getBreakCost(), "已花费" + obj.getAddCost());
+                Hook.vaultCost(player, obj.getBreakCost(), "已花费" + obj.getBreakCost());
                 Exp.subtractExpPoints(player, obj.getBreakExp());
                 if (Enchantment.size() == 0) {
                     player.sendMessage(lan.getEnchantmentNoEM());

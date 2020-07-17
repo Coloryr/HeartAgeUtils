@@ -26,12 +26,12 @@ class deathChestRead implements IConfig {
             if (files != null) {
                 InputStreamReader reader;
                 BufferedReader bfreader;
+                deathChestDo.deathChestSet.clear();
                 for (File temp : files) {
                     Gson json = new Gson();
                     reader = new InputStreamReader(new FileInputStream(temp), StandardCharsets.UTF_8);
                     bfreader = new BufferedReader(reader);
                     playSetObj obj = json.fromJson(bfreader, playSetObj.class);
-                    deathChestDo.deathChestSet.clear();
                     if (obj != null)
                         deathChestDo.deathChestSet.put(temp.getName().replace(".json", ""), obj);
                     reader.close();

@@ -26,12 +26,12 @@ class drawerRead implements IConfig {
             if (files != null) {
                 InputStreamReader reader;
                 BufferedReader bfreader;
+                drawerDo.drawerList.clear();
                 for (File temp : files) {
                     Gson json = new Gson();
                     reader = new InputStreamReader(new FileInputStream(temp), StandardCharsets.UTF_8);
                     bfreader = new BufferedReader(reader);
                     drawerSaveObj obj = json.fromJson(bfreader, drawerSaveObj.class);
-                    drawerDo.drawerList.clear();
                     if (obj != null)
                         drawerDo.drawerList.put(temp.getName().replace(".json", ""), obj);
                     reader.close();

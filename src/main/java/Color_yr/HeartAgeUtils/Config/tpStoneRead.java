@@ -25,12 +25,12 @@ class tpStoneRead implements IConfig {
             if (files != null) {
                 InputStreamReader reader;
                 BufferedReader bfreader;
+                tpStoneDo.toStoneSave.clear();
                 for (File temp : files) {
                     Gson json = new Gson();
                     reader = new InputStreamReader(new FileInputStream(temp), StandardCharsets.UTF_8);
                     bfreader = new BufferedReader(reader);
                     tpStoneSaveObj obj = json.fromJson(bfreader, tpStoneSaveObj.class);
-                    tpStoneDo.toStoneSave.clear();
                     if (obj != null)
                         tpStoneDo.toStoneSave.put(temp.getName().replace(".json", ""), obj);
                     reader.close();

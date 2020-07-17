@@ -54,6 +54,7 @@ public class configMain {
                     HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石手中物品找不到");
                 } else {
                     tpStoneDo.item = a;
+                    HeartAgeUtils.log.info("§d[HeartAgeUtils]§c传送石物品:" + tpStoneDo.item.toString());
                 }
             } else {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石手中物品ID为空");
@@ -65,22 +66,25 @@ public class configMain {
                     HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石升级物品找不到");
                 } else {
                     tpStoneDo.updateItem = a;
+                    HeartAgeUtils.log.info("§d[HeartAgeUtils]§c传送石升级物品:" + tpStoneDo.updateItem.toString());
                 }
             } else {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c传送石升级物品ID为空");
             }
-            //更新死亡箱子
-            deathChest.init();
             if (!Config.getDrawer().getBlock().isEmpty()) {
                 Material a = Material.matchMaterial(Config.getDrawer().getBlock());
                 if (a == null) {
                     HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块找不到");
                 } else {
                     drawerDo.block = a;
+                    HeartAgeUtils.log.info("§d[HeartAgeUtils]§c抽屉方块:" + drawerDo.block.toString());
                 }
             } else {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c抽屉方块ID为空");
             }
+
+            //更新死亡箱子
+            deathChest.init();
 
             //抽屉初始化
             drawer.init();
