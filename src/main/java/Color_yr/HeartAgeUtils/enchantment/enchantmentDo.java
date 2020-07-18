@@ -111,24 +111,21 @@ public class enchantmentDo {
                 for (Map.Entry<Enchantment, Integer> item : Enchantment.entrySet()) {
                     itemHand.removeEnchantment(item.getKey());
                     player.getInventory().setItemInMainHand(itemHand);
+                    ItemStack item1 = new ItemStack(Material.ENCHANTED_BOOK);
+                    EnchantmentStorageMeta data = (EnchantmentStorageMeta)item1.getItemMeta();
+                    data.addStoredEnchant(item.getKey(), item.getValue(), true);
+                    data.setDisplayName("拆分后的附魔书");
+                    item1.setItemMeta(data);
                     if (itemOff.getAmount() > 1) {
                         itemOff.setAmount(itemOff.getAmount() - 1);
-                        ItemStack item1 = new ItemStack(Material.ENCHANTED_BOOK);
-                        EnchantmentStorageMeta data = (EnchantmentStorageMeta)item1.getItemMeta();
-                        data.addStoredEnchant(item.getKey(), item.getValue(), true);
-                        item1.setItemMeta(data);
                         if (Tools.CheckIsFull(player))
                             player.getLocation().getWorld().dropItem(player.getLocation(), item1);
                         else
                             player.getInventory().addItem(item1);
+                        player.getInventory().setItemInOffHand(itemOff);
                     } else {
-                        ItemMeta data = itemOff.getItemMeta();
-                        data.setDisplayName("拆分后的附魔书");
-                        itemOff.setItemMeta(data);
-                        itemOff.setType(Material.ENCHANTED_BOOK);
-                        itemOff.addUnsafeEnchantment(item.getKey(), item.getValue());
+                        player.getInventory().setItemInOffHand(item1);
                     }
-                    player.getInventory().setItemInOffHand(itemOff);
                     player.sendMessage(lan.getEnchantmentBreak());
                     return;
                 }
