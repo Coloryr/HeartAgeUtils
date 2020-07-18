@@ -65,6 +65,8 @@ public class deathChest implements Listener {
                         config.getCost().getNoDrop())) {
                     e.setKeepInventory(true);
                     e.getDrops().clear();
+                    e.setKeepLevel(true);
+                    e.setDroppedExp(0);
 
                 } else {
                     player.sendMessage(lan.getDeathChestNoMoney2());

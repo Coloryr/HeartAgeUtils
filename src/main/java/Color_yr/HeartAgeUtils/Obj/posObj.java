@@ -6,14 +6,24 @@ public class posObj {
     private int x = 0;
     private int y = 0;
     private int z = 0;
+    private String world;
 
     public posObj(Location location) {
         this.x = location.getBlockX();
         this.y = location.getBlockY();
         this.z = location.getBlockZ();
+        world = "world";
     }
 
     public posObj() {
+    }
+
+    public String getWorld() {
+        return world;
+    }
+
+    public void setWorld(String world) {
+        this.world = world;
     }
 
     public int getX() {

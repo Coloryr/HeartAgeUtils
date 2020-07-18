@@ -5,6 +5,7 @@ import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.configObj;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -304,8 +305,9 @@ public class deathChestDo {
     public static boolean setChest(PlayerDeathEvent e) {
         Player player = e.getEntity();
         playSetObj set = deathChestDo.getPlayerSet(player.getUniqueId(), true);
-        Location location = new Location(player.getWorld(), set.getX(), set.getY(), set.getZ());
-        List<Inventory> inventory = getChest(player.getWorld(), location);
+        World world = Bukkit.getWorld(set.getWorld());
+        Location location = new Location(world, set.getX(), set.getY(), set.getZ());
+        List<Inventory> inventory = getChest(world, location);
         return Check(inventory, e, player);
     }
 

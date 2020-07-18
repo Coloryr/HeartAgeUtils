@@ -40,6 +40,7 @@ class deathChest implements ICommand {
             set.setX(block.getX());
             set.setY(block.getY());
             set.setZ(block.getZ());
+            set.setWorld(block.getWorld().getName());
             deathChestDo.setPlayerSet(((Player) sender).getUniqueId(), set);
             sender.sendMessage(lan.getDeathChestSet().replace("%x%", "" + set.getX())
                     .replace("%y%", "" + set.getY()).replace("%z%", "" + set.getZ()));
