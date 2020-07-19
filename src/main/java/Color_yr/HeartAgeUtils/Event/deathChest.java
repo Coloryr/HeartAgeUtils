@@ -200,7 +200,7 @@ public class deathChest implements Listener {
             Player player = (Player) e.getPlayer();
             Inventory inventory = e.getInventory();
             Location location = inventory.getLocation();
-            if(location == null)
+            if (location == null)
                 return;
             Block block = player.getWorld().getBlockAt(location);
             if (block.getType().equals(Material.CHEST)) {

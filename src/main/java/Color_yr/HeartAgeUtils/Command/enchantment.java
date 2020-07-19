@@ -1,13 +1,10 @@
 package Color_yr.HeartAgeUtils.Command;
 
 import Color_yr.HeartAgeUtils.API.ICommand;
-import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.OreGen.oreGenDo;
 import Color_yr.HeartAgeUtils.enchantment.enchantmentDo;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;

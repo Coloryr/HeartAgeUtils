@@ -25,6 +25,7 @@ public class enchantmentObj {
     public int getBreakCost() {
         return breakCost;
     }
+
     public int getBreakExp() {
         return breakExp;
     }

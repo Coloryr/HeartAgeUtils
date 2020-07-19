@@ -9,17 +9,17 @@ public class deathChestConfigObj {
     private boolean enable;
     private boolean lock;
 
+    public deathChestConfigObj() {
+        cost = new costObj();
+        disable = new ArrayList<>();
+    }
+
     public boolean isLock() {
         return lock;
     }
 
     public boolean isEnable() {
         return enable;
-    }
-
-    public deathChestConfigObj() {
-        cost = new costObj();
-        disable = new ArrayList<>();
     }
 
     public List<Integer> getDisable() {

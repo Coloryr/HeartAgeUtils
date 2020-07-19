@@ -27,10 +27,7 @@ public class deathChestDo {
     public static final List<String> enable = new ArrayList<>();
     public static final Map<String, playSetObj> deathChestSet = new HashMap<>();
     public static final Map<String, InventoryView> guiSave = new HashMap<>();
-    public static boolean enableLocal = false;
-    public static String help = "";
-
-    private static final MetadataValue drop =  new MetadataValueAdapter(HeartAgeUtils.plugin) {
+    private static final MetadataValue drop = new MetadataValueAdapter(HeartAgeUtils.plugin) {
         @Override
         public Object value() {
             return true;
@@ -41,11 +38,8 @@ public class deathChestDo {
 
         }
     };
-
-    public static class RE {
-        public boolean ok;
-        public Location location;
-    }
+    public static boolean enableLocal = false;
+    public static String help = "";
 
     public static void GenHelp() {
         help = "";
@@ -135,6 +129,7 @@ public class deathChestDo {
         temp = temp.replace("%Money%", "" + config.getCost().getNoDrop());
         Hook.vaultCost(player, config.getCost().getNoDrop(), temp);
     }
+
     public static List<Inventory> setBlock(World world, Location location, boolean needDoble) {
         boolean up = true;
         if (location.getY() >= world.getMaxHeight()) {
@@ -330,5 +325,10 @@ public class deathChestDo {
             player.sendMessage(lan.getDeathChestCantPlace());
         }
         return true;
+    }
+
+    public static class RE {
+        public boolean ok;
+        public Location location;
     }
 }

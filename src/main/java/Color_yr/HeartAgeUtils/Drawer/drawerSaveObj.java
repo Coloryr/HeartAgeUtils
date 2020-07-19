@@ -37,11 +37,11 @@ public class drawerSaveObj {
         return item;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
     public void setItem(Material item) {
         this.item = item;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }

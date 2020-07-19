@@ -21,7 +21,7 @@
   },
   "oreGen": {
     "Enable": true,
-    "Count" : 1000,
+    "Count": 1000,
     "Coal": 50,
     "Iron": 25,
     "Gold": 10,
@@ -33,7 +33,9 @@
     "glowstone": 0,
     "quartz": 0,
     "ExtCost": 2,
-    "Block": ["stone"]
+    "Block": [
+      "stone"
+    ]
   },
   "enchantment": {
     "breakExp": 2000,
@@ -71,8 +73,7 @@
       "§b/hau ore enable 启用矿石奖励",
       "§b/hau ore disable 关闭矿石奖励"
     ],
-    "helpCommandEnchantment":
-    [
+    "helpCommandEnchantment": [
       "§b主手那种你要附魔的东西，副手拿书或者附魔书",
       "§b/hau em break 拆分附魔",
       "§b/hau em add 强制附魔",

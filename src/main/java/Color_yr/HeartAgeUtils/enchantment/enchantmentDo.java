@@ -3,16 +3,13 @@ package Color_yr.HeartAgeUtils.enchantment;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Obj.towItem;
 import Color_yr.HeartAgeUtils.Utils.Exp;
 import Color_yr.HeartAgeUtils.Utils.Tools;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Map;
 
@@ -112,7 +109,7 @@ public class enchantmentDo {
                     itemHand.removeEnchantment(item.getKey());
                     player.getInventory().setItemInMainHand(itemHand);
                     ItemStack item1 = new ItemStack(Material.ENCHANTED_BOOK);
-                    EnchantmentStorageMeta data = (EnchantmentStorageMeta)item1.getItemMeta();
+                    EnchantmentStorageMeta data = (EnchantmentStorageMeta) item1.getItemMeta();
                     data.addStoredEnchant(item.getKey(), item.getValue(), true);
                     data.setDisplayName("拆分后的附魔书");
                     item1.setItemMeta(data);

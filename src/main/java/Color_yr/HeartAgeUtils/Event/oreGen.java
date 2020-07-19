@@ -4,7 +4,6 @@ import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
 import Color_yr.HeartAgeUtils.OreGen.oreGenDo;
 import Color_yr.HeartAgeUtils.Utils.Exp;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +29,7 @@ public class oreGen implements Listener {
         Player player = e.getPlayer();
         if (!oreGenDo.isEnable(player.getName()))
             return;
-        if(!oreGenDo.Blocks.contains(e.getBlock().getType()))
+        if (!oreGenDo.Blocks.contains(e.getBlock().getType()))
             return;
         languageObj lan = HeartAgeUtils.configMain.lan;
         if (Exp.getExpPoints(player) < HeartAgeUtils.configMain.Config.getOreGen().getExtCost()) {

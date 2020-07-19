@@ -15,8 +15,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 
 public class drawerDo {
-    public static Material block;
     public static final Map<String, drawerSaveObj> drawerList = new HashMap<>();
+    public static Material block;
 
     public static ItemStack getDrawer() {
         if (block == null)
