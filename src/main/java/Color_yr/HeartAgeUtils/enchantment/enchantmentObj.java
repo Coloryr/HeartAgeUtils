@@ -2,10 +2,10 @@ package Color_yr.HeartAgeUtils.enchantment;
 
 public class enchantmentObj {
 
-    private int breakExp;
-    private int breakCost;
-    private int addExp;
-    private int addCost;
+    private final int breakExp;
+    private final int breakCost;
+    private final int addExp;
+    private final int addCost;
 
     public enchantmentObj() {
         breakExp = 5000;

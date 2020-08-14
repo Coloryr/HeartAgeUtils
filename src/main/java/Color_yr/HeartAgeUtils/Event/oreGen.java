@@ -41,7 +41,7 @@ public class oreGen implements Listener {
         Material ore = oreGenDo.getOre();
         if (ore != Material.AIR) {
             ItemStack item = new ItemStack(ore);
-            player.getLocation().getWorld().dropItem(player.getLocation(), item);
+            player.getLocation().getWorld().dropItem(e.getBlock().getLocation(), item);
             player.sendMessage(lan.getOreGenGet().replace("%ore%", oreGenDo.lan.get(ore)));
         }
     }

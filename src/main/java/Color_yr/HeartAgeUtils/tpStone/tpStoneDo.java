@@ -2,8 +2,8 @@ package Color_yr.HeartAgeUtils.tpStone;
 
 import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
+import Color_yr.HeartAgeUtils.NMS.ItemNBTSet;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.ItemNBTSet;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

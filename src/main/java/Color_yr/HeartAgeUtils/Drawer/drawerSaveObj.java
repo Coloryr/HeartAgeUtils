@@ -6,7 +6,7 @@ import org.bukkit.Material;
 
 public class drawerSaveObj {
     private Material item;
-    private String uuid;
+    private final String uuid;
     private posObj pos;
     private int amount;
 

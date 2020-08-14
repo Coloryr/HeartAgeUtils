@@ -3,8 +3,8 @@ package Color_yr.HeartAgeUtils.Event;
 import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
+import Color_yr.HeartAgeUtils.NMS.ItemNBTSet;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.Utils.ItemNBTSet;
 import Color_yr.HeartAgeUtils.tpStone.locationObj;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
 import Color_yr.HeartAgeUtils.tpStone.tpStoneObjSet;
@@ -38,11 +38,14 @@ public class tpStone implements Listener {
         Material test = item.getType();
         if (test.equals(tpStoneDo.item)) {
             ItemNBTSet ItemNbt = new ItemNBTSet(item);
-            if (!ItemNbt.hasKey("uuid"))
-                return;
             e.setCancelled(true);
-            String uuid = ItemNbt.getString("uuid");
             Player player = e.getPlayer();
+            if (!ItemNbt.hasKey("uuid")) {
+                player.closeInventory();
+                return;
+            }
+            String uuid = ItemNbt.getString("uuid");
+
             languageObj lan = HeartAgeUtils.configMain.lan;
             if (!tpStoneDo.toStoneSave.containsKey(uuid)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
@@ -107,8 +110,11 @@ public class tpStone implements Listener {
         if (e.getWhoClicked() instanceof Player) {
             Player player = (Player) e.getWhoClicked();
             ItemStack hand = player.getInventory().getItemInMainHand();
-            if (hand.getType().equals(Material.AIR))
+            if (hand.getType().equals(Material.AIR)) {
+                player.closeInventory();
+                deathChestDo.guiSave.remove(player.getName());
                 return;
+            }
             languageObj lan = HeartAgeUtils.configMain.lan;
             if (deathChestDo.guiSave.containsKey(player.getName())) {
                 InventoryView inv = deathChestDo.guiSave.get(player.getName());

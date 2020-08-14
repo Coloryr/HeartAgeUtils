@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class deathChestConfigObj {
-    private costObj cost;
-    private List<Integer> disable;
+    private final costObj cost;
+    private final List<Integer> disable;
     private boolean enable;
     private boolean lock;
 
