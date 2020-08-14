@@ -21,10 +21,7 @@ public class saveTaskDo {
         service = Executors.newSingleThreadScheduledExecutor();
         Runnable runnable = () -> {
             try {
-                isSave = true;
                 save();
-                isSave = false;
-                Thread.sleep(60000);
             } catch (Exception e) {
                 HeartAgeUtils.log.warning("§d[HeartAgeUtils]§c数据保存失败");
                 e.printStackTrace();
@@ -52,7 +49,8 @@ public class saveTaskDo {
         Tasks.add(save);
     }
 
-    private void save() {
+    public void save() {
+        isSave = true;
         if (Tasks.size() != 0) {
             for (saveTaskObj save : Tasks) {
                 try {
@@ -68,5 +66,6 @@ public class saveTaskDo {
                 }
             }
         }
+        isSave = false;
     }
 }

@@ -30,6 +30,10 @@ class HAU implements CommandExecutor, TabExecutor {
                     sender.sendMessage(lan.getTitle() + lan.getReloadCommand());
                     return true;
                 }
+            } else if (arg[0].equalsIgnoreCase("save")) {
+                HeartAgeUtils.configMain.SaveTask.save();
+                sender.sendMessage("已保存");
+                return true;
             }
             String[] ss = new String[arg.length - 1];
             System.arraycopy(arg, 1, ss, 0, ss.length);

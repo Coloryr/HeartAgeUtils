@@ -12,6 +12,7 @@ import Color_yr.HeartAgeUtils.tpStone.tpStoneSaveObj;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,6 +27,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Map;
 
 public class tpStone implements Listener {
@@ -65,6 +67,8 @@ public class tpStone implements Listener {
                 ItemNbt.setInt("x", locationObj.getX());
                 ItemNbt.setInt("y", locationObj.getY());
                 ItemNbt.setInt("z", locationObj.getZ());
+                String world = locationObj.getWorld();
+                ItemNbt.setNbt("world", world != null ? world : "world");
                 itemStack = ItemNbt.saveNBT();
                 temp1 = itemStack.getItemMeta();
                 temp1.setDisplayName(locationObj.getName());
@@ -134,13 +138,16 @@ public class tpStone implements Listener {
                             return;
                         } else if (e.getClick() == ClickType.LEFT) {
                             int x = ItemNbt.getInt("x");
-                            int y = ItemNbt.getInt("y");
+                            int y = ItemNbt.getInt("y") + 1;
                             int z = ItemNbt.getInt("z");
+                            String worldName = ItemNbt.getString("world");
+                            World world = Bukkit.getWorld(worldName);
+
                             if (x == 0 && y == 0 && z == 0) {
                                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1.0f, 1.0f);
                                 player.sendMessage(lan.getTitle() + lan.getTpStoneCantTp());
                             } else {
-                                player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
+                                player.teleport(new org.bukkit.Location(world != null ? world : player.getWorld(), x, y, z));
                                 player.playSound(player.getLocation(), Sound.ENTITY_SHULKER_TELEPORT, 1.0f, 1.0f);
                                 player.sendMessage(lan.getTitle() + lan.getTpStoneTp());
                             }
@@ -158,6 +165,7 @@ public class tpStone implements Listener {
                                 location1.setX((int) location.getX());
                                 location1.setY((int) location.getY());
                                 location1.setZ((int) location.getZ());
+                                location1.setWorld(location.getWorld().getName());
                                 set.setSel(e.getSlot(), location1);
                                 configMain.tpStone.save(stone, uuid);
                                 tpStoneDo.toStoneSave.put(uuid, stone);
