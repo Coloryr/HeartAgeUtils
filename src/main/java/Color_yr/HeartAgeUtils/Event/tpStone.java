@@ -110,67 +110,65 @@ public class tpStone implements Listener {
         if (e.getWhoClicked() instanceof Player) {
             Player player = (Player) e.getWhoClicked();
             ItemStack hand = player.getInventory().getItemInMainHand();
-            if (hand.getType().equals(Material.AIR)) {
-                player.closeInventory();
-                deathChestDo.guiSave.remove(player.getName());
-                return;
-            }
-            languageObj lan = HeartAgeUtils.configMain.lan;
-            if (deathChestDo.guiSave.containsKey(player.getName())) {
-                InventoryView inv = deathChestDo.guiSave.get(player.getName());
-                if (!inv.getTitle().contains(lan.getTpStoneTitle())) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
-                    deathChestDo.guiSave.remove(player.getName());
-                    return;
-                }
+            if (hand.getType().equals(tpStoneDo.item)) {
                 e.setCancelled(true);
-                if (inv.getPlayer().equals(player)) {
-                    ItemStack item = inv.getItem(e.getSlot());
-                    ItemNBTSet ItemNbt = new ItemNBTSet(item);
-                    if (ItemNbt.getBoolean("disable")) {
-                        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
-                        player.sendMessage(lan.getTitle() + lan.getTpStoneUnlockSlot());
-                    } else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z"))) {
-                        player.sendMessage(lan.getTitle() + lan.getTpStoneError());
+                languageObj lan = HeartAgeUtils.configMain.lan;
+                if (deathChestDo.guiSave.containsKey(player.getName())) {
+                    InventoryView inv = deathChestDo.guiSave.get(player.getName());
+                    if (!inv.getTitle().contains(lan.getTpStoneTitle())) {
                         player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
+                        player.closeInventory();
                         deathChestDo.guiSave.remove(player.getName());
                         return;
-                    } else if (e.getClick() == ClickType.LEFT) {
-                        int x = ItemNbt.getInt("x");
-                        int y = ItemNbt.getInt("y");
-                        int z = ItemNbt.getInt("z");
-                        if (x == 0 && y == 0 && z == 0) {
-                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStoneCantTp());
-                        } else {
-                            player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
-                            player.playSound(player.getLocation(), Sound.ENTITY_SHULKER_TELEPORT, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStoneTp());
-                        }
-                    } else if (e.getClick() == ClickType.RIGHT) {
-                        org.bukkit.Location location = player.getLocation();
-                        ItemNbt = new ItemNBTSet(hand);
-                        String uuid = ItemNbt.getString("uuid");
-                        if (!tpStoneDo.toStoneSave.containsKey(uuid)) {
+                    }
+                    if (inv.getPlayer().equals(player)) {
+                        ItemStack item = inv.getItem(e.getSlot());
+                        ItemNBTSet ItemNbt = new ItemNBTSet(item);
+                        if (ItemNbt.getBoolean("disable")) {
+                            player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0f, 1.0f);
+                            player.sendMessage(lan.getTitle() + lan.getTpStoneUnlockSlot());
+                        } else if (!ItemNbt.hasKey("disable") || (!ItemNbt.hasKey("x") || !ItemNbt.hasKey("y") || !ItemNbt.hasKey("z"))) {
                             player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStoneError());
-                        } else {
-                            tpStoneSaveObj stone = tpStoneDo.toStoneSave.get(uuid);
-                            tpStoneObjSet set = new tpStoneObjSet(stone);
-                            locationObj location1 = set.getSel(e.getSlot());
-                            location1.setX((int) location.getX());
-                            location1.setY((int) location.getY());
-                            location1.setZ((int) location.getZ());
-                            set.setSel(e.getSlot(), location1);
-                            configMain.tpStone.save(stone, uuid);
-                            tpStoneDo.toStoneSave.put(uuid, stone);
-                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
-                            player.sendMessage(lan.getTitle() + lan.getTpStoneSave());
+                            player.closeInventory();
+                            deathChestDo.guiSave.remove(player.getName());
+                            return;
+                        } else if (e.getClick() == ClickType.LEFT) {
+                            int x = ItemNbt.getInt("x");
+                            int y = ItemNbt.getInt("y");
+                            int z = ItemNbt.getInt("z");
+                            if (x == 0 && y == 0 && z == 0) {
+                                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1.0f, 1.0f);
+                                player.sendMessage(lan.getTitle() + lan.getTpStoneCantTp());
+                            } else {
+                                player.teleport(new org.bukkit.Location(player.getWorld(), x, y, z));
+                                player.playSound(player.getLocation(), Sound.ENTITY_SHULKER_TELEPORT, 1.0f, 1.0f);
+                                player.sendMessage(lan.getTitle() + lan.getTpStoneTp());
+                            }
+                        } else if (e.getClick() == ClickType.RIGHT) {
+                            org.bukkit.Location location = player.getLocation();
+                            ItemNbt = new ItemNBTSet(hand);
+                            String uuid = ItemNbt.getString("uuid");
+                            if (!tpStoneDo.toStoneSave.containsKey(uuid)) {
+                                player.playSound(player.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1.0f, 1.0f);
+                                player.sendMessage(lan.getTitle() + lan.getTpStoneError());
+                            } else {
+                                tpStoneSaveObj stone = tpStoneDo.toStoneSave.get(uuid);
+                                tpStoneObjSet set = new tpStoneObjSet(stone);
+                                locationObj location1 = set.getSel(e.getSlot());
+                                location1.setX((int) location.getX());
+                                location1.setY((int) location.getY());
+                                location1.setZ((int) location.getZ());
+                                set.setSel(e.getSlot(), location1);
+                                configMain.tpStone.save(stone, uuid);
+                                tpStoneDo.toStoneSave.put(uuid, stone);
+                                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+                                player.sendMessage(lan.getTitle() + lan.getTpStoneSave());
+                            }
                         }
                     }
+                    player.closeInventory();
+                    deathChestDo.guiSave.remove(player.getName());
                 }
-                player.closeInventory();
-                deathChestDo.guiSave.remove(player.getName());
             }
         }
     }
