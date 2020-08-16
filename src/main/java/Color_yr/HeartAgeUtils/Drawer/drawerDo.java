@@ -56,6 +56,23 @@ public class drawerDo {
                 if (obj.checkPos(block.getLocation())) {
                     if (!Hook.isAllowed(player, block)) {
                         player.sendMessage(lan.getDrawerLock());
+                        return null;
+                    }
+                    return obj;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static drawerSaveObj getDrawerSaveOwner(Player player, Block block) {
+        languageObj lan = HeartAgeUtils.configMain.lan;
+        if (block.getType().equals(drawerDo.block)) {
+            for (drawerSaveObj obj : drawerList.values()) {
+                if (obj.checkPos(block.getLocation())) {
+                    if (!Hook.isOwner(player, block)) {
+                        player.sendMessage(lan.getDrawerLock());
+                        return null;
                     }
                     return obj;
                 }

@@ -11,4 +11,9 @@ class blocklocker {
             return BlockLockerAPIv2.isAllowed(player, block, allowBypass);
         return true;
     }
+    public boolean owner(Player player, Block block, boolean allowBypass) {
+        if (BlockLockerAPIv2.isProtected(block))
+            return BlockLockerAPIv2.isOwner(player, block);
+        return true;
+    }
 }

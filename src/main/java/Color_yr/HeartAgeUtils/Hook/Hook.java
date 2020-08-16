@@ -51,4 +51,9 @@ public class Hook {
             return true;
         return blocklocker.can(player, block, true);
     }
+    public static boolean isOwner(Player player, Block block) {
+        if (!blockLockerHook)
+            return true;
+        return blocklocker.owner(player, block, true);
+    }
 }

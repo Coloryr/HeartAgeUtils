@@ -39,7 +39,7 @@ class drawer implements ICommand {
                 player.sendMessage(lan.getDrawerNot());
                 return true;
             }
-            drawerSaveObj obj = drawerDo.getDrawerSave(player, block);
+            drawerSaveObj obj = drawerDo.getDrawerSaveOwner(player, block);
             if (obj == null) {
                 player.sendMessage(lan.getDrawerNot());
                 return true;
