@@ -79,6 +79,7 @@ public class languageObj {
     private String drawerPlace;
     private String drawerBreak;
     private String drawerNot;
+    private String drawerCant;
     private String oreGenEnable;
     private String oreGenDisable;
     private String oreGenAuto;
@@ -92,6 +93,10 @@ public class languageObj {
     private String enchantmentNoTool;
     private String enchantmentNoEM;
     private String enchantmentNo;
+
+    public String getDrawerCant() {
+        return drawerCant;
+    }
 
     public String getEnchantmentNo() {
         return enchantmentNo;

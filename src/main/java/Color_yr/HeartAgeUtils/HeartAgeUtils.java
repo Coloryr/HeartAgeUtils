@@ -3,10 +3,10 @@ package Color_yr.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Command.commandList;
 import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
-import Color_yr.HeartAgeUtils.Event.deathChest;
-import Color_yr.HeartAgeUtils.Event.drawer;
-import Color_yr.HeartAgeUtils.Event.oreGen;
-import Color_yr.HeartAgeUtils.Event.tpStone;
+import Color_yr.HeartAgeUtils.DeathChest.deathChestEvent;
+import Color_yr.HeartAgeUtils.Drawer.drawerEvent;
+import Color_yr.HeartAgeUtils.OreGen.oreGenEvent;
+import Color_yr.HeartAgeUtils.tpStone.tpStoneEvent;
 import Color_yr.HeartAgeUtils.Hook.Hook;
 import Color_yr.HeartAgeUtils.enchantment.enchantmentDo;
 import org.bukkit.Bukkit;
@@ -46,13 +46,13 @@ public class HeartAgeUtils extends JavaPlugin {
         Bukkit.getPluginCommand("hau").setExecutor(commandList.command);//注册插件主指令
         log.info("[HeartAgeUtils]事件注册中");
         if (configMain.Config.getDrawer().isEnable())
-            Bukkit.getPluginManager().registerEvents(new drawer(), this);//注册方块事件
+            Bukkit.getPluginManager().registerEvents(new drawerEvent(), this);//注册方块事件
         if (configMain.Config.getTpStone().isEnable())
-            Bukkit.getPluginManager().registerEvents(new tpStone(), this);//注册物品事件
+            Bukkit.getPluginManager().registerEvents(new tpStoneEvent(), this);//注册物品事件
         if (configMain.Config.getDeathChest().isEnable())
-            Bukkit.getPluginManager().registerEvents(new deathChest(), this);//注册物品事件
+            Bukkit.getPluginManager().registerEvents(new deathChestEvent(), this);//注册物品事件
         if (configMain.Config.getOreGen().isEnable())
-            Bukkit.getPluginManager().registerEvents(new oreGen(), this);//注册物品事件
+            Bukkit.getPluginManager().registerEvents(new oreGenEvent(), this);//注册物品事件
         log.info("[HeartAgeUtils]已启动-" + Version);
     }
 

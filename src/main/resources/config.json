@@ -167,6 +167,7 @@
     "drawerBreak": "§e抽屉已拆除",
     "drawerNot": "§e你看着的不是抽屉方块",
     "drawerName": "§e抽屉方块",
+    "drawerCant": "§e不能存带NBT的物品",
     "oreGenEnable": "§d随机矿石已启用",
     "oreGenDisable": "§d随机矿石已关闭",
     "oreGenAuto": "§c经验不足，已自动关闭",

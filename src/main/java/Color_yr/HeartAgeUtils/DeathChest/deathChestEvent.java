@@ -1,4 +1,4 @@
-package Color_yr.HeartAgeUtils.Event;
+package Color_yr.HeartAgeUtils.DeathChest;
 
 import Color_yr.HeartAgeUtils.DeathChest.deathChestConfigObj;
 import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
@@ -23,7 +23,7 @@ import org.bukkit.metadata.MetadataValue;
 
 import java.util.List;
 
-public class deathChest implements Listener {
+public class deathChestEvent implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onplayerDeath(PlayerDeathEvent e) {

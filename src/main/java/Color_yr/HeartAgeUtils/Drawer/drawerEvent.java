@@ -1,4 +1,4 @@
-package Color_yr.HeartAgeUtils.Event;
+package Color_yr.HeartAgeUtils.Drawer;
 
 import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.Drawer.drawerDo;
@@ -18,7 +18,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 
-public class drawer implements Listener {
+public class drawerEvent implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void itemClick(PlayerInteractEvent e) {
         if (e.isCancelled())
@@ -40,11 +40,27 @@ public class drawer implements Listener {
                 ItemStack item = e.getItem();
                 if (item != null) {
                     Material test = item.getType();
+                    boolean all = e.getPlayer().isSneaking();
                     if (obj.getItem().equals(test)) {
-                        obj.setAmount(obj.getAmount() + item.getAmount());
-                        e.getPlayer().getInventory().removeItem(item);
+                        if(all) {
+                            for (ItemStack item1 : e.getPlayer().getInventory()) {
+                                if (item1!=null && item1.getType().equals(test)) {
+                                    obj.setAmount(obj.getAmount() + item1.getAmount());
+                                    e.getPlayer().getInventory().removeItem(item1);
+                                }
+                            }
+                        }
+                        else {
+                            obj.setAmount(obj.getAmount() + item.getAmount());
+                            e.getPlayer().getInventory().removeItem(item);
+                        }
                         e.setCancelled(true);
                     } else if (obj.getItem().equals(Material.AIR)) {
+                        ItemNBTSet set = new ItemNBTSet(item);
+                        if(set.haveNBT()) {
+                            e.getPlayer().sendMessage(lan.getDrawerCant());
+                            return;
+                        }
                         obj.setItem(test);
                         obj.setAmount(item.getAmount());
                         e.getPlayer().getInventory().removeItem(item);
@@ -62,9 +78,10 @@ public class drawer implements Listener {
                         return;
                     }
                     int amount;
-                    if (obj.getAmount() >= 64) {
-                        amount = 64;
-                        obj.setAmount(obj.getAmount() - 64);
+                    int maxAmount = obj.getItem().getMaxStackSize();
+                    if (obj.getAmount() >= maxAmount) {
+                        amount = maxAmount;
+                        obj.setAmount(obj.getAmount() - maxAmount);
                     } else {
                         amount = obj.getAmount();
                         obj.setAmount(0);

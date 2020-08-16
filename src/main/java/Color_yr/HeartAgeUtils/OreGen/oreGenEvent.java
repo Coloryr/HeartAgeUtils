@@ -1,4 +1,4 @@
-package Color_yr.HeartAgeUtils.Event;
+package Color_yr.HeartAgeUtils.OreGen;
 
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
@@ -13,7 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class oreGen implements Listener {
+public class oreGenEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void OnPlayerJoin(PlayerJoinEvent e) {

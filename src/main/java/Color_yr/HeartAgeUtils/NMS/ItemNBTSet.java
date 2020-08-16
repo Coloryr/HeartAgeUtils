@@ -21,6 +21,10 @@ public class ItemNBTSet {//NBT标签获取
         return CraftItemStack.asBukkitCopy(NMSItem.cloneItemStack());
     }
 
+    public boolean haveNBT() {
+        return !NBT.isEmpty();
+    }
+
     public void setNbt(String key, String value) {
         NBT.setString(key, value);
     }

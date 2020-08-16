@@ -1,14 +1,10 @@
-package Color_yr.HeartAgeUtils.Event;
+package Color_yr.HeartAgeUtils.tpStone;
 
 import Color_yr.HeartAgeUtils.Config.configMain;
 import Color_yr.HeartAgeUtils.DeathChest.deathChestDo;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.NMS.ItemNBTSet;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
-import Color_yr.HeartAgeUtils.tpStone.locationObj;
-import Color_yr.HeartAgeUtils.tpStone.tpStoneDo;
-import Color_yr.HeartAgeUtils.tpStone.tpStoneObjSet;
-import Color_yr.HeartAgeUtils.tpStone.tpStoneSaveObj;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -27,10 +23,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Map;
 
-public class tpStone implements Listener {
+public class tpStoneEvent implements Listener {
 
     @EventHandler
     public void itemClick(PlayerInteractEvent e) {
