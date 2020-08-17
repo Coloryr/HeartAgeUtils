@@ -42,22 +42,21 @@ public class drawerEvent implements Listener {
                     Material test = item.getType();
                     boolean all = e.getPlayer().isSneaking();
                     if (obj.getItem().equals(test)) {
-                        if(all) {
+                        if (all) {
                             for (ItemStack item1 : e.getPlayer().getInventory()) {
-                                if (item1!=null && item1.getType().equals(test)) {
+                                if (item1 != null && item1.getType().equals(test)) {
                                     obj.setAmount(obj.getAmount() + item1.getAmount());
                                     e.getPlayer().getInventory().removeItem(item1);
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             obj.setAmount(obj.getAmount() + item.getAmount());
                             e.getPlayer().getInventory().removeItem(item);
                         }
                         e.setCancelled(true);
                     } else if (obj.getItem().equals(Material.AIR)) {
                         ItemNBTSet set = new ItemNBTSet(item);
-                        if(set.haveNBT()) {
+                        if (set.haveNBT()) {
                             e.getPlayer().sendMessage(lan.getDrawerCant());
                             return;
                         }
@@ -78,19 +77,36 @@ public class drawerEvent implements Listener {
                         return;
                     }
                     int amount;
-                    int maxAmount = obj.getItem().getMaxStackSize();
-                    if (obj.getAmount() >= maxAmount) {
-                        amount = maxAmount;
-                        obj.setAmount(obj.getAmount() - maxAmount);
+                    int maxAmount = 64;//obj.getItem().getMaxStackSize();
+                    boolean all = e.getPlayer().isSneaking();
+                    if (all) {
+                        for (ItemStack item2 : e.getPlayer().getInventory()) {
+                            if (item2 == null) {
+                                if (obj.getAmount() >= maxAmount) {
+                                    amount = maxAmount;
+                                    obj.setAmount(obj.getAmount() - maxAmount);
+                                } else {
+                                    amount = obj.getAmount();
+                                    obj.setAmount(0);
+                                }
+                                item1.setAmount(amount);
+                                e.getPlayer().getInventory().addItem(item1);
+                            }
+                        }
                     } else {
-                        amount = obj.getAmount();
-                        obj.setAmount(0);
+                        if (obj.getAmount() >= maxAmount) {
+                            amount = maxAmount;
+                            obj.setAmount(obj.getAmount() - maxAmount);
+                        } else {
+                            amount = obj.getAmount();
+                            obj.setAmount(0);
+                        }
+                        item1.setAmount(amount);
+                        e.getPlayer().getInventory().addItem(item1);
                     }
                     if (obj.getAmount() == 0) {
                         obj.setItem(Material.AIR);
                     }
-                    item1.setAmount(amount);
-                    e.getPlayer().getInventory().addItem(item1);
                     e.setCancelled(true);
                 }
                 break;
