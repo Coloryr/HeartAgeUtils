@@ -1,7 +1,7 @@
 package Color_yr.HeartAgeUtils.NMS;
 
-import net.minecraft.server.v1_16_R2.NBTTagCompound;
-import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
+import net.minecraft.server.v1_16_R3.NBTTagCompound;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 public class ItemNBTSet {//NBT标签获取
@@ -11,12 +11,12 @@ public class ItemNBTSet {//NBT标签获取
 
     public ItemNBTSet(ItemStack item) {
         this.item = item;
-        net.minecraft.server.v1_16_R2.ItemStack NMSItem = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_16_R3.ItemStack NMSItem = CraftItemStack.asNMSCopy(item);
         NBT = NMSItem.getOrCreateTag();
     }
 
     public ItemStack saveNBT() {
-        net.minecraft.server.v1_16_R2.ItemStack NMSItem = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_16_R3.ItemStack NMSItem = CraftItemStack.asNMSCopy(item);
         NMSItem.setTag(NBT);
         return CraftItemStack.asBukkitCopy(NMSItem.cloneItemStack());
     }
