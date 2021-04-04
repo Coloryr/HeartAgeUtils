@@ -22,10 +22,6 @@ class tpStone implements ICommand {
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
         languageObj lan = HeartAgeUtils.configMain.lan;
-        if (sender instanceof ConsoleCommandSender) {
-            sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
-            return true;
-        }
         if (args.length == 0 || args[0].equalsIgnoreCase("help")) {//获取帮助
             for (String a : lan.getHelpCommandTpStone()) {
                 sender.sendMessage(lan.getTitle() + a);
@@ -37,6 +33,10 @@ class tpStone implements ICommand {
             sender.sendMessage(lan.getTitle() + lan.getNoPlayerCommand());
             return true;
         } else if (args[0].equalsIgnoreCase("rename")) {//重命名传送石
+            if (sender instanceof ConsoleCommandSender) {
+                sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
+                return true;
+            }
             ItemStack stack = player.getInventory().getItemInMainHand();
             Material item = stack.getType();
             if (!item.equals(tpStoneDo.item)) {
@@ -51,6 +51,10 @@ class tpStone implements ICommand {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
             return true;
         } else if (args[0].equalsIgnoreCase("uplevel")) {//升级传送石
+            if (sender instanceof ConsoleCommandSender) {
+                sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
+                return true;
+            }
             ItemStack stack = player.getInventory().getItemInMainHand();
             Material item = stack.getType();
             if (!item.equals(tpStoneDo.item)) {
@@ -67,6 +71,10 @@ class tpStone implements ICommand {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
             return true;
         } else if (args[0].equalsIgnoreCase("setname")) {
+            if (sender instanceof ConsoleCommandSender) {
+                sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
+                return true;
+            }
             ItemStack stack = player.getInventory().getItemInMainHand();
             Material item = stack.getType();
             if (!item.equals(tpStoneDo.item)) {

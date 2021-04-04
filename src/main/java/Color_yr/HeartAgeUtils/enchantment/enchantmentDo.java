@@ -68,9 +68,6 @@ public class enchantmentDo {
                             }
                         }
                         itemHand.setItemMeta(data1);
-                        player.getInventory().setItemInMainHand(itemHand);
-                        player.getInventory().setItemInOffHand(null);
-                        player.sendMessage(lan.getEnchantmentAdd());
                     } else {
                         for (Map.Entry<Enchantment, Integer> item : Enchantment1.entrySet()) {
                             if (Enchantment.containsKey(item.getKey())) {
@@ -85,10 +82,10 @@ public class enchantmentDo {
                                 itemHand.addUnsafeEnchantment(item.getKey(), item.getValue());
                             }
                         }
-                        player.getInventory().setItemInMainHand(itemHand);
-                        player.getInventory().setItemInOffHand(null);
-                        player.sendMessage(lan.getEnchantmentAdd());
                     }
+                    player.getInventory().setItemInMainHand(itemHand);
+                    player.getInventory().setItemInOffHand(null);
+                    player.sendMessage(lan.getEnchantmentAdd());
                 }
             }
         } else {//Break
@@ -99,12 +96,12 @@ public class enchantmentDo {
             } else if (Exp.getExpPoints(player) < obj.getBreakExp()) {
                 player.sendMessage(lan.getEnchantmentNoExp());
             } else {
-                Hook.vaultCost(player, obj.getBreakCost(), "已花费" + obj.getBreakCost());
-                Exp.subtractExpPoints(player, obj.getBreakExp());
                 if (Enchantment.size() == 0) {
                     player.sendMessage(lan.getEnchantmentNoEM());
                     return;
                 }
+                Hook.vaultCost(player, obj.getBreakCost(), "已花费" + obj.getBreakCost());
+                Exp.subtractExpPoints(player, obj.getBreakExp());
                 for (Map.Entry<Enchantment, Integer> item : Enchantment.entrySet()) {
                     itemHand.removeEnchantment(item.getKey());
                     player.getInventory().setItemInMainHand(itemHand);

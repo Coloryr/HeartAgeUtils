@@ -24,15 +24,16 @@ class drawer implements ICommand {
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
         languageObj lan = HeartAgeUtils.configMain.lan;
-        if (sender instanceof ConsoleCommandSender) {
-            sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
-            return true;
-        } else if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
+        if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
             for (String help : lan.getHelpCommandDrawer()) {
                 sender.sendMessage(help);
             }
             return true;
         } else if (args[0].equalsIgnoreCase("break")) {
+            if (sender instanceof ConsoleCommandSender) {
+                sender.sendMessage(lan.getTitle() + lan.getPlayerOnlyCommand());
+                return true;
+            }
             Player player = (Player) sender;
             Block block = player.getTargetBlockExact(5);
             if (block == null) {
