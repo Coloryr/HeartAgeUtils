@@ -92,7 +92,12 @@ public class languageObj {
     private String enchantmentNoEMBook;
     private String enchantmentNoTool;
     private String enchantmentNoEM;
+    private String enchantmentNoEMs;
     private String enchantmentNo;
+
+    public String getEnchantmentNoEMs() {
+        return enchantmentNoEMs;
+    }
 
     public String getDrawerCant() {
         return drawerCant;

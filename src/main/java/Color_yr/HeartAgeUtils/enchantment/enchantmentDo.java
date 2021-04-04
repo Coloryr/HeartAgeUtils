@@ -36,7 +36,6 @@ public class enchantmentDo {
             player.sendMessage(lan.getEnchantmentNoTool());
         }
         ItemStack itemOff = player.getInventory().getItemInOffHand();
-        Map<Enchantment, Integer> Enchantment = itemHand.getItemMeta().getEnchants();
         if (f) {//Add
             if (!itemOff.getType().equals(Material.ENCHANTED_BOOK)) {
                 player.sendMessage(lan.getEnchantmentNoEMBook());
@@ -69,6 +68,7 @@ public class enchantmentDo {
                         }
                         itemHand.setItemMeta(data1);
                     } else {
+                        Map<Enchantment, Integer> Enchantment = itemHand.getItemMeta().getEnchants();
                         for (Map.Entry<Enchantment, Integer> item : Enchantment1.entrySet()) {
                             if (Enchantment.containsKey(item.getKey())) {
                                 int level1 = Enchantment.get(item.getKey());
@@ -96,32 +96,69 @@ public class enchantmentDo {
             } else if (Exp.getExpPoints(player) < obj.getBreakExp()) {
                 player.sendMessage(lan.getEnchantmentNoExp());
             } else {
-                if (Enchantment.size() == 0) {
-                    player.sendMessage(lan.getEnchantmentNoEM());
-                    return;
+                Map<Enchantment, Integer> Enchantment;
+                if (!itemHand.getType().equals(Material.ENCHANTED_BOOK)) {
+                    Enchantment = itemHand.getItemMeta().getEnchants();
+                    if (Enchantment.size() == 0) {
+                        player.sendMessage(lan.getEnchantmentNoEM());
+                        return;
+                    }
+                } else {
+                    Enchantment = ((EnchantmentStorageMeta) itemHand.getItemMeta()).getStoredEnchants();
+                    if (Enchantment.size() <= 1) {
+                        player.sendMessage(lan.getEnchantmentNoEMs());
+                        return;
+                    }
                 }
+
                 Hook.vaultCost(player, obj.getBreakCost(), "已花费" + obj.getBreakCost());
                 Exp.subtractExpPoints(player, obj.getBreakExp());
-                for (Map.Entry<Enchantment, Integer> item : Enchantment.entrySet()) {
-                    itemHand.removeEnchantment(item.getKey());
-                    player.getInventory().setItemInMainHand(itemHand);
-                    ItemStack item1 = new ItemStack(Material.ENCHANTED_BOOK);
-                    EnchantmentStorageMeta data = (EnchantmentStorageMeta) item1.getItemMeta();
-                    data.addStoredEnchant(item.getKey(), item.getValue(), true);
-                    data.setDisplayName("拆分后的附魔书");
-                    item1.setItemMeta(data);
-                    if (itemOff.getAmount() > 1) {
-                        itemOff.setAmount(itemOff.getAmount() - 1);
-                        if (Tools.CheckIsFull(player))
-                            player.getLocation().getWorld().dropItem(player.getLocation(), item1);
-                        else
-                            player.getInventory().addItem(item1);
-                        player.getInventory().setItemInOffHand(itemOff);
-                    } else {
-                        player.getInventory().setItemInOffHand(item1);
+                if (!itemHand.getType().equals(Material.ENCHANTED_BOOK)) {
+                    for (Map.Entry<Enchantment, Integer> item : Enchantment.entrySet()) {
+                        itemHand.removeEnchantment(item.getKey());
+                        player.getInventory().setItemInMainHand(itemHand);
+                        ItemStack item1 = new ItemStack(Material.ENCHANTED_BOOK);
+                        EnchantmentStorageMeta data = (EnchantmentStorageMeta) item1.getItemMeta();
+                        data.addStoredEnchant(item.getKey(), item.getValue(), true);
+                        data.setDisplayName("拆分后的附魔书");
+                        item1.setItemMeta(data);
+                        if (itemOff.getAmount() > 1) {
+                            itemOff.setAmount(itemOff.getAmount() - 1);
+                            if (Tools.CheckIsFull(player))
+                                player.getLocation().getWorld().dropItem(player.getLocation(), item1);
+                            else
+                                player.getInventory().addItem(item1);
+                            player.getInventory().setItemInOffHand(itemOff);
+                        } else {
+                            player.getInventory().setItemInOffHand(item1);
+                        }
+                        player.sendMessage(lan.getEnchantmentBreak());
+                        return;
                     }
-                    player.sendMessage(lan.getEnchantmentBreak());
-                    return;
+                } else {
+                    for (Map.Entry<Enchantment, Integer> item : Enchantment.entrySet()) {
+                        EnchantmentStorageMeta data1 = (EnchantmentStorageMeta) itemHand.getItemMeta();
+                        data1.removeStoredEnchant(item.getKey());
+                        itemHand.setItemMeta(data1);
+                        player.getInventory().setItemInMainHand(itemHand);
+                        ItemStack item1 = new ItemStack(Material.ENCHANTED_BOOK);
+                        EnchantmentStorageMeta data = (EnchantmentStorageMeta) item1.getItemMeta();
+                        data.addStoredEnchant(item.getKey(), item.getValue(), true);
+                        data.setDisplayName("拆分后的附魔书");
+                        item1.setItemMeta(data);
+                        if (itemOff.getAmount() > 1) {
+                            itemOff.setAmount(itemOff.getAmount() - 1);
+                            if (Tools.CheckIsFull(player))
+                                player.getLocation().getWorld().dropItem(player.getLocation(), item1);
+                            else
+                                player.getInventory().addItem(item1);
+                            player.getInventory().setItemInOffHand(itemOff);
+                        } else {
+                            player.getInventory().setItemInOffHand(item1);
+                        }
+                        player.sendMessage(lan.getEnchantmentBreak());
+                        return;
+                    }
                 }
             }
         }

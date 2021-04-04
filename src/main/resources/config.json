@@ -180,6 +180,7 @@
     "enchantmentNoEMBook": "§c副手不是附魔书",
     "enchantmentNoTool": "§c主手为空",
     "enchantmentNoEM": "§c工具无附魔",
+    "enchantmentNoEMs": "§c没有足够多的附魔",
     "enchantmentNo": "§c需要拆分后的附魔书"
   }
 }
