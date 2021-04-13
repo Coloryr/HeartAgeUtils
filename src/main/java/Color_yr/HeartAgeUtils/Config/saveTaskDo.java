@@ -39,7 +39,13 @@ public class saveTaskDo {
     }
 
     public void addTask(saveTaskObj save) {
-        while (isSave) ;
+        while (isSave) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
         for (saveTaskObj item : Tasks) {
             if (item.getFile().equals(save.getFile())) {
                 Tasks.remove(item);
