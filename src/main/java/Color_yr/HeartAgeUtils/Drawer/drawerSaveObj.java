@@ -16,6 +16,8 @@ public class drawerSaveObj {
     }
 
     public boolean checkPos(Location location) {
+        if(pos == null)
+            return false;
         return pos.getX() == location.getBlockX() &&
                 pos.getY() == location.getBlockY() &&
                 pos.getZ() == location.getBlockZ();
