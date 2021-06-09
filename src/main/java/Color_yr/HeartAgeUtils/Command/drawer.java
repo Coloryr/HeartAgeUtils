@@ -9,6 +9,7 @@ import Color_yr.HeartAgeUtils.Obj.languageObj;
 import Color_yr.HeartAgeUtils.Utils.Tools;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -68,6 +69,7 @@ class drawer implements ICommand {
             nbt.setNbt("uuid", obj.getUuid());
             item = nbt.saveNBT();
             inventory.addItem(item);
+            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_FRAME_BREAK, 1f, 1f);
 
             player.sendMessage(lan.getDrawerBreak());
 

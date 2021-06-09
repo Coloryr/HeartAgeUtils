@@ -6,7 +6,9 @@ import Color_yr.HeartAgeUtils.Drawer.drawerSaveObj;
 import Color_yr.HeartAgeUtils.HeartAgeUtils;
 import Color_yr.HeartAgeUtils.NMS.ItemNBTSet;
 import Color_yr.HeartAgeUtils.Obj.languageObj;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -34,7 +36,7 @@ public class drawerEvent implements Listener {
         if (obj == null) {
             return;
         }
-
+        Location location = e.getPlayer().getLocation();
         switch (e.getAction()) {
             case RIGHT_CLICK_BLOCK:
                 ItemStack item = e.getItem();
@@ -53,6 +55,7 @@ public class drawerEvent implements Listener {
                             obj.setAmount(obj.getAmount() + item.getAmount());
                             e.getPlayer().getInventory().removeItem(item);
                         }
+                        e.getPlayer().playSound(location, Sound.ENTITY_ITEM_FRAME_ADD_ITEM, 1f, 1f);
                         e.setCancelled(true);
                     } else if (obj.getItem().equals(Material.AIR)) {
                         ItemNBTSet set = new ItemNBTSet(item);
@@ -63,6 +66,7 @@ public class drawerEvent implements Listener {
                         obj.setItem(test);
                         obj.setAmount(item.getAmount());
                         e.getPlayer().getInventory().removeItem(item);
+                        e.getPlayer().playSound(location, Sound.ENTITY_ITEM_FRAME_ADD_ITEM, 1f, 1f);
                         e.setCancelled(true);
                     } else {
                         return;
@@ -107,6 +111,7 @@ public class drawerEvent implements Listener {
                     if (obj.getAmount() == 0) {
                         obj.setItem(Material.AIR);
                     }
+                    e.getPlayer().playSound(location, Sound.ENTITY_ITEM_FRAME_REMOVE_ITEM, 1f, 1f);
                     e.setCancelled(true);
                 }
                 break;
