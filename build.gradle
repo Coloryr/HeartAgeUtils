@@ -14,7 +14,7 @@ ext.minorVersion = 0
 ext.minecraftVersion = "1.8"
 
 repositories {
-
+    mavenCentral()
     maven {
         name 'Spigot'
         url 'https://hub.spigotmc.org/nexus/content/groups/public'
